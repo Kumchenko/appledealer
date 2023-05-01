@@ -153,13 +153,13 @@ section {
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
-  background-image: url("../../img/polygon.svg"), linear-gradient(to right, #704D9C, #704D9C);
+  background-image: url("../img/polygon.svg"), linear-gradient(to right, #704D9C, #704D9C);
   background-repeat: no-repeat;
   background-position: right 0.7777777778em top 50%, right 38px top 0;
   background-size: 0.6666666667em 0.6666666667em, 1px;
 }
 .form__select:active, .form__select:focus {
-  background-image: url("../../img/polygon-bold.svg"), linear-gradient(to right, #704D9C, #704D9C);
+  background-image: url("../img/polygon-bold.svg"), linear-gradient(to right, #704D9C, #704D9C);
   background-size: 0.6666666667em 0.6666666667em, 2px;
 }
 

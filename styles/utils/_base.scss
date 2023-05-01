@@ -132,7 +132,7 @@ section {
     padding: 6px 16px;
     appearance: none;
     background-image:
-        url("../../img/polygon.svg"),
+        url("../img/polygon.svg"),
         linear-gradient(to right, $purple, $purple);
     background-repeat: no-repeat;
     background-position:
@@ -145,7 +145,7 @@ section {
     &:active,
     &:focus {
         background-image:
-            url("../../img/polygon-bold.svg"),
+            url("../img/polygon-bold.svg"),
             linear-gradient(to right, $purple, $purple);
         background-size:
             math.div(1em, 1.5) math.div(1em, 1.5),
