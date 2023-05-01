@@ -49,7 +49,63 @@
             </div>
         </nav>
     </header>
-    
+    <section class="order">
+        <div class="container">
+            <h1 class="order__title">Замовити ремонт</h1>
+            <form action="#" method="POST" class="order-form form grid">
+                <div class="order-form__tile form__tile">
+                    <h5 class="order-form__title form__title">Модель</h5>
+                    <select class="form__select" name="model" id="model">
+                        <option value="" disabled selected>Оберіть модель</option>
+                        <option value="iphone-13-mini">iPhone 13 Mini</option>
+                        <option value="iphone-13">iPhone 13</option>
+                        <option value="iphone-13-pro">iPhone 13 Pro</option>
+                        <option value="iphone-13-pro-max">iPhone 13 Pro Max</option>
+                    </select>
+                <img src="./img/iphones/iphone-13-mini.png" alt="iPhone 13 Mini" class="order-form__img">
+                </div>
+                <div class="order-form__tile form__tile">
+                    <h5 class="order-form__title form__title">Контактні дані</h5>
+                    <label class="order-form__label form__label">
+                        Імʼя
+                        <span class="form__label-error">Не заповнено</span>
+                        <input class="form__input" name="name" id="name" type="text" placeholder="Ваше імʼя" required>
+                    </label>
+                    <label class="order-form__label form__label">
+                        Прізвище
+                        <input class="form__input" name="surname" id="surname" type="text" placeholder="Ваше прізвище" required>
+                    </label>
+                    <label class="order-form__label form__label">
+                        Телефон
+                        <input class="form__input" name="tel" id="tel" type="tel" pattern="[+]{1}38[0]{1}[0-9]{9}" placeholder="+38(___)-___-__-__" required>
+                    </label>
+                    <label class="order-form__label form__label">
+                        Email
+                        <input class="form__input" name="email" id="email" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" placeholder="example@example.com" required>
+                    </label>
+                </div>
+                <div class="order-form__tile form__tile">
+                    <h5 class="order-form__title form__title">Замовлення</h5>
+                    <label class="order-form__label form__label">
+                        Компонент
+                        <select class="form__select" name="component" id="component">
+                            <option value="display">Дисплей</option>
+                            <option value="battery">Акумулятор</option>
+                            <option value="housing">Корпус</option>
+                            <option value="rear-camera">Основна камера</option>
+                        </select>
+                    </label>
+                    <label class="order-form__label form__label">
+                        Якість
+                        <select class="form__select" name="quality" id="quality">
+                            <option value="original" selected>Оригінал</option>
+                        </select>
+                    </label>
+                    <button class="order-form__btn btn btn_green" type="submit">Замовити</button>
+                </div>
+            </form>
+        </div>
+    </section>
     <footer class="footer">
         <div class="container">
             <a class="footer__about" href="#" target="_blank" rel="noopener noreferrer">2023 - Created by Kumchenko</a>
