@@ -1,0 +1,6 @@
+.result {
+    &__title {
+        text-align: center;
+        margin-bottom: math.div(64, 48) * 1em;
+    }
+}
