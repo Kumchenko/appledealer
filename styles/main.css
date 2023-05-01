@@ -124,6 +124,11 @@ section {
   background-color: #5A4773;
 }
 
+.form__tile {
+  background-color: #fff;
+  border-radius: 30px;
+}
+
 .form__input,
 .form__select {
   border-radius: 20px;
@@ -450,8 +455,8 @@ section {
 .check .check-form {
   margin: 0 auto;
   max-width: 545px;
-  background-color: #fff;
-  border-radius: 30px;
+}
+.check .check-form__tile {
   display: flex;
   flex-direction: column;
   padding: 12px 30px 20px;

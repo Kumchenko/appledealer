@@ -107,6 +107,11 @@ section {
     }
 }
 
+.form__tile {
+    background-color: $white;
+    border-radius: 30px;
+}
+
 .form__input,
 .form__select {
     border-radius: 20px;
@@ -157,6 +162,7 @@ section {
     display: grid;
     grid-template-columns: 1fr 1fr;
     font-size: 18px;
+
     input,
     select {
         margin-top: 8px;

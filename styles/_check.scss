@@ -7,11 +7,12 @@
     .check-form {
         margin: 0 auto;
         max-width: 545px;
-        background-color: $white;
-        border-radius: 30px;
-        display: flex;
-        flex-direction: column;
-        padding: 12px 30px 20px;
+
+        &__tile {
+            display: flex;
+            flex-direction: column;
+            padding: 12px 30px 20px;
+        }
 
         &__label:not(:first-of-type) {
             margin-top: 16px;

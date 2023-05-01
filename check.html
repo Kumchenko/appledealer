@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="uk">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,6 +10,7 @@
     <link rel="shortcut icon" href="favicon.png" type="image/png">
     <script src="https://kit.fontawesome.com/788d3ea337.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
     <header class="header">
         <div class="info">
@@ -54,18 +56,22 @@
             <h1 class="check__title">
                 Статус замовлення
             </h1>
-            <form class="check-form" action="#" method="post">
-                <h5 class="check-form__title form__title">Перевірочні дані</h5>
-                <label class="check-form__label form__label">
-                    Номер замовлення
-                    <span class="form__label-error">Не заповнено</span>
-                    <input class="check-form__input form__input" name="id" id="id" type="text" pattern="[0-9]{4}" placeholder="0001" required>
-                </label>
-                <label class="check-form__label form__label">
-                    Номер телефону
-                    <input class="check-form__input form__input" name="tel" id="tel" type="tel" pattern="[+]{1}38[0]{1}[0-9]{9}" placeholder="+38(___)-___-__-__" required>
-                </label>
-                <button class="check-form__btn btn btn_green" type="submit">Перевірити</button>
+            <form class="check-form form" action="#" method="post">
+                <div class="check-form__tile form__tile">
+                    <h5 class="check-form__title form__title">Перевірочні дані</h5>
+                    <label class="check-form__label form__label">
+                        Номер замовлення
+                        <span class="form__label-error">Не заповнено</span>
+                        <input class="check-form__input form__input" name="id" id="id" type="text" pattern="[0-9]{4}"
+                            placeholder="0001" required>
+                    </label>
+                    <label class="check-form__label form__label">
+                        Номер телефону
+                        <input class="check-form__input form__input" name="tel" id="tel" type="tel"
+                            pattern="[+]{1}38[0]{1}[0-9]{9}" placeholder="+38(___)-___-__-__" required>
+                    </label>
+                    <button class="check-form__btn btn btn_green" type="submit">Перевірити</button>
+                </div>
             </form>
         </div>
     </section>
@@ -75,4 +81,5 @@
         </div>
     </footer>
 </body>
+
 </html>
