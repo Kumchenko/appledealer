@@ -1,0 +1,54 @@
+.header {
+    .info {
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+        }
+    }
+
+    .nav {
+        background-color: $white;
+        padding: 3px 0;
+    }
+
+    .logo__link {
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
+
+    .menu {
+        list-style: none;
+        grid-column: 3 / 12;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+
+        &__item {
+            @include clickable;
+        }
+
+        &__link {
+            &.active {
+                font-weight: 600;
+            }
+
+            @include purpleClickable('transparent');
+        }
+    }
+
+    .social__link {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    .social__svg {
+        @include purpleClickable($obj: 'svg');
+
+        & path {
+            transition: all $transitionTime $transitionFunc;
+        }
+    }
+}

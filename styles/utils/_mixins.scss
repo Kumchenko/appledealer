@@ -1,0 +1,90 @@
+@mixin onLaptop {
+    @media (min-width: 992px) {
+        @content;
+    }
+}
+
+@mixin onTablet {
+    @media (max-width: 768px) {
+        @content;
+    }
+}
+
+@mixin onMobile {
+    @media (max-width: 576px) {
+        @content;
+    }
+}
+
+@mixin clickable {
+    transition: all $transitionTime $transitionFunc;
+
+    &:hover {
+        transform: translateY(-3px);
+    }
+
+    &:active {
+        transform: translateY(3px);
+    }
+}
+
+@mixin greenClickable {
+    color: $white;
+    background-color: $green;
+
+    &:hover {
+        background-color: $lightGreen;
+    }
+
+    &:active {
+        background-color: $deepGreen;
+    }
+}
+
+@mixin purpleClickable($obj) {
+    @if $obj =='svg' {
+        path {
+            transition: fill $transitionTime $transitionFunc;
+            fill: $purple;
+        }
+
+        &:hover path {
+            fill: $lightPurple;
+        }
+
+        &:active path {
+            fill: $deepPurple;
+        }
+    }
+
+    @if $obj =='transparent' {
+        & {
+            color: $purple;
+        }
+
+        &:hover {
+            color: $lightPurple;
+        }
+
+        &:active {
+            color: $deepPurple;
+        }
+    }
+
+    @if $obj =='fill' {
+        & {
+            color: $white;
+            background-color: $purple;
+        }
+
+        &:hover {
+            color: $white;
+            background-color: $lightPurple;
+        }
+
+        &:active {
+            color: $white;
+            background-color: $deepPurple;
+        }
+    }
+}
