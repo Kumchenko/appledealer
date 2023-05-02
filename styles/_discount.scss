@@ -10,20 +10,20 @@
     }
     &__subtitle {
         font-weight: 500;
-        grid-column: 1 / 7;
+        grid-column: 2 / 7;
     }
     &__desc {
-        grid-column: 1 / 7;
+        grid-column: 2 / 7;
     }
     &__order {
         align-self: end;
-        grid-column: 1 / 7;
+        grid-column: 2 / 7;
     }
     .timer {
         display: flex;
-        gap: 27px;
+        gap: 1.7em;
         justify-self: right;
-        grid-column: 7 / 13;
+        grid-column: 7 / 12;
         grid-row: 2 / 5;
     }
     .timer__field {

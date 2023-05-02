@@ -9,7 +9,6 @@
     width: 100%;
     height: 100%;
     overflow: hidden;
-    padding: 20px;
     background-color: rgba(0, 0, 0, .5);
 
     &-form {
@@ -23,12 +22,12 @@
     }
 
     &__title {
-        margin-bottom: 9px;
+        margin-bottom: 10px;
         text-align: center;
     }
 
     &__label:not(:first-of-type) {
-        margin-top: 16px;
+        margin-top: 18px;
     }
 
     &__btn {

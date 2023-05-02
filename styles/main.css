@@ -20,7 +20,7 @@ body {
 }
 
 .container {
-  width: 1000px;
+  width: 1140px;
   margin: 0 auto;
 }
 
@@ -35,28 +35,28 @@ h6 {
 }
 
 h1 {
-  font-size: 48px;
+  font-size: 3rem;
   color: #391763;
 }
 
 h2 {
-  font-size: 40px;
+  font-size: 2.5rem;
 }
 
 h3 {
-  font-size: 36px;
+  font-size: 2.25rem;
 }
 
 h4 {
-  font-size: 32px;
+  font-size: 2rem;
 }
 
 h5 {
-  font-size: 24px;
+  font-size: 1.5rem;
 }
 
 h6 {
-  font-size: 20px;
+  font-size: 1.25rem;
 }
 
 a,
@@ -84,7 +84,7 @@ address {
 }
 
 section {
-  padding-top: 68px;
+  padding-top: 74px;
 }
 
 .btn {
@@ -189,25 +189,10 @@ section {
 .grid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  -moz-column-gap: 30px;
-       column-gap: 30px;
+  -moz-column-gap: 1.875rem;
+       column-gap: 1.875rem;
 }
 
-@media (max-width: 1020px) {
-  .container {
-    width: 720px;
-  }
-}
-@media (max-width: 768px) {
-  .container {
-    width: 540px;
-  }
-}
-@media (max-width: 576px) {
-  .container {
-    width: 90%;
-  }
-}
 .header .info .container {
   display: flex;
   justify-content: space-between;
@@ -277,7 +262,7 @@ section {
   margin-bottom: 0.1666666667em;
 }
 .about__subtitle {
-  font-size: 20px;
+  font-size: 1.25rem;
   margin-bottom: 1.3em;
 }
 .about__title, .about__subtitle {
@@ -289,17 +274,17 @@ section {
   border-radius: 25px;
   grid-column: 1/7;
   padding: 24px;
-  font-size: 18px;
+  font-size: 1.125rem;
 }
 .about .info__title {
   margin-bottom: 0.2222222222em;
 }
 .about .info__title:nth-of-type(even) {
-  margin-top: 30px;
+  margin-top: 0.8333333333em;
 }
 .about .info__address {
   display: block;
-  margin-bottom: 12px;
+  margin-bottom: 0.6666666667em;
 }
 .about .info__address {
   color: #704D9C;
@@ -338,20 +323,20 @@ section {
 }
 .discount__subtitle {
   font-weight: 500;
-  grid-column: 1/7;
+  grid-column: 2/7;
 }
 .discount__desc {
-  grid-column: 1/7;
+  grid-column: 2/7;
 }
 .discount__order {
   align-self: end;
-  grid-column: 1/7;
+  grid-column: 2/7;
 }
 .discount .timer {
   display: flex;
-  gap: 27px;
+  gap: 1.7em;
   justify-self: right;
-  grid-column: 7/13;
+  grid-column: 7/12;
   grid-row: 2/5;
 }
 .discount .timer__field {
@@ -378,7 +363,7 @@ section {
   margin-bottom: 0.1666666667em;
 }
 .works__subtitle {
-  font-size: 20px;
+  font-size: 1.25rem;
   margin-bottom: 1.3em;
 }
 .works__title, .works__subtitle {
@@ -398,7 +383,7 @@ section {
   padding: 20px 20px 20px 50px;
 }
 .works .slider__desc {
-  margin: 6px 0 20px;
+  margin: 1em 0 1.5em;
 }
 .works .slider__img {
   width: 50%;
@@ -408,7 +393,7 @@ section {
   margin-bottom: 0.1666666667em;
 }
 .how__subtitle {
-  font-size: 20px;
+  font-size: 1.25rem;
   margin-bottom: 2.5em;
 }
 .how__title, .how__subtitle {
@@ -428,7 +413,7 @@ section {
   width: 33%;
 }
 .how__item .how__pic {
-  font-size: 40px;
+  font-size: 2.5rem;
   width: 90px;
   height: 90px;
   border-radius: 50%;
@@ -454,7 +439,7 @@ section {
 .how__text {
   text-align: center;
   margin-top: 0.8125em;
-  width: 228px;
+  max-width: 228px;
 }
 
 .footer {
@@ -479,10 +464,10 @@ section {
   padding: 12px 30px 20px;
 }
 .check .check-form__label:not(:first-of-type) {
-  margin-top: 16px;
+  margin-top: 18px;
 }
 .check .check-form__title {
-  margin-bottom: 9px;
+  margin-bottom: 10px;
   text-align: center;
 }
 .check .check-form__btn {
@@ -498,7 +483,7 @@ section {
   max-width: 545px;
   padding: 12px 30px 20px;
   display: grid;
-  font-size: 20px;
+  font-size: 1.25rem;
   grid-template-columns: 1fr 1fr;
 }
 .result .tile__title {
@@ -543,7 +528,7 @@ section {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  padding: 12px 16px 26px;
+  padding: 12px 16px 20px;
   background-color: #fff;
   border-radius: 30px;
 }
@@ -586,7 +571,7 @@ section {
   padding: 12px 30px 20px;
   display: flex;
   flex-direction: column;
-  font-size: 20px;
+  font-size: 1.25rem;
 }
 .thanks .tile__title, .thanks .tile__subtitle {
   margin-bottom: 9px;
@@ -615,7 +600,6 @@ section {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  padding: 20px;
   background-color: rgba(0, 0, 0, 0.5);
 }
 .modal-form {
@@ -627,12 +611,108 @@ section {
   padding: 12px 30px 20px;
 }
 .modal__title {
-  margin-bottom: 9px;
+  margin-bottom: 10px;
   text-align: center;
 }
 .modal__label:not(:first-of-type) {
-  margin-top: 16px;
+  margin-top: 18px;
 }
 .modal__btn {
   margin-top: 22px;
+}
+
+@media (max-width: 1199px) {
+  .container {
+    width: 940px;
+  }
+  section {
+    padding-top: 68px;
+  }
+  .discount__subtitle {
+    grid-column: 1/7;
+  }
+  .discount__desc {
+    grid-column: 1/7;
+  }
+  .discount__order {
+    grid-column: 1/7;
+  }
+  .discount .timer {
+    grid-column: 7/13;
+  }
+}
+@media (max-width: 991px) {
+  html {
+    font-size: 15px;
+  }
+  .container {
+    width: 720px;
+  }
+  .about .info {
+    grid-column: 2/12;
+  }
+  .about__map {
+    margin-top: 1.875rem;
+    grid-column: 2/12;
+    height: 280px;
+  }
+  .discount .discount__title {
+    margin-bottom: 0.1666666667em;
+  }
+  .discount__subtitle {
+    grid-column: 1/13;
+    grid-row-start: 3;
+    justify-self: center;
+  }
+  .discount__desc {
+    grid-column: 1/13;
+    grid-row-start: 2;
+    justify-self: center;
+    font-size: 1.25rem;
+    margin-bottom: 1.3em;
+  }
+  .discount__order {
+    justify-self: center;
+    grid-column: 1/13;
+  }
+  .discount .timer {
+    grid-row-start: 4;
+    grid-column: 1/13;
+    justify-self: center;
+    margin: 1.2rem;
+  }
+  .works .slider__info {
+    padding-left: 36px;
+  }
+  .how__item {
+    grid-column: 1/3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .order .order-form {
+    row-gap: 1.375rem;
+  }
+  .order .order-form__tile:nth-of-type(1) {
+    grid-column: 1/7;
+  }
+  .order .order-form__tile:nth-of-type(2) {
+    grid-column: 7/13;
+  }
+  .order .order-form__tile:nth-of-type(3) {
+    grid-column: 4/10;
+  }
+  .order .order-form__btn {
+    margin-top: 1.2rem;
+  }
+}
+@media (max-width: 767px) {
+  .container {
+    width: 540px;
+  }
+}
+@media (max-width: 575px) {
+  .container {
+    width: 90%;
+  }
 }/*# sourceMappingURL=main.css.map */

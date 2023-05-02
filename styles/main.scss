@@ -5,7 +5,7 @@
 @import "./utils/mixins";
 @import "./utils/base";
 @import "./utils/grid";
-@import "./utils/media";
+
 
 // ---- COMPONENTS ----
 @import "./header";
@@ -19,3 +19,6 @@
 @import "./order";
 @import "./thanks";
 @import "./modal";
+
+// ---- MEDIA ----
+@import "./utils/media";

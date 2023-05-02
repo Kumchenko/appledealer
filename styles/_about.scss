@@ -9,7 +9,7 @@
     }
 
     &__subtitle {
-        font-size: 20px;
+        font-size: 1.25rem;
         margin-bottom: math.div(26, 20) * 1em;
     }
 
@@ -24,18 +24,18 @@
         border-radius: 25px;
         grid-column: 1 / 7;
         padding: 24px;
-        font-size: 18px;
+        font-size: 1.125rem;
 
         &__title {
             margin-bottom: math.div(8, 36) * 1em;
             &:nth-of-type(even) {
-                margin-top: 30px;
+                margin-top: math.div(30, 36) * 1em;
             }
         }
 
         &__address {
             display: block;
-            margin-bottom: 12px;
+            margin-bottom: math.div(12, 18) * 1em;
             @include purpleClickable('transparent');
         }
 

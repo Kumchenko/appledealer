@@ -23,7 +23,7 @@ body {
 }
 
 .container {
-    width: 1000px;
+    width: 1140px;
     margin: 0 auto;
 }
 
@@ -38,28 +38,28 @@ h6 {
 }
 
 h1 {
-    font-size: 48px;
+    font-size: 3rem;
     color: $darkPurple;
 }
 
 h2 {
-    font-size: 40px;
+    font-size: math.div(40, 16) * 1rem;
 }
 
 h3 {
-    font-size: 36px;
+    font-size: math.div(36, 16) * 1rem;
 }
 
 h4 {
-    font-size: 32px;
+    font-size: math.div(32, 16) * 1rem;
 }
 
 h5 {
-    font-size: 24px;
+    font-size: math.div(24, 16) * 1rem;
 }
 
 h6 {
-    font-size: 20px;
+    font-size: math.div(20, 16) * 1rem;
 }
 
 a,
@@ -87,7 +87,7 @@ address {
 }
 
 section {
-    padding-top: 68px;
+    padding-top: 74px;
 }
 
 .btn {
