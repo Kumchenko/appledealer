@@ -1,0 +1,17 @@
+@include onLaptop {
+    .container {
+        width: 720px;
+    }
+}
+
+@include onTablet {
+    .container {
+        width: 540px;
+    }
+}
+
+@include onMobile {
+    .container {
+        width: 90%;
+    }
+}

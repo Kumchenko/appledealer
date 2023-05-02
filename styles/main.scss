@@ -5,6 +5,7 @@
 @import "./utils/mixins";
 @import "./utils/base";
 @import "./utils/grid";
+@import "./utils/media";
 
 // ---- COMPONENTS ----
 @import "./header";
@@ -17,3 +18,4 @@
 @import "./result";
 @import "./order";
 @import "./thanks";
+@import "./modal";

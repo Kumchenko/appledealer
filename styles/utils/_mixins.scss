@@ -1,5 +1,5 @@
 @mixin onLaptop {
-    @media (min-width: 992px) {
+    @media (max-width: 1020px) {
         @content;
     }
 }
