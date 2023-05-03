@@ -15,11 +15,13 @@ html {
     font-weight: 400;
     font-size: 16px;
     letter-spacing: 0.02em;
+    scroll-behavior: smooth;
 }
 
 body {
     color: $purple;
     background-color: $brightPurple;
+    &.opened { overflow: hidden;}
 }
 
 .container {
@@ -87,15 +89,15 @@ address {
 }
 
 section {
-    padding-top: 74px;
+    padding-top: 4.625rem;
 }
 
 .btn {
     display: block;
     border: none;
     border-radius: 20px;
-    font-size: 16px;
-    padding: 10px 26px;
+    font-size: 1rem;
+    padding: 0.625em 1.625rem;
     @include clickable;
 
     &_green {
@@ -117,7 +119,7 @@ section {
     border-radius: 20px;
     border: 1px solid $purple;
     padding: 7px 16px;
-    font-size: 18px;
+    font-size: 1.125rem;
     font-weight: 500;
     color: $purple;
 
@@ -142,7 +144,7 @@ section {
     background-repeat: no-repeat;
     background-position:
         right math.div(14, 18) * 1em top 50%,
-        right 38px top 0;
+        right 2.375rem top 0;
     background-size:
         math.div(1em, 1.5) math.div(1em, 1.5),
         1px;
@@ -161,7 +163,7 @@ section {
 .form__label {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    font-size: 18px;
+    font-size: 1.125rem;
 
     input,
     select {

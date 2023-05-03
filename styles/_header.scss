@@ -1,54 +1,82 @@
 .header {
     .info {
         .container {
+            min-height: 60px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 0;
-        }
-    }
-
-    .nav {
-        background-color: $white;
-        padding: 3px 0;
-    }
-
-    .logo__link {
-        grid-column-start: 1;
-        grid-column-end: 3;
-    }
-
-    .menu {
-        list-style: none;
-        grid-column: 3 / 12;
-        display: flex;
-        justify-content: space-evenly;
-        align-items: center;
-
-        &__item {
-            @include clickable;
-        }
-
-        &__link {
-            &.active {
-                font-weight: 600;
-            }
-
-            @include purpleClickable('transparent');
         }
     }
 
     .social__link {
         display: flex;
-        justify-content: flex-end;
         align-items: center;
     }
 
-    .social__svg {
-        @include purpleClickable($obj: 'svg');
+    .menu {
+        background-color: $white;
 
-        & path {
-            transition: all $transitionTime $transitionFunc;
+        .container {
+            min-height: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
+
+        &__list {
+            flex-grow: 2;
+            list-style: none;
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        &__item {
+            padding: 20px 5px;
+
+            &:hover {
+                .submenu__list {
+                    transform: translateY(0);
+                    opacity: 1;
+                    visibility: visible;
+                    pointer-events: all;
+                }
+            }
+        }
+
+        &__link {
+            &.active {
+                font-weight: 500;
+            }
+            @include purpleClickable('transparent');
+        }
+    }
+
+    @media (min-width: 768px) {
+        .submenu__list {
+            padding: 1em;
+            border-radius: 20px;
+            box-shadow: 0 0 15px 5px #00000036;
+            top: 110%;
+            position: absolute;
+            transform: translateY(-20%);
+            background-color: $white;
+        }
+    }
+
+    .submenu__list {
+        z-index: 5;
+        list-style: none;
+        white-space: nowrap;
+        transition: all $transitionTime $transitionFunc;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        display: flex;
+        flex-direction: column;
+        row-gap: 1em;
+    }
+
+    .submenu__item {
+        @include purpleClickable('transparent');
     }
 }

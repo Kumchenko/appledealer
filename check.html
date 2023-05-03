@@ -23,13 +23,22 @@
                 <button class="info__call btn btn_green">Звʼязатися</button>
             </div>
         </div>
-        <nav class="nav">
-            <div class="container grid">
+        <nav class="menu">
+            <div class="container">
                 <a class="logo__link" href="./">
                     <img src="./img/logo.svg" alt="AppleDealer" class="logo__img">
                 </a>
-                <ul class="menu">
-                    <li class="menu__item"><a href="./" class="menu__link">Про нас</a></li>
+                <ul class="menu__list">
+                    <li class="menu__item">
+                        <a href="./" class="menu__link">Про нас</a>
+                        <span class="menu__arrow"></span>
+                        <ul class="submenu__list">
+                            <li class="submenu__item"><a href="#about" class="submenu__link">Контактна інформація</a></li>
+                            <li class="submenu__item"><a href="#discount" class="submenu__link">Спеціальна пропозиція</a></li>
+                            <li class="submenu__item"><a href="#works" class="submenu__link">Наше кредо - якість!</a></li>
+                            <li class="submenu__item"><a href="#how" class="submenu__link">Як ми працюємо?</a></li>
+                        </ul>
+                    </li>
                     <li class="menu__item"><a href="./order.html" class="menu__link">Замовити ремонт</a></li>
                     <li class="menu__item"><a href="./check.html" class="menu__link active">Статус замовлення</a></li>
                 </ul>
@@ -48,6 +57,7 @@
                             fill="#704D9C" />
                     </svg>
                 </a>
+                <div class="menu__burger"><span></span></div>
             </div>
         </nav>
     </header>
@@ -80,6 +90,7 @@
             <a class="footer__about" href="#" target="_blank" rel="noopener noreferrer">2023 - Created by Kumchenko</a>
         </div>
     </footer>
+    <script src="./js/main.js"></script>
 </body>
 
 </html>

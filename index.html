@@ -21,13 +21,22 @@
                 <button class="info__call btn btn_green">Звʼязатися</button>
             </div>
         </div>
-        <nav class="nav">
-            <div class="container grid">
+        <nav class="menu">
+            <div class="container">
                 <a class="logo__link" href="./">
                     <img src="./img/logo.svg" alt="AppleDealer" class="logo__img">
                 </a>
-                <ul class="menu">
-                    <li class="menu__item"><a href="./" class="menu__link active">Про нас</a></li>
+                <ul class="menu__list">
+                    <li class="menu__item">
+                        <a href="./" class="menu__link active">Про нас</a>
+                        <span class="menu__arrow"></span>
+                        <ul class="submenu__list">
+                            <li class="submenu__item"><a href="#about" class="submenu__link">Контактна інформація</a></li>
+                            <li class="submenu__item"><a href="#discount" class="submenu__link">Спеціальна пропозиція</a></li>
+                            <li class="submenu__item"><a href="#works" class="submenu__link">Наше кредо - якість!</a></li>
+                            <li class="submenu__item"><a href="#how" class="submenu__link">Як ми працюємо?</a></li>
+                        </ul>
+                    </li>
                     <li class="menu__item"><a href="./order.html" class="menu__link">Замовити ремонт</a></li>
                     <li class="menu__item"><a href="./check.html" class="menu__link">Статус замовлення</a></li>
                 </ul>
@@ -46,13 +55,14 @@
                             fill="#704D9C" />
                     </svg>
                 </a>
+                <div class="menu__burger"><span></span></div>
             </div>
         </nav>
     </header>
-    <section class="about">
+    <section id="about" class="about">
         <div class="container grid">
             <h1 class="about__title">
-                Сервісний центр AppleDealer - Про нас
+                Сервісний центр AppleDealer
             </h1>
             <p class="about__subtitle">
                 Ремонтуємо iPhone. Швидко. Якісно.
@@ -83,7 +93,7 @@
                 referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
     </section>
-    <section class="discount">
+    <section id="discount" class="discount">
         <div class="container grid">
             <h2 class="discount__title">
                 Спеціальна пропозиція -5%
@@ -115,7 +125,7 @@
             </div>
         </div>
     </section>
-    <section class="works">
+    <section id="works" class="works">
         <div class="container">
             <h2 class="works__title">Наше кредо - якість!</h2>
             <p class="works__subtitle">Нижче наведено приклад наших робіт</p>
@@ -131,7 +141,7 @@
             </div>
         </div>
     </section>
-    <section class="how">
+    <section id="how" class="how">
         <div class="container">
             <h2 class="how__title">Як ми працюємо?</h2>
             <p class="how__subtitle">Наш простий та надійний алгоритм роботи</p>
@@ -164,5 +174,6 @@
             <a class="footer__about" href="#" target="_blank" rel="noopener noreferrer">2023 - Created by Kumchenko</a>
         </div>
     </footer>
+    <script src="./js/main.js"></script>
 </body>
 </html>

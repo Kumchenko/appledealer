@@ -4,6 +4,7 @@
         justify-items: left;
     }
     &__title {
+        text-align: center;
         justify-self: center;
         margin-bottom: 0.95em;
         grid-column: 1 / 13;
@@ -32,11 +33,11 @@
         align-items: center;
     }
     .timer__count {
-        width: 86px;
+        width: 5.375rem;
         background-color: $white;
         font-weight: 500;
-        font-size: 48px;
-        padding: 20px 14px;
+        font-size: 3rem;
+        padding: 1.25rem 0.875rem;
         border-radius: 25px;
         display: flex;
         align-items: center;
