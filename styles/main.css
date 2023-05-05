@@ -676,10 +676,7 @@ section {
   }
   .header .menu__arrow {
     margin-left: 0.6em;
-    width: 20px;
-    height: 20px;
-    display: block;
-    background-color: #704D9C;
+    margin-top: 1px;
   }
   .about .info {
     grid-column: 2/12;
