@@ -9,3 +9,85 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Order {
+  id        Int         @id @default(autoincrement())
+  service   Service     @relation(fields: [serviceId], references: [id])
+  serviceId Int
+  name      String
+  surname   String
+  tel       String
+  email     String
+  Operation Operation[]
+  cost      Int
+
+  @@map("orders")
+}
+
+model Operation {
+  id         Int      @id @default(autoincrement())
+  dateTime   DateTime @default(now())
+  status     Status
+  order      Order    @relation(fields: [orderId], references: [id])
+  orderId    Int
+  employee   Employee @relation(fields: [employeeId], references: [id])
+  employeeId Int
+
+  @@map("operations")
+}
+
+model Service {
+  id          Int       @id @default(autoincrement())
+  model       Model     @relation(fields: [modelId], references: [id])
+  modelId     Int
+  component   Component @relation(fields: [componentId], references: [id])
+  componentId Int
+  quality     Quality   @relation(fields: [qualityId], references: [id])
+  qualityId   Int
+  cost        Int
+  orders      Order[]
+
+  @@map("services")
+}
+
+model Employee {
+  id         Int         @id @default(autoincrement())
+  login      String      @unique
+  password   String
+  operations Operation[]
+
+  @@map("employees")
+}
+
+model Model {
+  id       Int       @id @default(autoincrement())
+  name     String    @unique
+  value    String    @unique
+  services Service[]
+
+  @@map("models")
+}
+
+model Component {
+  id       Int       @id @default(autoincrement())
+  name     String    @unique
+  value    String    @unique
+  services Service[]
+
+  @@map("components")
+}
+
+model Quality {
+  id       Int       @id @default(autoincrement())
+  name     String    @unique
+  value    String    @unique
+  services Service[]
+
+  @@map("qualities")
+}
+
+enum Status {
+  CREATED
+  INPROCESS
+  DONE
+}

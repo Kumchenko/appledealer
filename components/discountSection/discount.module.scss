@@ -1,0 +1,130 @@
+@use "sass:math";
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.discount {
+    .grid {
+        align-items: center;
+        justify-items: left;
+    }
+
+    &__title {
+        text-align: center;
+        justify-self: center;
+        margin-bottom: 0.95em;
+        grid-column: 1 / 13;
+    }
+
+    &__subtitle {
+        font-weight: 500;
+        grid-column: 2 / 7;
+    }
+
+    &__desc {
+        grid-column: 2 / 7;
+    }
+
+    &__order {
+        align-self: end;
+        grid-column: 2 / 7;
+    }
+
+    .timer {
+        display: flex;
+        gap: 1.7em;
+        justify-self: right;
+        grid-column: 7 / 12;
+        grid-row: 2 / 5;
+    }
+
+    .timer__field {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .timer__count {
+        width: 5.375rem;
+        background-color: $white;
+        font-weight: 500;
+        font-size: 3rem;
+        padding: 1.25rem 0.875rem;
+        border-radius: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .timer__label {
+        margin-top: 3px;
+    }
+}
+
+@include lg {
+    .discount {
+        &__subtitle {
+            grid-column: 1 / 7;
+        }
+
+        &__desc {
+            grid-column: 1 / 7;
+        }
+
+        &__order {
+            grid-column: 1 / 7;
+        }
+
+        .timer {
+            grid-column: 7 / 13;
+        }
+    }
+}
+
+@include md {
+    .discount {
+        .discount__title {
+            margin-bottom: math.div(8, 48) * 1em;
+        }
+
+        &__subtitle {
+            grid-column: 1 / 13;
+            grid-row-start: 3;
+            justify-self: center;
+        }
+
+        &__desc {
+            grid-column: 1 / 13;
+            grid-row-start: 2;
+            justify-self: center;
+            font-size: 1.25rem;
+            margin-bottom: 1.3em;
+        }
+
+        &__order {
+            justify-self: center;
+            grid-column: 1 / 13;
+        }
+
+        .timer {
+            grid-row-start: 4;
+            grid-column: 1 / 13;
+            justify-self: center;
+            margin: 1.2rem;
+        }
+    }
+}
+
+@include xs {
+    .discount {
+        &__desc {
+            text-align: center;
+        }
+
+        .timer {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5em;
+
+        }
+    }
+}

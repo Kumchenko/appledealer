@@ -1,0 +1,258 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.header {
+    .info {
+        .container {
+            min-height: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+
+    .logo__link {
+        display: block;
+        width: 110px;
+        height: 50px;
+    }
+
+    .social__link {
+        display: flex;
+        align-items: center;
+    }
+
+    .social__logo  {
+        font-size: 2.25rem;
+        @include purpleClickable('transparent');
+    }
+
+    .menu {
+        background-color: $white;
+
+        .container {
+            min-height: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        &__list {
+            flex-grow: 2;
+            list-style: none;
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        &__item {
+            padding: 20px 5px;
+
+            &:hover {
+                .submenu__list {
+                    transform: translateY(0);
+                    opacity: 1;
+                    visibility: visible;
+                    pointer-events: all;
+                }
+            }
+        }
+
+        &__link {
+            &.active {
+                font-weight: 600;
+            }
+
+            @include purpleClickable('transparent');
+        }
+    }
+
+    @media (min-width: 768px) {
+        .submenu__list {
+            padding: 1em;
+            border-radius: 20px;
+            box-shadow: 0 0 15px 5px #00000036;
+            top: 110%;
+            position: absolute;
+            transform: translateY(-20%);
+            background-color: $white;
+        }
+    }
+
+    .submenu__list {
+        z-index: 5;
+        list-style: none;
+        white-space: nowrap;
+        transition: all $transitionTime $transitionFunc;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        display: flex;
+        flex-direction: column;
+        row-gap: 1em;
+    }
+
+    .submenu__link {
+        &.active {
+            font-weight: 500;
+        }
+        @include purpleClickable('transparent');
+    }
+}
+
+@include md {
+    .header {
+        .menu {
+            &__item {
+                display: flex;
+            }
+
+            &__arrow {
+                margin-left: 0.6em;
+                margin-top: 1px;
+            }
+        }
+    }
+}
+
+@include sm {
+    .header {
+        .info {
+            .container {
+                min-height: initial;
+                padding-block: 0.7rem;
+            }
+        }
+
+        .logo__link {
+            width: 90px;
+            height: 44px;
+        }
+
+        .menu {
+
+            .container {
+                min-height: initial;
+                padding-block: 0.2rem;
+            }
+            font-size: 1.3rem;
+
+            &__burger {
+                margin-right: 0;
+                width: 28px;
+                height: 20px;
+
+                &::before,
+                span,
+                &::after {
+                    position: absolute;
+                    content: '';
+                    width: 100%;
+                    height: 3px;
+                    background-color: $purple;
+                    display: block;
+                    transition: all $transitionTime $transitionFunc;
+                    border-radius: 3px;
+                }
+
+                &::before {
+                    top: 0;
+                }
+
+                span {
+                    top: 50%;
+                    transform: scale(1) translateY(-50%);
+                }
+
+                &::after {
+                    bottom: 0;
+                }
+            }
+
+            &__arrow {
+                display: none;
+            }
+
+            &__list {
+                padding: 1.5rem;
+                flex-direction: column;
+                row-gap: 2em;
+                position: fixed;
+                background-color: $brightPurple;
+                width: 100%;
+                height: 100%;
+                left: 0;
+                top: 0;
+                z-index: 2;
+                justify-content: initial;
+                visibility: hidden;
+                opacity: 0;
+                transform: translateX(-100%);
+                transition: all $transitionTime $transitionFunc;
+            }
+
+            &__item {
+                display: initial;
+                padding: initial;
+            }
+
+            &_opened {
+                .menu__list {
+                    visibility: visible;
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+
+                .menu__burger {
+                    position: fixed;
+                    z-index: 5;
+                    top: 1.5rem;
+                    right: 1.5rem;
+
+                    &::before {
+                        top: 8px;
+                        transform: rotate(-45deg);
+                    }
+
+                    span {
+                        transform: scale(0);
+                    }
+
+                    &::after {
+                        bottom: 9px;
+                        transform: rotate(45deg);
+                    }
+                }
+            }
+
+            .container {
+                justify-content: initial;
+            }
+        }
+
+        .submenu__list {
+            margin: 1em 0 0 2em;
+            transform: translateY(0);
+            z-index: initial;
+            opacity: 1;
+            visibility: visible;
+            pointer-events: all;
+        }
+
+        .social__link {
+            width: 30px;
+            height: 30px;
+            margin-right: 1em;
+            margin-left: auto;
+        }
+    }
+}
+
+@include xs {
+    .header {
+        .info {
+            .container {
+                column-gap: 2rem;
+            }
+        }
+    }
+}

@@ -1,0 +1,100 @@
+@use "sass:math";
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.works {
+    &__title {
+        margin-bottom: math.div(8, 48) * 1em;
+    }
+
+    &__subtitle {
+        font-size: 1.25rem;
+        margin-bottom: math.div(26, 20) * 1em;
+    }
+
+    &__title,
+    &__subtitle {
+        text-align: center;
+    }
+
+    .slider {
+        border-radius: 25px;
+
+    }
+
+    .swiper-button-prev {
+        display: block;
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        top: 50%;
+    }
+
+    .slide {
+        background-color: $white;
+        display: flex;
+        align-items: stretch;
+        overflow: hidden;
+        min-height: 25rem;
+    }
+
+    .slide__info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 20px 20px 20px 50px;
+        width: 50%;
+    }
+
+    .slide__desc {
+        margin: 1em 0 1.5em;
+    }
+
+    .slide__img-wrapper {
+        width: 50%;
+    }
+
+    .slide__img {
+        object-fit: cover;
+    }
+}
+
+@include md {
+    .works {
+        .slide__info {
+            padding-left: 36px;
+        }
+    }
+}
+
+@include sm {
+    .works {
+        .slide {
+            align-items: stretch;
+
+            &__img {
+                object-fit: cover;
+            }
+        }
+    }
+}
+
+@include xs {
+    .works {
+        .slide {
+            &__info {
+                width: 100%;
+                padding: 36px;
+                z-index: 2;
+                background-color: rgba(255, 255, 255, 0.75);
+            }
+
+            &__img-wrapper {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+}
