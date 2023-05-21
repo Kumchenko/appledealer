@@ -1,0 +1,25 @@
+@use 'sass:math';
+ 
+.check {
+    &__title {
+        text-align: center;
+        margin-bottom: math.div(64, 48) * 1em;
+    }
+
+    .card {
+        margin: 0 auto;
+    }
+
+    .form {
+        display: flex;
+        flex-direction: column;
+
+        &__label:not(:first-of-type) {
+            margin-top: 18px;
+        }
+
+        button {
+            margin-top: 22px;
+        }
+    }
+}

@@ -1,13 +1,7 @@
-import Head from "next/head"
-import CheckSection from "@/components/checkSection/CheckSection"
+import CheckPageView from "@/pages/CheckPage/CheckPageView"
 
-export default function checkPage() {
+export default function Check() {
     return (
-        <>
-            <Head>
-                <title>Статус замовлення – AppleDealer</title>
-            </Head>
-            <CheckSection />
-        </>
+        <CheckPageView />
     )
 }

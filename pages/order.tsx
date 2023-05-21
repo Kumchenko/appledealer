@@ -1,13 +1,7 @@
-import Head from "next/head"
-import OrderSection from "@/components/orderSection/OrderSection"
+import OrderPageView from "@/pages/OrderPage/OrderPageView";
 
-export default function orderPage() {
+export default function order() {
     return (
-        <>
-            <Head>
-                <title>Замовити ремонт – AppleDealer</title>
-            </Head>
-            <OrderSection />
-        </>
+        <OrderPageView />
     )
 }

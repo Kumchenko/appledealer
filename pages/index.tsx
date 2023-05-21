@@ -1,19 +1,7 @@
-import Head from "next/head"
-import AboutSection from "@/components/aboutSection/AboutSection"
-import DiscountSection from "@/components/discountSection/DiscountSection"
-import WorksSection from "@/components/worksSection/WorksSection"
-import HowSection from "@/components/howSection/HowSection"
+import IndexPageView from "@/pages/IndexPage/IndexPageView"
 
-export default function Page() {
+export default function Index() {
     return (
-        <>
-            <Head>
-                <title>Про нас – AppleDealer</title>
-            </Head>
-            <AboutSection />
-            <DiscountSection />
-            <WorksSection />
-            <HowSection />
-        </>
+        <IndexPageView />
     )
 }
