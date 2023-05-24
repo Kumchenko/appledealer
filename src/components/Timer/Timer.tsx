@@ -66,7 +66,7 @@ const Timer = ({ date }: ITimer) => {
         loading={loading} 
         aria-label="Loading pulseloader" />
 
-    const Complete = <h4 className={clsx(styles.completed, styles.timerLocation)}>Пропозиція скінчилась :(</h4>
+    const Complete = <p className={clsx(styles.completed, styles.timerLocation)}>Пропозиція скінчилась :(</p>
 
     if (loading) return Load;
     if (ticking) return View;
