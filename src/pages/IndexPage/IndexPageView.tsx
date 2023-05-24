@@ -7,7 +7,7 @@ import HowSection from "@/components/HowSection/HowSection"
 
 export default function IndexPageView() {
     return (
-        <Layout>
+        <>
             <Head>
                 <title>Про нас – AppleDealer</title>
             </Head>
@@ -15,6 +15,6 @@ export default function IndexPageView() {
             <DiscountSection />
             <WorksSection />
             <HowSection />
-        </Layout>
+        </>
     )
 }
