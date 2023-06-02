@@ -7,6 +7,17 @@
         margin-bottom: math.div(64, 48) * 1em;
     }
 
+    .form__animatedWrapper {
+        height: 100%;
+        min-height: 240;
+    }
+
+    .form__animated {
+        display: flex;
+        justify-content: center;
+        height: 100%;
+    }
+
     .form__img {
         min-width: initial !important;
         width: initial !important;

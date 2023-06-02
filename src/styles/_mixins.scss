@@ -25,12 +25,14 @@
 @mixin clickable {
     transition: all $transitionTime $transitionFunc;
 
-    &:hover {
-        transform: translateY(-3px);
-    }
+    &:not(:disabled) {
+        &:hover {
+            transform: translateY(-3px);
+        }
 
-    &:active {
-        transform: translateY(3px);
+        &:active {
+            transform: translateY(3px);
+        }
     }
 }
 
@@ -47,24 +49,14 @@
         color: $white;
         background-color: $deepGreen;
     }
+
+    &:disabled {
+        cursor: not-allowed;
+        background-color: $deepGreen;
+    }
 }
 
 @mixin purpleClickable($obj) {
-    @if $obj =='svg' {
-        path {
-            transition: fill $transitionTime $transitionFunc;
-            fill: $purple;
-        }
-
-        &:hover path {
-            fill: $lightPurple;
-        }
-
-        &:active path {
-            fill: $deepPurple;
-        }
-    }
-
     @if $obj =='transparent' {
         & {
             transition: color $transitionTime $transitionFunc;

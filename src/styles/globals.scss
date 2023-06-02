@@ -76,6 +76,7 @@ a,
 button {
     transition: all $transitionTime $transitionFunc;
     font-family: inherit;
+    font-variant-numeric: inherit;
     cursor: pointer;
 }
 
@@ -142,6 +143,7 @@ section {
 
 .form__select {
     padding: 6px 16px;
+    padding-right: 2.375rem;
     appearance: none;
     background-image:
         url("/img/polygon.svg"),

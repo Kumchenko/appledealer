@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -12,14 +9,15 @@ datasource db {
 
 model Order {
   id        Int         @id @default(autoincrement())
-  service   Service     @relation(fields: [serviceId], references: [id])
   serviceId Int
   name      String
   surname   String
   tel       String
   email     String
-  Operation Operation[]
   cost      Int
+  created   DateTime    @default(now())
+  Operation Operation[]
+  service   Service     @relation(fields: [serviceId], references: [id])
 
   @@map("orders")
 }
@@ -28,25 +26,27 @@ model Operation {
   id         Int      @id @default(autoincrement())
   dateTime   DateTime @default(now())
   status     Status
-  order      Order    @relation(fields: [orderId], references: [id])
   orderId    Int
-  employee   Employee @relation(fields: [employeeId], references: [id])
   employeeId Int
+  employee   Employee @relation(fields: [employeeId], references: [id])
+  order      Order    @relation(fields: [orderId], references: [id])
 
+  @@unique([orderId, status])
   @@map("operations")
 }
 
 model Service {
   id          Int       @id @default(autoincrement())
-  model       Model     @relation(fields: [modelId], references: [id])
-  modelId     Int
-  component   Component @relation(fields: [componentId], references: [id])
-  componentId Int
-  quality     Quality   @relation(fields: [qualityId], references: [id])
-  qualityId   Int
+  modelId     String
+  componentId String
+  qualityId   String
   cost        Int
   orders      Order[]
+  component   Component @relation(fields: [componentId], references: [id])
+  model       Model     @relation(fields: [modelId], references: [id])
+  quality     Quality   @relation(fields: [qualityId], references: [id])
 
+  @@unique([modelId, componentId, qualityId])
   @@map("services")
 }
 
@@ -60,34 +60,30 @@ model Employee {
 }
 
 model Model {
-  id       Int       @id @default(autoincrement())
+  id       String    @id
   name     String    @unique
-  value    String    @unique
   services Service[]
 
   @@map("models")
 }
 
 model Component {
-  id       Int       @id @default(autoincrement())
+  id       String    @id
   name     String    @unique
-  value    String    @unique
   services Service[]
 
   @@map("components")
 }
 
 model Quality {
-  id       Int       @id @default(autoincrement())
+  id       String    @id
   name     String    @unique
-  value    String    @unique
   services Service[]
 
   @@map("qualities")
 }
 
 enum Status {
-  CREATED
   INPROCESS
   DONE
 }
