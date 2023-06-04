@@ -42,7 +42,7 @@ export default function Header() {
                 <div className={clsx(styles.container, 'container')}>
                     <Link href="/">
                         <a className={styles.logo__link}>
-                            <Image layout='fill' src="/img/logo.svg" alt="AppleDealer" className={styles.logo__img} />
+                            <Image layout='fill' priority={true} src="/img/logo.svg" alt="AppleDealer" className={styles.logo__img} />
                         </a>
                     </Link>
                     <ul className={styles.menu__list}>

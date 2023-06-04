@@ -1,9 +1,8 @@
-import clsx from "clsx"
-import { IFormErrorProps } from "./interfaces"
+import { IFormError } from "./interfaces"
 
-const FormError = ({error, touched, className, ...args}: IFormErrorProps) => {
+const FormError = ({error, touched, ...args}: IFormError) => {
     return (
-        (error && touched) ? <span className={clsx("form__error", className)} {...args}>{error}</span> : null
+        (error && touched) ? <span {...args}>{error}</span> : null
     )
 }
 

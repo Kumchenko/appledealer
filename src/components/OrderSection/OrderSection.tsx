@@ -10,8 +10,21 @@ import { fetchServices, clearServices } from "@/slices/ServicesSlice"
 import { useDispatch, useSelector } from "@/store"
 import { useMemo, useState } from "react"
 import useUpdate from "@/hooks/useUpdate"
-import FormError from "../FormError/FormError"
+import Form from "../Form/Form"
+import FormSelect from "../FormSelect/FormSelect"
+import FormInputExtended from "../FormInputExtended/FormInputExtended"
+import FormSelectExtended from "../FormSelectExtended/FormSelectExtended"
 import { useTransition, a } from "@react-spring/web"
+
+interface IInitialValues {
+    model: string,
+    name: string,
+    surname: string,
+    tel: string,
+    email: string,
+    component: string,
+    quality: string
+}
 
 const OrderSection = ({ models }: IModels) => {
     const dispatch = useDispatch();
@@ -57,11 +70,12 @@ const OrderSection = ({ models }: IModels) => {
     });
 
     // Initialize formik
-    const { values, errors, touched, isSubmitting, ...formik } = useFormik({
+    const formik = useFormik({
         initialValues,
         validationSchema,
         onSubmit: (values) => console.log(values),
     })
+    const { values, errors, touched, isSubmitting } = formik;
 
     // Prepare Component selector Placeholder value
     const componentPlaceholder = useMemo(() => {
@@ -156,22 +170,16 @@ const OrderSection = ({ models }: IModels) => {
         <section className={styles.order}>
             <div className={clsx(styles.container, "container")}>
                 <h1 className={styles.order__title}>Замовити ремонт</h1>
-                <form onSubmit={formik.handleSubmit} className={clsx(styles.form, "form grid")}>
+                <Form formik={formik} className={clsx(styles.form, "grid")}>
                     <Card title="Модель" className={styles.form__card}>
-                        <select
+                        <FormSelect
                             style={{ marginBottom: 10 }}
-                            className="form__select"
+                            className={styles.form__field}
                             name="model"
-                            id="model"
-                            value={values.model}
-                            onChange={(e) => {
-                                formik.handleChange(e);
-                            }}
-                            onBlur={formik.handleBlur}
+                            placeholder="Оберіть модель"
                         >
-                            <option value="" disabled>Оберіть модель</option>
                             {modelElems}
-                        </select>
+                        </FormSelect>
                         <div className={styles.form__animatedWrapper}>
                             {transitions((style, item) => (
                                 <a.div style={style} className={styles.form__animated}>
@@ -179,6 +187,7 @@ const OrderSection = ({ models }: IModels) => {
                                         className={styles.form__img}
                                         src={item && !(errors.model) ? `/img/iphones/${item}.png` : `/img/iphones/empty.png`}
                                         layout="fill"
+                                        quality={90}
                                         priority={true}
                                         alt={item}
                                     />
@@ -187,94 +196,59 @@ const OrderSection = ({ models }: IModels) => {
                         </div>
                     </Card>
                     <Card title="Контактні дані" className={styles.form__card}>
-                        <label className={clsx(styles.form__label, 'form__label')}>
-                            Імʼя
-                            <FormError error={errors.name} touched={touched.name} />
-                            <input className="form__input"
-                                name="name"
-                                id="name"
-                                type="text"
-                                value={values.name}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                placeholder="Ваше імʼя"
-                                required
-                            />
-                        </label>
-                        <label className={clsx(styles.form__label, 'form__label')}>
-                            Прізвище
-                            <FormError error={errors.surname} touched={touched.surname} />
-                            <input className="form__input"
-                                name="surname"
-                                id="surname"
-                                type="text"
-                                value={values.surname}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                placeholder="Ваше прізвище"
-                                required />
-                        </label>
-                        <label className={clsx(styles.form__label, 'form__label')}>
-                            Телефон
-                            <FormError error={errors.tel} touched={touched.tel} />
-                            <input className="form__input"
-                                name="tel"
-                                id="tel"
-                                type="tel"
-                                value={values.tel}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                pattern="[+]{1}38[0]{1}[0-9]{9}"
-                                placeholder="+38(___)-___-__-__"
-                                required />
-                        </label>
-                        <label className={clsx(styles.form__label, 'form__label')}>
-                            Email
-                            <FormError error={errors.email} touched={touched.email} />
-                            <input className="form__input"
-                                name="email"
-                                id="email"
-                                type="email"
-                                value={values.email}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                placeholder="example@example.com"
-                                required />
-                        </label>
+                        <FormInputExtended
+                            className={styles.form__field}
+                            label="Імʼя"
+                            name="name"
+                            type="text"
+                            placeholder="Ваше імʼя"
+                            required
+                        />
+                        <FormInputExtended
+                            className={styles.form__field}
+                            label="Прізвище"
+                            name="surname"
+                            type="text"
+                            placeholder="Ваше прізвище"
+                            required
+                        />
+                        <FormInputExtended
+                            className={styles.form__field}
+                            label="Телефон"
+                            name="tel"
+                            type="tel"
+                            pattern="[+]{1}38[0]{1}[0-9]{9}"
+                            placeholder="+38(___)-___-__-__"
+                            required
+                        />
+                        <FormInputExtended
+                            className={styles.form__field}
+                            label="Email"
+                            name="email"
+                            type="email"
+                            placeholder="example@example.com"
+                            required 
+                        />
                     </Card>
                     <Card title="Замовлення" className={styles.form__card}>
-                        <label className={clsx(styles.form__label, 'form__label')}>
-                            Компонент
-                            <FormError error={errors.component} touched={touched.component} />
-                            <select
-                                disabled={!(values.model)}
-                                className="form__select"
-                                name="component"
-                                id="component"
-                                value={values.component}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                            >
-                                <option value="" disabled>{componentPlaceholder}</option>
-                                {componentElems}
-                            </select>
-                        </label>
-                        <label className={clsx(styles.form__label, 'form__label')}>
-                            Якість
-                            <FormError error={errors.quality} touched={touched.quality} />
-                            <select
-                                disabled={!(values.component)}
-                                className="form__select"
-                                name="quality"
-                                id="quality"
-                                value={values.quality}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                            >
-                                <option value="" disabled>{qualityPlaceholder}</option>
-                                {qualityElems}
-                            </select>
-                        </label>
+                        <FormSelectExtended
+                            className={styles.form__field}
+                            label="Компонент"
+                            name="component"
+                            placeholder={componentPlaceholder}
+                            disabled={!(values.model)}
+                        >
+                            {componentElems}
+                        </FormSelectExtended>
+                        <FormSelectExtended
+                            className={styles.form__field}
+                            label="Якість"
+                            name="quality"
+                            placeholder={qualityPlaceholder}
+                            disabled={!(values.component)}
+                        >
+                            {qualityElems}
+                        </FormSelectExtended>
                         <button
                             disabled={isSubmitting || !(values.quality)}
                             className={clsx(styles.form__btn, "btn btn_green")}
@@ -283,7 +257,7 @@ const OrderSection = ({ models }: IModels) => {
                             {submitText}
                         </button>
                     </Card>
-                </form>
+                </Form>
             </div>
         </section>
     )

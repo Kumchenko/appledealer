@@ -31,7 +31,6 @@ export default function MyApp({ Component, pageProps, router }: AppProps) {
     <Provider store={store}>
       <div style={{ overflowX: 'hidden' }}>
         <Head>
-          <title>AppleDealer</title>
           <link rel="shortcut icon" href="/favicon.png" type="image/png" />
         </Head>
         <Header />
