@@ -8,8 +8,10 @@ export interface IOrderReqData {
     quality: string;
 }
 
-export interface IOrderData extends IOrderReqData {
+export interface IOrderResData extends IOrderReqData {
+    id: number;
     serviceId: number;
+    created: Date;
     cost: number;
 }
 

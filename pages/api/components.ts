@@ -10,7 +10,7 @@ const handler = async (req: IComponentsRequest, res: NextApiResponse) => {
     try {
         const { model } = req.body;
         if (!model) {
-            throw new Error("Model in req is empty!");
+            res.status(400).json([]);
         }
         const components = await prisma.component.findMany({
             where: {

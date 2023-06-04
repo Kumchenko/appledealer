@@ -5,7 +5,7 @@ import FormInput from "../FormInput/FormInput"
 import { IFormInputExtended } from "./interfaces"
 import { useFormikContext } from "formik"
 
-const FormInputExtended = ({className, label, name, disabled, ...args}: IFormInputExtended) => {
+const FormInputExtended = ({className, label, name, ...args}: IFormInputExtended) => {
     const {getFieldMeta} = useFormikContext();
     const {error, touched} = getFieldMeta(name);
     return (

@@ -5,7 +5,7 @@ import FormSelect from "../FormSelect/FormSelect"
 import { IFormSelectExtended } from "./interfaces"
 import { useFormikContext } from "formik"
 
-const FormSelectExtended = ({className, label, name, disabled, ...args}: IFormSelectExtended) => {
+const FormSelectExtended = ({className, label, name, ...args}: IFormSelectExtended) => {
     const {getFieldMeta} = useFormikContext();
     const {error, touched} = getFieldMeta(name);
     return (

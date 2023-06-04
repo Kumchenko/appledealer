@@ -8,31 +8,28 @@ import { IModels } from "@/interfaces"
 import { fetchComponents, clearComponents } from "@/slices/ComponentSlice"
 import { fetchServices, clearServices } from "@/slices/ServicesSlice"
 import { useDispatch, useSelector } from "@/store"
-import { useMemo, useState } from "react"
+import { useCallback, useMemo, useState } from "react"
 import useUpdate from "@/hooks/useUpdate"
 import Form from "../Form/Form"
 import FormSelect from "../FormSelect/FormSelect"
 import FormInputExtended from "../FormInputExtended/FormInputExtended"
 import FormSelectExtended from "../FormSelectExtended/FormSelectExtended"
 import { useTransition, a } from "@react-spring/web"
+import { PulseLoader } from "react-spinners"
+import { pushOrder } from "@/slices/OrderSlice"
+import { IOrderReqData } from "pages/api/interfaces"
+import { useRouter } from "next/router"
 
-interface IInitialValues {
-    model: string,
-    name: string,
-    surname: string,
-    tel: string,
-    email: string,
-    component: string,
-    quality: string
-}
 
 const OrderSection = ({ models }: IModels) => {
+    const router = useRouter();
     const dispatch = useDispatch();
     const { components, loadingStatus: componentsLoadingStatus } = useSelector(({ componentsSlice }) => componentsSlice);
     const { services, loadingStatus: servicesLoadingStatus } = useSelector(({ servicesSlice }) => servicesSlice);
+    const { loadingStatus: orderLoadingStatus } = useSelector(({ orderSlice }) => orderSlice)
 
     // Initial form values
-    const initialValues = {
+    const initialValues: IOrderReqData = {
         model: '',
         name: '',
         surname: '',
@@ -73,9 +70,17 @@ const OrderSection = ({ models }: IModels) => {
     const formik = useFormik({
         initialValues,
         validationSchema,
-        onSubmit: (values) => console.log(values),
+        onSubmit: (values) => {
+            dispatch(pushOrder(values)).unwrap()
+                .then(() => {
+                    router.push('/thanks')
+                })
+                .catch(() => {
+                    formik.resetForm();
+                })
+        }
     })
-    const { values, errors, touched, isSubmitting } = formik;
+    const { values, errors, isSubmitting } = formik;
 
     // Prepare Component selector Placeholder value
     const componentPlaceholder = useMemo(() => {
@@ -150,12 +155,22 @@ const OrderSection = ({ models }: IModels) => {
     // Prepare text for submit button
     const submitText = useMemo(() => {
         const service = services.find(service => service.quality.id === values.quality);
+        if (orderLoadingStatus === 'error') {
+            return 'Виникла помилка'
+        }
+        if (isSubmitting) {
+            return <PulseLoader
+                color={styles.white}
+                className={styles.form__loader}
+                loading={isSubmitting}
+                aria-label="Loading pulseloader" />;
+        }
         if (service) {
             return `Замовити: ${service.cost}₴`;
         } else {
             return 'Замовити';
         }
-    }, [services, values.quality]);
+    }, [isSubmitting, orderLoadingStatus, services, values.quality]);
 
     // Transition implementation
     const [modelList, setModelList] = useState([initialValues.model]);
@@ -227,7 +242,7 @@ const OrderSection = ({ models }: IModels) => {
                             name="email"
                             type="email"
                             placeholder="example@example.com"
-                            required 
+                            required
                         />
                     </Card>
                     <Card title="Замовлення" className={styles.form__card}>
@@ -250,7 +265,7 @@ const OrderSection = ({ models }: IModels) => {
                             {qualityElems}
                         </FormSelectExtended>
                         <button
-                            disabled={isSubmitting || !(values.quality)}
+                            disabled={isSubmitting || !(values.quality) || orderLoadingStatus === 'error'}
                             className={clsx(styles.form__btn, "btn btn_green")}
                             type="submit"
                         >
