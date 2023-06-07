@@ -1,4 +1,12 @@
-export interface IOrderReqData {
+import { Operation } from "@prisma/client";
+
+export interface IOrderReqQuery {
+    [key: string]: string | string[]
+    id: string;
+    tel: string;
+}
+
+export interface IOrderReqBody {
     model: string;
     name: string;
     surname: string;
@@ -8,11 +16,12 @@ export interface IOrderReqData {
     quality: string;
 }
 
-export interface IOrderResData extends IOrderReqData {
+export interface IOrderResData extends IOrderReqBody {
     id: number;
     serviceId: number;
     created: Date;
     cost: number;
+    operations: Operation[] | null
 }
 
 export interface IServiceReqData {

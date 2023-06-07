@@ -3,10 +3,10 @@ import { ICardProps } from "./interfaces"
 import styles from './sass/Card.module.scss'
 
 
-const Card = ({title, children, className, single = false, ...args}: ICardProps) => {
+const Card = ({title, titleClass, children, className, single = false, ...args}: ICardProps) => {
     return (
         <div {...args} className={clsx(styles.card, single && styles.card_single, className)}>
-            <h5 className={styles.card__title}>{title}</h5>
+            {title ? <h5 className={clsx(styles.card__title, titleClass)}>{title}</h5> : null}
             {children}
         </div>
     )

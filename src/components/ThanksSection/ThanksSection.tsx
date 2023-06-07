@@ -6,6 +6,7 @@ import Card from '../Card/Card';
 import { useSelector } from '@/store';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { idToString } from '@/utils';
 
 const ThanksSection = () => {
     const router = useRouter();
@@ -25,7 +26,7 @@ const ThanksSection = () => {
                 <h1 className={styles.thanks__title}>
                     Дякуємо за замовлення!
                 </h1>
-                <Card title={`Замовлення ${order?.id ? formatId(order.id) : 0}`} className={styles.card} single={true}>
+                <Card title={`Замовлення ${order?.id ? idToString(order.id) : 0}`} className={styles.card} single={true}>
                     <p className={styles.card__subtitle}>
                         Наш менеджер зв’яжеться з вами для уточнення умов
                     </p>
@@ -51,15 +52,6 @@ const ThanksSection = () => {
             </div>
         </section>
     )
-}
-
-const formatId = (id: number | string) => {
-    const res = id.toString().split('');
-    const length = res.length
-    for (let i = 0; i < (4 - length); i++) {
-        res.unshift('0');
-    }
-    return res.join('');
 }
 
 export default ThanksSection;

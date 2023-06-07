@@ -1,6 +1,6 @@
 import { ILoadingStatus } from "@/interfaces";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { IOrderReqData, IOrderResData } from "pages/api/interfaces";
+import { IOrderReqQuery, IOrderReqBody, IOrderResData } from "pages/api/interfaces";
 
 interface IInitialState extends ILoadingStatus {
     order: IOrderResData | null
@@ -11,9 +11,17 @@ const initialState: IInitialState = {
     loadingStatus: 'idle'
 }
 
-const pushOrder = createAsyncThunk(
-    'order/pushOrder',
-    async (order: IOrderReqData) => {
+const getOrder = createAsyncThunk(
+    'order/getOrder',
+    async ({ id, tel }: IOrderReqQuery) => {
+        const response = await fetch(`http://localhost:3000/api/order?id=${id}&tel=${encodeURIComponent(tel)}`)
+        return response.json();
+    }
+)
+
+const postOrder = createAsyncThunk(
+    'order/postOrder',
+    async (order: IOrderReqBody) => {
         const response = await fetch('http://localhost:3000/api/order', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -30,12 +38,18 @@ const OrderSlice = createSlice({
     },
     extraReducers: builder =>
         builder
-            .addCase(pushOrder.pending, state => { state.loadingStatus = 'fetching' })
-            .addCase(pushOrder.fulfilled, (state, action) => {
+            .addCase(postOrder.pending, state => { state.loadingStatus = 'fetching' })
+            .addCase(postOrder.fulfilled, (state, action) => {
                 state.order = action.payload;
                 state.loadingStatus = 'fetched';
             })
-            .addCase(pushOrder.rejected, state => { state.loadingStatus = 'error' })
+            .addCase(postOrder.rejected, state => { state.loadingStatus = 'error' })
+            .addCase(getOrder.pending, state => { state.loadingStatus = 'fetching' })
+            .addCase(getOrder.fulfilled, (state, action) => {
+                state.order = action.payload;
+                state.loadingStatus = 'fetched';
+            })
+            .addCase(getOrder.rejected, state => { state.loadingStatus = 'error' })
 })
 
 const { actions, reducer } = OrderSlice;
@@ -44,4 +58,4 @@ export default reducer;
 export const {
     clearOrder
 } = actions;
-export { pushOrder };
+export { getOrder, postOrder };

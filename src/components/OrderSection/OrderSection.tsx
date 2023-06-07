@@ -8,7 +8,7 @@ import { IModels } from "@/interfaces"
 import { fetchComponents, clearComponents } from "@/slices/ComponentSlice"
 import { fetchServices, clearServices } from "@/slices/ServicesSlice"
 import { useDispatch, useSelector } from "@/store"
-import { useCallback, useMemo, useState } from "react"
+import { useMemo, useState } from "react"
 import useUpdate from "@/hooks/useUpdate"
 import Form from "../Form/Form"
 import FormSelect from "../FormSelect/FormSelect"
@@ -16,8 +16,8 @@ import FormInputExtended from "../FormInputExtended/FormInputExtended"
 import FormSelectExtended from "../FormSelectExtended/FormSelectExtended"
 import { useTransition, a } from "@react-spring/web"
 import { PulseLoader } from "react-spinners"
-import { pushOrder } from "@/slices/OrderSlice"
-import { IOrderReqData } from "pages/api/interfaces"
+import { postOrder } from "@/slices/OrderSlice"
+import { IOrderReqBody } from "pages/api/interfaces"
 import { useRouter } from "next/router"
 
 
@@ -29,7 +29,7 @@ const OrderSection = ({ models }: IModels) => {
     const { loadingStatus: orderLoadingStatus } = useSelector(({ orderSlice }) => orderSlice)
 
     // Initial form values
-    const initialValues: IOrderReqData = {
+    const initialValues: IOrderReqBody = {
         model: '',
         name: '',
         surname: '',
@@ -71,7 +71,7 @@ const OrderSection = ({ models }: IModels) => {
         initialValues,
         validationSchema,
         onSubmit: (values) => {
-            dispatch(pushOrder(values)).unwrap()
+            dispatch(postOrder(values)).unwrap()
                 .then(() => {
                     router.push('/thanks')
                 })
