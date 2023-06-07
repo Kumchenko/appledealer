@@ -1,10 +1,28 @@
 @use "sass:math";
+@import "../../../styles/variables";
 @import "../../../styles/mixins";
 
 .order {
     &__title {
         text-align: center;
         margin-bottom: math.div(64, 48) * 1em;
+    }
+
+    .form__loader {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .form__animatedWrapper {
+        height: 100%;
+        min-height: 240px;
+    }
+
+    .form__animated {
+        display: flex;
+        justify-content: center;
+        height: 100%;
     }
 
     .form__img {
@@ -17,7 +35,7 @@
         margin: auto 0 0;
     }
 
-    .form__label:not(:first-of-type) {
+    .form__field:not(:first-of-type) {
         margin-top: 18px;
     }
 

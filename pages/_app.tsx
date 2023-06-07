@@ -6,7 +6,9 @@ import '@fortawesome/fontawesome-svg-core/styles.css'
 import '@/styles/globals.scss'
 import { AppProps } from 'next/app'
 import { useEffect, useState } from 'react'
-import { animated, useTransition } from '@react-spring/web'
+import { a, useTransition } from '@react-spring/web'
+import store from '@/store'
+import { Provider } from 'react-redux'
 
 config.autoAddCss = false
 
@@ -26,14 +28,15 @@ export default function MyApp({ Component, pageProps, router }: AppProps) {
   }, [Component, pageProps, router.asPath]);
 
   return (
-    <div style={{ overflowX: 'hidden' }}>
-      <Head>
-        <title>AppleDealer</title>
-        <link rel="shortcut icon" href="/favicon.png" type="image/png" />
-      </Head>
-      <Header />
-      {transitions((style, item) => <animated.div style={style}>{item}</animated.div>)}
-      <Footer />
-    </div>
+    <Provider store={store}>
+      <div style={{ overflowX: 'hidden' }}>
+        <Head>
+          <link rel="shortcut icon" href="/favicon.png" type="image/png" />
+        </Head>
+        <Header />
+        {transitions((style, item) => <a.div style={style}>{item}</a.div>)}
+        <Footer />
+      </div>
+    </Provider>
   )
 }

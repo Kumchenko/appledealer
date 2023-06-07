@@ -1,14 +1,14 @@
 import Head from "next/head"
-import { Layout } from "@/layout"
 import OrderSection from "@/components/OrderSection/OrderSection"
+import { IModels } from "@/interfaces"
 
-export default function OrderPageView() {
+export default function OrderPageView({models}: IModels) {
     return (
         <>
             <Head>
                 <title>Замовити ремонт – AppleDealer</title>
             </Head>
-            <OrderSection />
+            <OrderSection models={models}/>
         </>
     )
 }
