@@ -1,0 +1,52 @@
+{
+    "h1": "AppleDealer service center",
+    "subtitle": "We repair iPhones. Quickly. Qualitatively.",
+    "open-hours": "Open hours",
+    "weekdays": "Monday - Friday",
+    "saturday": "Saturday",
+    "weekend": "Weekend",
+    "weekends": "Sundays and public holidays",
+    "contacts": "Contacts",
+    "offer": {
+        "title": "Special offer",
+        "submit": "Order repair",
+        "remains": "Validity of the offer",
+        "desc": "Discount on component repair",
+        "ended": "The offer has ended :("
+    },
+    "works": {
+        "title": "Our credo is quality!",
+        "subtitle": "Below are examples of our works",
+        "slides": [
+            {
+                "title": "Back glass replacement",
+                "desc": "Replacement of the rear glass while preserving the original body frame and MagSafe charging.",
+                "src": "/img/changing-glass.png",
+                "href": "https://www.youtube.com/watch?v=sNesBB7sOaw"
+            },
+            {
+                "title": "Display replacement",
+                "desc": "Display replacement with saving auto-brightness and True Tone functions.",
+                "src": "/img/changing-display.jpg",
+                "href": "https://www.youtube.com/watch?v=fd4EZNVlN7k"
+            },
+            {
+                "title": "Battery replacement",
+                "desc": "Replacing the battery with saving the display of Battery Health %",
+                "src": "/img/changing-battery.jpg",
+                "href": "https://www.youtube.com/watch?v=5mm2c2PfHCk"
+            }
+        ]
+    },
+    "how": {
+        "title": "How do we work?",
+        "subtitle": "Our simple and reliable work algorithm",
+        "actions": [
+            "You send a request with a description of the existing problem",
+            "Our manager will call you for clarification and approval of further actions",
+            "We diagnose your device and agree on the necessary repairs",
+            "We carry out professional repairs and the necessary testing",
+            "You get a fully functional device and are happy to use it :)"
+        ]
+    }
+}

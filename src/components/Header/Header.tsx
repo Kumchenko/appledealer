@@ -7,10 +7,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faInstagram } from '@fortawesome/free-brands-svg-icons'
 import styles from './sass/Header.module.scss'
 import { useRouter } from 'next/router'
+import { useTranslation } from "next-i18next"
 
 export default function Header() {
+    const { t } = useTranslation();
     const [menuOpened, setMenuOpened] = useState(false);
     const router = useRouter();
+
     const toggleMenu = () => {
         setMenuOpened(!menuOpened);
     }
@@ -20,6 +23,11 @@ export default function Header() {
             setMenuOpened(false);
         }
     }, [menuOpened]);
+
+    const changeLocale = (newLocale: string) => {
+        const { pathname, asPath, query } = router
+        router.push({ pathname, query }, asPath, { locale: newLocale });
+    }
 
     useEffect(() => {
         router.events.on('routeChangeStart', closeMenu)
@@ -32,10 +40,13 @@ export default function Header() {
                 <div className={clsx(styles.container, 'container')}>
                     <address className={styles.info__address}>
                         <a href="https://goo.gl/maps/XLexykR1npzgqB2R7" target="_blank" rel="noopener noreferrer">
-                            Дніпро, вул. Якова Самарського 7
+                            {t('address')}
                         </a>
                     </address>
-                    <button className={clsx('btn btn_green')}>Звʼязатися</button>
+                    <button onClick={() => changeLocale('uk')}>УК</button>
+                    <button onClick={() => changeLocale('ru')}>РУ</button>
+                    <button onClick={() => changeLocale('en')}>EN</button>
+                    <button className={clsx('btn btn_green')}>{t('call-me')}</button>
                 </div>
             </div>
             <nav className={clsx({ [styles.menu]: true, [styles.menu_opened]: menuOpened })}>
@@ -48,7 +59,7 @@ export default function Header() {
                     <ul className={styles.menu__list}>
                         <li className={styles.menu__item}>
                             <NavLink href="/" className={styles.menu__link} activeClass={styles.active}>
-                                Про нас
+                                {t('about-us')}
                             </NavLink>
                             <span className={styles.menu__arrow}></span>
                             <ul className={styles.submenu__list}>
@@ -76,12 +87,12 @@ export default function Header() {
                         </li>
                         <li className={styles.menu__item}>
                             <NavLink href="/order" className={styles.menu__link} activeClass={styles.active}>
-                                Замовити ремонт
+                                {t('order-repair')}
                             </NavLink>
                         </li>
                         <li className={styles.menu__item}>
                             <NavLink href="/check" className={styles.menu__link} activeClass={styles.active}>
-                                Статус замовлення
+                                {t('order-status')}
                             </NavLink>
                         </li>
                     </ul>

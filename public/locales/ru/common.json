@@ -1,0 +1,38 @@
+{
+    "header": {
+        "address": "Днепр, ул. Якова Самарского 7",
+        "call-me": "Связаться",
+        "about-us": "Про нас",
+        "order-repair": "Заказать ремонт",
+        "order-status": "Статус заказа"
+    },
+    "necessary": "Обязательно",
+    "incorrect": "Некорректный формат",
+    "occured": "Произошла ошибка",
+    "model": {
+        "iphone-8": "iPhone 8",
+        "iphone-8-plus": "iPhone 8 Plus",
+        "iphone-x": "iPhone X",
+        "iphone-xr": "iPhone XR",
+        "iphone-xs": "iPhone XS",
+        "iphone-xs-max": "iPhone XS Max",
+        "iphone-12-mini": "iPhone 12 Mini",
+        "iphone-13-mini": "iPhone 13 Mini",
+        "iphone-14-plus": "iPhone 14 Plus",
+        "iphone-11": "iPhone 11",
+        "iphone-12": "iPhone 12",
+        "iphone-13": "iPhone 13",
+        "iphone-14": "iPhone 14",
+        "iphone-11-pro": "iPhone 11 Pro",
+        "iphone-12-pro": "iPhone 12 Pro",
+        "iphone-13-pro": "iPhone 13 Pro",
+        "iphone-14-pro": "iPhone 14 Pro",
+        "iphone-11-pro-max": "iPhone 11 Pro Max",
+        "iphone-12-pro-max": "iPhone 12 Pro Max",
+        "iphone-13-pro-max": "iPhone 13 Pro Max",
+        "iphone-14-pro-max": "iPhone 14 Pro Max"
+    },
+    "footer": {
+        "credentials": "Создал Кумченко"
+    }
+}

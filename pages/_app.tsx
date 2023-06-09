@@ -9,12 +9,12 @@ import { useEffect, useState } from 'react'
 import { a, useTransition } from '@react-spring/web'
 import store from '@/store'
 import { Provider } from 'react-redux'
+import { appWithTranslation } from 'next-i18next'
 
 config.autoAddCss = false
 
 
-// This default export is required in a new `pages/_app.js` file.
-export default function MyApp({ Component, pageProps, router }: AppProps) {
+function MyApp({ Component, pageProps, router }: AppProps) {
   const [pagesArr, setPagesArr] = useState([<Component key={router.asPath} {...pageProps} />]);
 
   const transitions = useTransition(pagesArr, {
@@ -40,3 +40,5 @@ export default function MyApp({ Component, pageProps, router }: AppProps) {
     </Provider>
   )
 }
+
+export default appWithTranslation(MyApp);

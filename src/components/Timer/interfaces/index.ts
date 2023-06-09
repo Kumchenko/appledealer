@@ -4,5 +4,6 @@ export interface ITimerBlock {
 }
 
 export interface ITimer {
-    date: number
+    date: number,
+    ended: string
 }

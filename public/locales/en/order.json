@@ -1,0 +1,23 @@
+{
+    "h1": "Order repair",
+    "model": "Model",
+    "contact-data": "Contacts",
+    "order": "Details",
+    "select-model": "Choose model",
+    "name": "Name",
+    "surname": "Surname",
+    "tel": "Phone number",
+    "email": "Email",
+    "component": "Component",
+    "quality": "Quality",
+    "submit": "Order",
+    "your-name": "John",
+    "your-surname": "Doe",
+    "select-component": "Choose component",
+    "select-quality": "Choose quality",
+    "first-select-component": "First, choose a component",
+    "first-select-model": "First, choose a model",
+    "no-components": "No components",
+    "no-qualities": "No qualities",
+    "no-models": "No models"
+}

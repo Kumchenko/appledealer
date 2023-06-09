@@ -1,15 +1,16 @@
 import clsx from "clsx"
 import styles from "./sass/How.module.scss"
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faReply, faPhone, faGear, faWrench, faSmile } from '@fortawesome/free-solid-svg-icons'
+import { useTranslation } from "next-i18next"
 
 const HowSection = () => {
+    const { t: i } = useTranslation('index');
     return (
         <section id="how" className={styles.how}>
             <div className={clsx(styles.container, 'container')}>
-                <h2 className={styles.how__title}>Як ми працюємо?</h2>
-                <p className={styles.how__subtitle}>Наш простий та надійний алгоритм роботи</p>
+                <h2 className={styles.how__title}>{i('how.title')}</h2>
+                <p className={styles.how__subtitle}>{i('how.subtitle')}</p>
                 <ul className={styles.how__list}>
                     <li className={styles.how__item}>
                         <span className={styles["how__icon-wrapper"]}>

@@ -1,7 +1,8 @@
 import { IModels } from "@/interfaces";
 import prisma from "@/lib/prisma";
 import OrderPageView from "@/pages/OrderPage/OrderPageView";
-import { fetchComponents } from "@/slices/ComponentSlice";
+import { GetStaticProps } from "next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 export default function Order({ models }: IModels) {
     return (
@@ -9,11 +10,16 @@ export default function Order({ models }: IModels) {
     )
 }
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
     const models = await prisma?.model.findMany();
     return {
         props: {
-            models
+            models,
+            ...(await serverSideTranslations(locale ?? 'uk', [
+                'common',
+                'order',
+                'repair'
+            ]))
         }
     }
 }

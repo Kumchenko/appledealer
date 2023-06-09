@@ -1,0 +1,24 @@
+{
+    "address": "Dnipro, 7 Yakova Samarskoho Street",
+    "call-me": "Call me",
+    "call-back": "Call back",
+    "about-us": "About us",
+    "order-repair": "Order repair",
+    "order-status": "Status of order",
+    "loading": "Loading...",
+    "back": "Back",
+    "to-main": "To main",
+    "cost": "Cost",
+    "view": "View",
+    "errors": {
+        "min": "Min {{count}} chars",
+        "max": "Max {{count}} chars",
+        "only": "Only {{count}} digits",
+        "necessary": "Necessary",
+        "incorrect": "Incorrect format",
+        "occured": "Error was occured"
+    },
+    "footer": {
+        "credentials": "Created by Kumchenko"
+    }
+}

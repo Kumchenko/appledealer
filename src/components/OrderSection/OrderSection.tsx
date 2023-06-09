@@ -19,13 +19,22 @@ import { PulseLoader } from "react-spinners"
 import { postOrder } from "@/slices/OrderSlice"
 import { IOrderReqBody } from "pages/api/interfaces"
 import { useRouter } from "next/router"
+import { useTranslation } from "next-i18next"
 
 
 const OrderSection = ({ models }: IModels) => {
+    const { t } = useTranslation();
     const router = useRouter();
     const dispatch = useDispatch();
-    const { components, loadingStatus: componentsLoadingStatus } = useSelector(({ componentsSlice }) => componentsSlice);
-    const { services, loadingStatus: servicesLoadingStatus } = useSelector(({ servicesSlice }) => servicesSlice);
+
+    const {
+        components,
+        loadingStatus: componentsLoadingStatus
+    } = useSelector(({ componentsSlice }) => componentsSlice);
+    const {
+        services,
+        loadingStatus: servicesLoadingStatus
+    } = useSelector(({ servicesSlice }) => servicesSlice);
     const { loadingStatus: orderLoadingStatus } = useSelector(({ orderSlice }) => orderSlice)
 
     // Initial form values
@@ -42,28 +51,28 @@ const OrderSection = ({ models }: IModels) => {
     // Validation Schema for form
     const validationSchema = Yup.object({
         model: Yup.string()
-            .oneOf(models.map(model => model.id), 'Помилка')
-            .required('Обовʼязково'),
+            .oneOf(models.map(model => model.id), t('errors.occured'))
+            .required(t('errors.necessary')),
         name: Yup.string()
-            .required('Обовʼязково')
-            .min(3, 'Мін. 3 симв.')
-            .max(20, 'Макс. 20 симв.'),
+            .required(t('errors.necessary'))
+            .min(3, args => t('errors.min', { count: args.min }))
+            .max(20, args => t('errors.max', { count: args.max })),
         surname: Yup.string()
-            .required('Обовʼязково')
-            .min(3, 'Мін. 3 симв.')
-            .max(20, 'Макс. 20 симв.'),
+            .required(t('errors.necessary'))
+            .min(3, args => t('errors.min', { count: args.min }))
+            .max(20, args => t('errors.max', { count: args.max })),
         tel: Yup.string()
-            .matches(/[+]{1}38[0]{1}[0-9]{9}/, 'Некоректний формат')
-            .required('Обовʼязково'),
+            .matches(/[+]{1}38[0]{1}[0-9]{9}/, t('errors.incorrect'))
+            .required(t('errors.necessary')),
         email: Yup.string()
-            .matches(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/, 'Некоректний формат')
-            .required('Обовʼязково'),
+            .matches(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/, t('errors.incorrect'))
+            .required(t('errors.necessary')),
         component: Yup.string()
-            .oneOf(components.map(component => component.id), 'Помилка')
-            .required('Обовʼязково'),
+            .oneOf(components.map(component => component.id), t('errors.occured'))
+            .required(t('errors.necessary')),
         quality: Yup.string()
-            .oneOf(services.map(service => service.quality.id), 'Помилка')
-            .required('Обовʼязково')
+            .oneOf(services.map(service => service.quality.id), t('errors.occured'))
+            .required(t('errors.necessary'))
     });
 
     // Initialize formik
@@ -82,46 +91,58 @@ const OrderSection = ({ models }: IModels) => {
     })
     const { values, errors, isSubmitting } = formik;
 
+    // Prepate Model selector Placeholder value
+    const modelPlaceholder = useMemo(() => {
+        if (models.length > 0) {
+            return t('order:select-model')
+        } else {
+            return t('order:no-models')
+        }
+    }, [models.length, t]);
+
     // Prepare Component selector Placeholder value
     const componentPlaceholder = useMemo(() => {
         switch (componentsLoadingStatus) {
             case 'idle': {
-                return 'Спочатку оберіть модель'
+                return t('order:first-select-model')
             }
             case 'error': {
-                return 'Немає компонент'
+                return t('order:no-components')
             }
             case 'fetching': {
-                return 'Завантаження...'
+                return t('loading')
             }
             case 'fetched': {
-                return 'Оберіть компонент'
+                return t('order:select-component')
             }
         }
-    }, [componentsLoadingStatus]);
+    }, [componentsLoadingStatus, t]);
 
     // Prepare Quality selector Placeholder value
     const qualityPlaceholder = useMemo(() => {
         switch (servicesLoadingStatus) {
             case 'idle': {
-                return 'Спочатку оберіть компонент'
+                return t('order:first-select-component')
             }
             case 'error': {
-                return 'Помилка'
+                return t('order.no-qualities')
             }
             case 'fetching': {
-                return 'Завантаження...'
+                return t('loading')
             }
             case 'fetched': {
-                return 'Оберіть якість'
+                return t('order:select-quality')
             }
         }
-    }, [servicesLoadingStatus]);
+    }, [servicesLoadingStatus, t]);
 
     // Preparing options for select elements
-    const modelElems = useMemo(() => models.map(({ id, name }) => <option key={id} value={id}>{name}</option>), [models]);
-    const componentElems = useMemo(() => components.map(({ id, name }) => <option key={id} value={id}>{name}</option>), [components]);
-    const qualityElems = useMemo(() => services.map(({ quality: { id, name } }) => <option key={id} value={id}>{name}</option>), [services]);
+    const modelElems = useMemo(() => models.map(({ id }) =>
+        <option key={id} value={id}>{t(`repair:${id}`)}</option>), [models, t]);
+    const componentElems = useMemo(() => components.map(({ id }) =>
+        <option key={id} value={id}>{t(`repair:${id}`)}</option>), [components, t]);
+    const qualityElems = useMemo(() => services.map(({ quality: { id } }) =>
+        <option key={id} value={id}>{t(`repair:${id}`)}</option>), [services, t]);
 
     // Download available components for selected model
     const getComponents = (model: string) => {
@@ -139,7 +160,9 @@ const OrderSection = ({ models }: IModels) => {
         formik.setFieldValue('component', initialValues.component);
         formik.setFieldValue('quality', initialValues.quality);
         dispatch(clearComponents());
-        getComponents(values.model);
+        if (values.model) {
+            getComponents(values.model);
+        }
     }, [values.model])
 
     // Catching changes of component
@@ -156,7 +179,7 @@ const OrderSection = ({ models }: IModels) => {
     const submitText = useMemo(() => {
         const service = services.find(service => service.quality.id === values.quality);
         if (orderLoadingStatus === 'error') {
-            return 'Виникла помилка'
+            return t('errors.occured')
         }
         if (isSubmitting) {
             return <PulseLoader
@@ -166,11 +189,11 @@ const OrderSection = ({ models }: IModels) => {
                 aria-label="Loading pulseloader" />;
         }
         if (service) {
-            return `Замовити: ${service.cost}₴`;
+            return `${t('order:submit')}: ${service.cost}₴`;
         } else {
-            return 'Замовити';
+            return t('order:submit');
         }
-    }, [isSubmitting, orderLoadingStatus, services, values.quality]);
+    }, [isSubmitting, orderLoadingStatus, services, t, values.quality]);
 
     // Transition implementation
     const [modelList, setModelList] = useState([initialValues.model]);
@@ -184,14 +207,14 @@ const OrderSection = ({ models }: IModels) => {
     return (
         <section className={styles.order}>
             <div className={clsx(styles.container, "container")}>
-                <h1 className={styles.order__title}>Замовити ремонт</h1>
+                <h1 className={styles.order__title}>{t('order:h1')}</h1>
                 <Form formik={formik} className={clsx(styles.form, "grid")}>
-                    <Card title="Модель" className={styles.form__card}>
+                    <Card title={t('order:model')} className={styles.form__card}>
                         <FormSelect
                             style={{ marginBottom: 10 }}
                             className={styles.form__field}
                             name="model"
-                            placeholder="Оберіть модель"
+                            placeholder={modelPlaceholder}
                         >
                             {modelElems}
                         </FormSelect>
@@ -210,26 +233,26 @@ const OrderSection = ({ models }: IModels) => {
                             ))}
                         </div>
                     </Card>
-                    <Card title="Контактні дані" className={styles.form__card}>
+                    <Card title={t('order:contact-data')} className={styles.form__card}>
                         <FormInputExtended
                             className={styles.form__field}
-                            label="Імʼя"
+                            label={t('order:name')}
                             name="name"
                             type="text"
-                            placeholder="Ваше імʼя"
+                            placeholder={t('order:your-name')}
                             required
                         />
                         <FormInputExtended
                             className={styles.form__field}
-                            label="Прізвище"
+                            label={t('order:surname')}
                             name="surname"
                             type="text"
-                            placeholder="Ваше прізвище"
+                            placeholder={t('order:your-surname')}
                             required
                         />
                         <FormInputExtended
                             className={styles.form__field}
-                            label="Телефон"
+                            label={t('order:tel')}
                             name="tel"
                             type="tel"
                             pattern="[+]{1}38[0]{1}[0-9]{9}"
@@ -238,17 +261,17 @@ const OrderSection = ({ models }: IModels) => {
                         />
                         <FormInputExtended
                             className={styles.form__field}
-                            label="Email"
+                            label={t('order:email')}
                             name="email"
                             type="email"
                             placeholder="example@example.com"
                             required
                         />
                     </Card>
-                    <Card title="Замовлення" className={styles.form__card}>
+                    <Card title={t('order:order')} className={styles.form__card}>
                         <FormSelectExtended
                             className={styles.form__field}
-                            label="Компонент"
+                            label={t('order:component')}
                             name="component"
                             placeholder={componentPlaceholder}
                             disabled={!(values.model)}
@@ -257,7 +280,7 @@ const OrderSection = ({ models }: IModels) => {
                         </FormSelectExtended>
                         <FormSelectExtended
                             className={styles.form__field}
-                            label="Якість"
+                            label={t('order:quality')}
                             name="quality"
                             placeholder={qualityPlaceholder}
                             disabled={!(values.component)}
