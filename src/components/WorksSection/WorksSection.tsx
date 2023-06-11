@@ -1,36 +1,34 @@
-import Image from "next/image"
 import clsx from "clsx"
 import styles from './sass/Works.module.scss'
 import { Navigation, Pagination, Autoplay, A11y } from 'swiper'
-import { Swiper, SwiperSlide } from 'swiper/react'
+import { Swiper } from 'swiper/react'
+import { SwiperSlide } from "swiper/react";
 import 'swiper/css'
 import 'swiper/css/a11y'
 import 'swiper/css/autoplay'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
-import { useTranslation } from "next-i18next"
+import { useTranslation } from "@/hooks/useTranslation"
 import { useMemo } from "react"
-
-interface Slide {
-    title: string,
-    desc: string,
-    src: string,
-    href: string
-}
+import { ISlideProps } from "../Slide/interfaces"
+import Slide from "../Slide/Slide"
 
 const WorksSection = () => {
-    const { t } = useTranslation();
-    const { t: i } = useTranslation('index');
+    const { t: w } = useTranslation('index', { keyPrefix: 'works' });
 
-    const slides: Slide[] = useMemo(() => {
-        return i('works.slides', { returnObjects: true })
-    }, [i]);
+    const slides = useMemo(() => {
+        const slidesInfo: ISlideProps[] | null = w('slides', { returnObjects: true, defaultValue: null });
+        return slidesInfo?.map((slide, id) => (
+            <SwiperSlide key={id} className={styles.slide}>
+                <Slide {...slide} />
+            </SwiperSlide>))
+    }, [w]);
 
     return (
         <section id="works" className={styles.works}>
             <div className={clsx(styles.container, "container")}>
-                <h2 className={styles.works__title}>{i('works.title')}</h2>
-                <p className={styles.works__subtitle}>{i('works.subtitle')}</p>
+                <h2 className={styles.works__title}>{w('title')}</h2>
+                <p className={styles.works__subtitle}>{w('subtitle')}</p>
                 <Swiper
                     className={styles.slider}
                     modules={[Navigation, Pagination, Autoplay, A11y]}
@@ -39,28 +37,7 @@ const WorksSection = () => {
                     pagination={{ clickable: true }}
                     autoplay={{ delay: 5000 }}
                 >
-                    {
-                        slides.map(slide => (
-                            <SwiperSlide key={slide.title} className={styles.slide}>
-                                <div className={styles.slide__info}>
-                                    <h4 className={styles.slide__title}>{slide.title}</h4>
-                                    <p className={styles.slide__desc}>
-                                        {slide.desc}
-                                    </p>
-                                    <a
-                                        className={clsx(styles.slide__more, "btn btn_purple")}
-                                        href={slide.href}
-                                        target="_blank"
-                                        rel="noopener noreferrer">
-                                        {t('view')}
-                                    </a>
-                                </div>
-                                <div className={styles['slide__img-wrapper']}>
-                                    <Image className={styles.slide__img} layout="fill" src={slide.src} alt={slide.title} />
-                                </div>
-                            </SwiperSlide>
-                        ))
-                    }
+                    {slides}
                 </Swiper>
             </div>
         </section>

@@ -54,6 +54,8 @@
     .timetable {
         display: grid;
         grid-template-columns: 2fr 1fr;
+        gap: .3em .1em;
+        align-items: center;
     }
 
     .timetable>*:nth-child(even) {

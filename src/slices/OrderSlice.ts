@@ -13,9 +13,15 @@ const initialState: IInitialState = {
 
 const getOrder = createAsyncThunk(
     'order/getOrder',
-    async ({ id, tel }: IOrderReqQuery) => {
+    async ({ id, tel }: IOrderReqQuery, thunkAPI) => {
         const response = await fetch(`http://localhost:3000/api/order?id=${id}&tel=${encodeURIComponent(tel)}`)
-        return response.json();
+        const order = await response.json();
+        console.log(order);
+        if (order) {
+            return order;
+        } else {
+            return thunkAPI.rejectWithValue(null);
+        }
     }
 )
 

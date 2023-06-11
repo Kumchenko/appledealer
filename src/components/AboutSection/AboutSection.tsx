@@ -1,6 +1,6 @@
-import clsx from 'clsx'
-import styles from './sass/About.module.scss'
-import { useTranslation } from 'next-i18next';
+import clsx from 'clsx';
+import styles from './sass/About.module.scss';
+import { useTranslation } from '@/hooks/useTranslation';
 
 const AboutSection = () => {
     const { t } = useTranslation();

@@ -1,4 +1,4 @@
-import { Component, Model, Service } from "@prisma/client";
+import { Component, Model } from "@prisma/client";
 
 export interface IModels {
     models: Model[];

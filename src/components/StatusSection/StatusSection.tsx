@@ -8,7 +8,7 @@ import { useEffect, useMemo } from "react";
 import { useRouter } from "next/router";
 import { useSelector } from "@/store";
 import Head from "next/head";
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const StatusSection = () => {
     const { t } = useTranslation();
@@ -29,7 +29,7 @@ const StatusSection = () => {
     return (
         <section className={styles.result}>
             <Head>
-                <title>{t('repair:order')} {id} – AppleDealer</title>
+                <title>{`${t('repair:order')} ${id} – AppleDealer`}</title>
             </Head>
             <div className={clsx(styles.container, "container")}>
                 <h1 className={styles.result__title}>

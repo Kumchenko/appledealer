@@ -11,10 +11,11 @@ import { useRouter } from "next/router";
 import { IOrderReqQuery } from "pages/api/interfaces";
 import { useMemo } from "react";
 import { PulseLoader } from "react-spinners";
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "@/hooks/useTranslation";
 
 
 const CheckSection = () => {
+    const { t: c } = useTranslation('check');
     const { t } = useTranslation();
     const router = useRouter();
     const dispatch = useDispatch();
@@ -48,12 +49,12 @@ const CheckSection = () => {
                 })
         }
     });
-    const { values, errors, isSubmitting } = formik;
+    const { isSubmitting } = formik;
 
     // Prepare text for submit button
     const submitText = useMemo(() => {
         if (orderLoadingStatus === 'error') {
-            return t('check:occured')
+            return t('errors.occured')
         }
         if (isSubmitting) {
             return <PulseLoader
@@ -62,19 +63,19 @@ const CheckSection = () => {
                 loading={isSubmitting}
                 aria-label="Loading pulseloader" />;
         }
-        return t('check:submit');
-    }, [isSubmitting, orderLoadingStatus, t]);
+        return c('submit');
+    }, [c, isSubmitting, orderLoadingStatus, t]);
 
     return (
         <section className={styles.check}>
             <div className={clsx(styles.container, 'container')}>
                 <h1 className={styles.check__title}>
-                    {t('check:h1')}
+                    {c('h1')}
                 </h1>
-                <Card className={styles.card} title={t('check:header')} single={true}>
+                <Card className={styles.card} title={c('header')} single={true}>
                     <Form className={styles.form} formik={formik}>
                         <FormInputExtended
-                            label={t('check:order-num')}
+                            label={c('order-num')}
                             className={styles.form__field}
                             name="id"
                             type="text"
@@ -83,7 +84,7 @@ const CheckSection = () => {
                             required
                         />
                         <FormInputExtended
-                            label={t('check:tel-num')}
+                            label={c('tel-num')}
                             className={styles.form__field}
                             name="tel"
                             type="tel"

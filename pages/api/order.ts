@@ -13,9 +13,11 @@ const handler = async (req: IOrderRequest, res: NextApiResponse) => {
         switch (req.method) {
             case 'GET': {
                 getHandler(req, res);
+                break;
             }
             case 'POST': {
                 postHandler(req, res);
+                break;
             }
         }
     }

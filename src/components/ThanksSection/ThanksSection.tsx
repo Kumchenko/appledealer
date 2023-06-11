@@ -7,7 +7,7 @@ import { useSelector } from '@/store';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { idToString } from '@/utils';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from '@/hooks/useTranslation';
 
 const ThanksSection = () => {
     const { t } = useTranslation();

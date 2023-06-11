@@ -5,7 +5,7 @@ import styles from './sass/Timer.module.scss'
 import { ITimer, ITimerBlock } from './interfaces'
 import { PulseLoader } from 'react-spinners'
 import clsx from 'clsx'
-import { useTranslation } from 'next-i18next'
+import { useTranslation } from '@/hooks/useTranslation'
 
 
 const TimerBlock = ({ value, name }: ITimerBlock) => {
@@ -44,7 +44,7 @@ const TimerBlock = ({ value, name }: ITimerBlock) => {
 
 
 const Timer = ({ date, ended }: ITimer) => {
-    const {t} = useTranslation('timer');
+    const { t } = useTranslation('timer');
     const { completed, ticking, units: { days, hours, minutes, seconds } } = useCountdown(date);
 
     const [loading, setLoading] = useState(true);
@@ -55,17 +55,17 @@ const Timer = ({ date, ended }: ITimer) => {
     }, []);
 
     const View = (<div className={clsx(styles.timer, styles.timerLocation)}>
-        <TimerBlock name={t('day', {count: days})} value={days} />
-        <TimerBlock name={t('hour', {count: hours})} value={hours} />
-        <TimerBlock name={t('minute', {count: minutes})} value={minutes} />
-        <TimerBlock name={t('second', {count: seconds})} value={seconds} />
+        <TimerBlock name={t('day', { count: days })} value={days} />
+        <TimerBlock name={t('hour', { count: hours })} value={hours} />
+        <TimerBlock name={t('minute', { count: minutes })} value={minutes} />
+        <TimerBlock name={t('second', { count: seconds })} value={seconds} />
     </div>);
 
     const Load = <PulseLoader
-        cssOverride={{display: 'block'}}
+        cssOverride={{ display: 'block' }}
         color={styles.purple}
-        className={clsx(styles.loader, styles.timerLocation)} 
-        loading={loading} 
+        className={clsx(styles.loader, styles.timerLocation)}
+        loading={loading}
         aria-label="Loading pulseloader" />
 
     const Complete = <p className={clsx(styles.completed, styles.timerLocation)}>{ended}</p>

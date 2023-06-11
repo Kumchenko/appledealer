@@ -19,7 +19,7 @@ import { PulseLoader } from "react-spinners"
 import { postOrder } from "@/slices/OrderSlice"
 import { IOrderReqBody } from "pages/api/interfaces"
 import { useRouter } from "next/router"
-import { useTranslation } from "next-i18next"
+import { useTranslation } from "@/hooks/useTranslation"
 
 
 const OrderSection = ({ models }: IModels) => {
