@@ -1,10 +1,19 @@
 import clsx from 'clsx';
 import styles from './sass/About.module.scss';
 import { useTranslation } from '@/hooks/useTranslation';
+import { useRouter } from 'next/router';
+import { useMemo, useState } from 'react';
+import { PulseLoader } from 'react-spinners';
 
 const AboutSection = () => {
     const { t } = useTranslation();
     const { t: i } = useTranslation('index');
+
+    const router = useRouter();
+    const locale = useMemo(() => router.locale || router.defaultLocale, [router.defaultLocale, router.locale]);
+
+    const [loading, setLoading] = useState(true);
+
     return (
         <section id="about" className={styles.about}>
             <div className={clsx(styles.container, styles.grid, "container grid")}>
@@ -34,11 +43,23 @@ const AboutSection = () => {
                         <button className="info__callme btn btn_green">{t('call-back')}</button>
                     </div>
                 </address>
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2645.6194919617487!2d35.055122499999996!3d48.4638299!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40dbe2dcada7f147%3A0x46b3cf12714afd76!2z0LLRg9C70LjRhtGPINCv0LrQvtCy0LAg0KHQsNC80LDRgNGB0YzQutC-0LPQviwgNywg0JTQvdGW0L_RgNC-LCDQlNC90ZbQv9GA0L7Qv9C10YLRgNC-0LLRgdGM0LrQsCDQvtCx0LvQsNGB0YLRjCwgNDkwMDA!5e0!3m2!1suk!2sua!4v1682890630058!5m2!1suk!2sua"
-                    className={styles.about__map}
-                    loading="eager"
-                    referrerPolicy="no-referrer-when-downgrade" />
+                <div className={styles.about__mapWrapper}>
+                    <PulseLoader
+                        color={styles.purple}
+                        className={styles.about__loader}
+                        loading={loading}
+                        aria-label="Loading pulseloader"
+                    />
+                    <iframe
+                        className={styles.about__map}
+                        loading="lazy"
+                        onLoad={() => setLoading(false)}
+                        src={`https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_MAPS_API_KEY}
+                             &q=улица+Якова+Самарского,+7,+Днепр,+Днепропетровская+область,+Украина&language=${locale}`}
+                        referrerPolicy="no-referrer-when-downgrade"
+                        allowFullScreen
+                    />
+                </div>
             </div>
         </section>
     )
