@@ -240,6 +240,7 @@ const OrderSection = ({ models }: IModels) => {
                             name="name"
                             type="text"
                             placeholder={t('order:your-name')}
+                            autoComplete="on"
                             required
                         />
                         <FormInputExtended
@@ -248,6 +249,7 @@ const OrderSection = ({ models }: IModels) => {
                             name="surname"
                             type="text"
                             placeholder={t('order:your-surname')}
+                            autoComplete="on"
                             required
                         />
                         <FormInputExtended
@@ -257,6 +259,7 @@ const OrderSection = ({ models }: IModels) => {
                             type="tel"
                             pattern="[+]{1}38[0]{1}[0-9]{9}"
                             placeholder="+38(___)-___-__-__"
+                            autoComplete="on"
                             required
                         />
                         <FormInputExtended
@@ -265,6 +268,7 @@ const OrderSection = ({ models }: IModels) => {
                             name="email"
                             type="email"
                             placeholder="example@example.com"
+                            autoComplete="on"
                             required
                         />
                     </Card>

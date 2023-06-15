@@ -1,3 +1,4 @@
+// DesktopFirst mixins
 @mixin lg {
     @media (max-width: 1199px) {
         @content;
@@ -20,6 +21,30 @@
     @media (max-width: 575px) {
         @content;
     }
+}
+
+
+// MobileFirst mixins
+@mixin afterLg {
+    @media (min-width: 992px) {
+        @content;
+    }
+}
+
+@mixin afterMd {
+    @media (min-width: 768px) {
+        @content;
+    }
+}
+
+@mixin afterSm {
+    @media (min-width: 576px) {
+        @content;
+    }
+}
+
+@mixin afterXs {
+    @content;
 }
 
 @mixin clickable {

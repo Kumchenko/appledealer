@@ -1,7 +1,9 @@
-import { LinkProps } from "next/link";
+import { INavPoint } from "@/interfaces";
 
-export interface INavLink extends LinkProps, React.PropsWithChildren{
-    activeClass?: string
-    className?: string
-    subLink?: boolean
+export interface INavLink  {
+    point: INavPoint,
+    className?: string,
+    styles?: {
+        [key: string]: string
+    }
 }

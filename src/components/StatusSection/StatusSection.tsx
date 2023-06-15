@@ -12,11 +12,12 @@ import { useTranslation } from "@/hooks/useTranslation";
 
 const StatusSection = () => {
     const { t } = useTranslation();
-
+    const { t: s } = useTranslation('status');
+    const { t: r } = useTranslation('repair');
 
     const router = useRouter();
     const { order, loadingStatus } = useSelector(({ orderSlice }) => orderSlice);
-    const id = useMemo(() => idToString(order?.id ? order.id : 0), []);
+    const id = useMemo(() => idToString(order?.id ? order.id : 0), [order?.id]);
 
     // Redirect when no info about order in slice
     useEffect(() => {
@@ -29,16 +30,16 @@ const StatusSection = () => {
     return (
         <section className={styles.result}>
             <Head>
-                <title>{`${t('repair:order')} ${id} – AppleDealer`}</title>
+                <title>{`${r('order')} ${id} – AppleDealer`}</title>
             </Head>
             <div className={clsx(styles.container, "container")}>
                 <h1 className={styles.result__title}>
-                    {t('status:h1')}
+                    {s('h1')}
                 </h1>
                 <Card
                     className={styles.card}
                     titleClass={styles.card__title}
-                    title={`${t('repair:order')} ${id}`}
+                    title={`${r('order')} ${id}`}
                     single={true}
                 >
                     <div className={styles.card__imgWrapper}>
@@ -48,25 +49,25 @@ const StatusSection = () => {
                             priority={true}
                             quality={90}
                             src={order?.model ? `/img/iphones/${order.model}.png` : `/img/iphones/empty.png`}
-                            alt={t(`repair:${order?.model}`)}
+                            alt={r(order?.model)}
                         />
                     </div>
                     <ul className={styles.card__list}>
                         <li className={styles.card__item}>
-                            <span>{t('repair:CREATED')}</span>
+                            <span>{r('CREATED')}</span>
                             {new Date(order?.created || 0).toLocaleString(router.locale)}
                         </li>
                         {order?.operations?.map(operation => {
                             return (
                                 <li key={operation.status} className={styles.card__item}>
-                                    <span>{t(`repair:${operation.status}`)}</span>
+                                    <span>{r(operation.status)}</span>
                                     {new Date(operation.dateTime).toLocaleString(router.locale)}
                                 </li>
                             )
                         })}
                     </ul>
                     <p className={styles.card__about}>
-                        <span>{t(`repair:${order?.model}`)} — {t(`repair:${order?.component}`)}</span>
+                        <span>{r(order?.model)} — {r(order?.component)}</span>
                         {t('cost')}: {order?.cost}₴
                     </p>
                     <Link href="/check" passHref>

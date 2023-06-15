@@ -90,6 +90,7 @@ const CheckSection = () => {
                             type="tel"
                             pattern="[+]{1}38[0]{1}[0-9]{9}"
                             placeholder="+38(___)-___-__-__"
+                            autoComplete="on"
                             required
                         />
                         <button

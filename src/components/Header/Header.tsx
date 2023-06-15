@@ -1,38 +1,54 @@
-import { useEffect, useState, useCallback } from 'react'
+import { useEffect, useState, useCallback, useMemo } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import NavLink from '@/components/NavLink/NavLink'
 import clsx from 'clsx'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faInstagram } from '@fortawesome/free-brands-svg-icons'
 import styles from './sass/Header.module.scss'
 import { useRouter } from 'next/router'
 import { useTranslation } from "next-i18next"
+import { IHeaderProps } from './interfaces'
 
-export default function Header() {
+const Header = ({ navPoints, socialPoints }: IHeaderProps) => {
     const { t } = useTranslation();
-    const [menuOpened, setMenuOpened] = useState(false);
+    const [navOpened, setNavOpened] = useState(false);
     const router = useRouter();
 
-    const toggleMenu = () => {
-        setMenuOpened(!menuOpened);
-    }
-
-    const closeMenu = useCallback(() => {
-        if (menuOpened) {
-            setMenuOpened(false);
+    const closeNav = useCallback(() => {
+        if (navOpened) {
+            setNavOpened(false);
         }
-    }, [menuOpened]);
+    }, [navOpened]);
 
-    const changeLocale = (newLocale: string) => {
-        const { pathname, asPath, query } = router
-        router.push({ pathname, query }, asPath, { locale: newLocale });
-    }
-
+    // Closing opened navigation menu when changing page
     useEffect(() => {
-        router.events.on('routeChangeStart', closeMenu)
-        router.events.on('hashChangeStart', closeMenu)
-    }, [router, closeMenu]);
+        router.events.on('routeChangeStart', closeNav)
+        router.events.on('hashChangeStart', closeNav)
+    }, [router, closeNav]);
+
+    // Prepare navigation links
+    const navElems = useMemo(() => navPoints.map(point =>
+        <li key={point.href} className={styles.menu__item}>
+            <NavLink styles={styles} point={point} />
+        </li>
+    ), [navPoints])
+
+    // Prepare social networks links
+    const socialElems = useMemo(() => socialPoints.map(({ href, child }) =>
+        <li key={href} className={styles.social__item}>
+            <a href={href} target="_blank" rel="noopener noreferrer" >
+                {child}
+            </a>
+        </li>
+    ), [socialPoints])
+
+    // Prepare language changing links
+    const langElems = useMemo(() => router.locales?.map(locale =>
+        <li className={clsx(styles.lang__item, locale == router.locale && styles.active)} key={locale}>
+            <Link href={router.pathname} locale={locale}>
+                {t(locale)}
+            </Link>
+        </li>
+    ), [router.locale, router.locales, router.pathname, t])
 
     return (
         <header className={styles.header}>
@@ -43,66 +59,28 @@ export default function Header() {
                             {t('address')}
                         </a>
                     </address>
-                    <button onClick={() => changeLocale('uk')}>УК</button>
-                    <button onClick={() => changeLocale('ru')}>РУ</button>
-                    <button onClick={() => changeLocale('en')}>EN</button>
                     <button className={clsx('btn btn_green')}>{t('call-me')}</button>
                 </div>
             </div>
-            <nav className={clsx({ [styles.menu]: true, [styles.menu_opened]: menuOpened })}>
+            <nav className={clsx(styles.menu, navOpened && styles.menu_opened)}>
                 <div className={clsx(styles.container, 'container')}>
                     <Link href="/">
                         <a className={styles.logo__link}>
-                            <Image layout='fill' priority={true} src="/img/logo.svg" alt="AppleDealer" className={styles.logo__img} />
+                            <Image width={110} height={50} priority={true} src="/img/logo.svg" alt="AppleDealer" className={styles.logo__img} />
                         </a>
                     </Link>
                     <ul className={styles.menu__list}>
-                        <li className={styles.menu__item}>
-                            <NavLink href="/" className={styles.menu__link} activeClass={styles.active}>
-                                {t('about-us')}
-                            </NavLink>
-                            <span className={styles.menu__arrow}></span>
-                            <ul className={styles.submenu__list}>
-                                <li className={styles.submenu__item}>
-                                    <Link href="/#about" scroll={false} passHref>
-                                        <a className={styles.submenu__link}>Контактна інформація</a>
-                                    </Link>
-                                </li>
-                                <li className={styles.submenu__item}>
-                                    <Link href="/#discount" scroll={false} passHref>
-                                        <a className={styles.submenu__link}>Спеціальна пропозиція</a>
-                                    </Link>
-                                </li>
-                                <li className={styles.submenu__item}>
-                                    <Link href="/#works" scroll={false} passHref>
-                                        <a className={styles.submenu__link}>Наше кредо - якість!</a>
-                                    </Link>
-                                </li>
-                                <li className={styles.submenu__item}>
-                                    <Link href="/#how" scroll={false} passHref>
-                                        <a className={styles.submenu__link}>Як ми працюємо?</a>
-                                    </Link>
-                                </li>
+                        {navElems}
+                        <div className={styles.menu__other}>
+                            <ul className={styles.social__list}>
+                                {socialElems}
                             </ul>
-                        </li>
-                        <li className={styles.menu__item}>
-                            <NavLink href="/order" className={styles.menu__link} activeClass={styles.active}>
-                                {t('order-repair')}
-                            </NavLink>
-                        </li>
-                        <li className={styles.menu__item}>
-                            <NavLink href="/check" className={styles.menu__link} activeClass={styles.active}>
-                                {t('order-status')}
-                            </NavLink>
-                        </li>
+                            <ul className={styles.lang__list}>
+                                {langElems}
+                            </ul>
+                        </div>
                     </ul>
-                    <a className={styles.social__link}
-                        href="https://www.instagram.com/appledealer_ua/"
-                        target="_blank"
-                        rel="noopener noreferrer">
-                        <FontAwesomeIcon className={styles.social__logo} icon={faInstagram} />
-                    </a>
-                    <div className={styles.menu__burger} onClick={toggleMenu}>
+                    <div className={styles.menu__burger} onClick={() => setNavOpened(!navOpened)}>
                         <span></span>
                     </div>
                 </div>
@@ -110,3 +88,5 @@ export default function Header() {
         </header >
     )
 }
+
+export default Header

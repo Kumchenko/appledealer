@@ -37,3 +37,14 @@ export interface IGetValues {
     minutes: number,
     seconds: number
 }
+
+export interface INavPoint {
+    href: string,
+    title: string,
+    subPoints?: INavPoint[]
+}
+
+export interface ISocialPoint {
+    href: string,
+    child: JSX.Element
+}

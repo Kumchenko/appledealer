@@ -10,6 +10,8 @@ import { a, useTransition } from '@react-spring/web'
 import store from '@/store'
 import { Provider } from 'react-redux'
 import { appWithTranslation } from 'next-i18next'
+import NavPoints from '@/constants/NavPoints'
+import SocialPoints from '@/constants/socialPoints'
 
 config.autoAddCss = false
 
@@ -24,8 +26,8 @@ function MyApp({ Component, pageProps, router }: AppProps) {
   })
 
   useEffect(() => {
-    setPagesArr([<Component key={router.asPath} {...pageProps} />])
-  }, [Component, pageProps, router.asPath]);
+    setPagesArr([<Component key={router.pathname} {...pageProps} />])
+  }, [Component, pageProps, router.pathname]);
 
   return (
     <Provider store={store}>
@@ -33,7 +35,7 @@ function MyApp({ Component, pageProps, router }: AppProps) {
         <Head>
           <link rel="shortcut icon" href="/favicon.png" type="image/png" />
         </Head>
-        <Header />
+        <Header navPoints={NavPoints} socialPoints={SocialPoints}/>
         {transitions((style, item) => <a.div style={style}>{item}</a.div>)}
         <Footer />
       </div>
