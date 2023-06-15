@@ -23,7 +23,8 @@
         "only": "Only {{count}} digits",
         "necessary": "Necessary",
         "incorrect": "Incorrect format",
-        "occured": "Error was occured"
+        "occured": "Error was occured",
+        "not-found": "Not found"
     },
     "footer": {
         "credentials": "Created by Kumchenko"

@@ -2,10 +2,10 @@
     "h1": "AppleDealer service center",
     "subtitle": "We repair iPhones. Quickly. Qualitatively.",
     "open-hours": "Open hours",
-    "weekdays": "Monday - Friday",
+    "weekdays": "Monday–Friday",
     "saturday": "Saturday",
     "weekend": "Weekend",
-    "weekends": "Sundays and public holidays",
+    "weekends": "Sunday and public holidays",
     "contacts": "Contacts",
     "offer": {
         "title": "Special offer",
@@ -20,21 +20,15 @@
         "slides": [
             {
                 "title": "Back glass replacement",
-                "desc": "Replacement of the rear glass while preserving the original body frame and MagSafe charging.",
-                "src": "/img/changing-glass.png",
-                "href": "https://www.youtube.com/watch?v=sNesBB7sOaw"
+                "desc": "Replacement of the rear glass while preserving the original body frame and MagSafe charging."
             },
             {
                 "title": "Display replacement",
-                "desc": "Display replacement with saving auto-brightness and True Tone functions.",
-                "src": "/img/changing-display.jpg",
-                "href": "https://www.youtube.com/watch?v=fd4EZNVlN7k"
+                "desc": "Display replacement with saving auto-brightness and True Tone functions."
             },
             {
                 "title": "Battery replacement",
-                "desc": "Replacing the battery with saving the display of Battery Health %.",
-                "src": "/img/changing-battery.jpg",
-                "href": "https://www.youtube.com/watch?v=5mm2c2PfHCk"
+                "desc": "Replacing the battery with saving the display of Battery Health %."
             }
         ]
     },

@@ -4,6 +4,7 @@ import { useTranslation } from '@/hooks/useTranslation';
 import { useRouter } from 'next/router';
 import { useMemo, useState } from 'react';
 import { PulseLoader } from 'react-spinners';
+import { createTime } from '@/utils';
 
 const AboutSection = () => {
     const { t } = useTranslation();
@@ -13,6 +14,8 @@ const AboutSection = () => {
     const locale = useMemo(() => router.locale || router.defaultLocale, [router.defaultLocale, router.locale]);
 
     const [loading, setLoading] = useState(true);
+
+    const timeFormat: Intl.DateTimeFormatOptions = { hour: '2-digit', minute: '2-digit' }
 
     return (
         <section id="about" className={styles.about}>
@@ -27,9 +30,17 @@ const AboutSection = () => {
                     <h3 className={styles.info__title}>{i('open-hours')}</h3>
                     <div className={styles.timetable}>
                         <span>{i('weekdays')}</span>
-                        <span>10:00 - 19:00</span>
+                        <span>
+                            {createTime(10, 0).toLocaleTimeString(locale, timeFormat)}
+                            –
+                            {createTime(19, 0).toLocaleTimeString(locale, timeFormat)}
+                        </span>
                         <span>{i('saturday')}</span>
-                        <span>10:00 - 16:00</span>
+                        <span>
+                            {createTime(10, 0).toLocaleTimeString(locale, timeFormat)}
+                            –
+                            {createTime(16, 0).toLocaleTimeString(locale, timeFormat)}
+                        </span>
                         <span>{i('weekends')}</span>
                         <span>{i('weekend')}</span>
                     </div>

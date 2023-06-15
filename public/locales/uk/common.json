@@ -26,7 +26,8 @@
         "only_many": "Лише {{count}} цифр",
         "necessary": "Обовʼязково",
         "incorrect": "Некоректний формат",
-        "occured": "Виникла помилка"
+        "occured": "Виникла помилка",
+        "not-found": "Не знайдено"
     },
     "footer": {
         "credentials": "Створив Кумченко"

@@ -10,17 +10,20 @@ import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import { useTranslation } from "@/hooks/useTranslation"
 import { useMemo } from "react"
-import { ISlideProps } from "../Slide/interfaces"
 import Slide from "../Slide/Slide"
+import WorkSlides from "@/constants/WorkSlides";
 
 const WorksSection = () => {
     const { t: w } = useTranslation('index', { keyPrefix: 'works' });
 
     const slides = useMemo(() => {
-        const slidesInfo: ISlideProps[] | null = w('slides', { returnObjects: true, defaultValue: null });
-        return slidesInfo?.map((slide, id) => (
+        const slidesTranslation = w('slides', { returnObjects: true, defaultValue: null });
+        return WorkSlides.map((slide, id) => (
             <SwiperSlide key={id} className={styles.slide}>
-                <Slide {...slide} />
+                <Slide
+                    title={slidesTranslation[id].title}
+                    desc={slidesTranslation[id].desc}
+                    {...slide} />
             </SwiperSlide>))
     }, [w]);
 

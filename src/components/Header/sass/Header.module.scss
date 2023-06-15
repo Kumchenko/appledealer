@@ -41,15 +41,24 @@
             justify-content: space-between;
             flex-grow: 1;
 
-            &:before {
-                content: ''
+            @include afterMd {
+                &:before {
+                    content: ''
+                }
             }
         }
 
         &__item {
-            padding: 0 .5em;
-            text-align: center;
-            @include purpleClickable('transparent');
+            @include afterMd {
+                padding: 0 .5em;
+                text-align: center;
+                @include purpleClickable('transparent');
+
+                &>div {
+                    padding: 3px;
+                }
+            }
+
         }
 
         &__link {
@@ -81,7 +90,7 @@
         font-size: 2.25rem;
         display: flex;
         align-items: center;
-        gap: 2em;
+        gap: 1.6rem;
         padding: 0 .5em;
     }
 
@@ -94,58 +103,67 @@
     .lang__list {
         list-style-type: none;
         display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-        gap: 2px;
-        font-size: 0.8em;
-        padding: 0 .5em
+
+        @include afterMd {
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 2px;
+            font-size: 0.8em;
+            padding: 0 .5em
+        }
     }
 
     .lang__item {
         @include purpleClickable('transparent');
+
         &.active {
             font-weight: 600;
         }
-        &:not(:last-of-type)::after {
-            content: '';
-            width: 100%;
-            height: 1px;
-            background-color: $purple;
-            display: block;
+
+        @include afterMd {
+            &:not(:last-of-type)::after {
+                content: '';
+                width: 100%;
+                height: 1px;
+                background-color: $purple;
+                display: block;
+            }
         }
     }
 
-    .submenu__list {
-        list-style: none;
-        position: absolute;
-        top: 100%;
-        left: -1em;
-        background-color: $white;
-        border-radius: 25px;
-        padding: 1em;
-        display: flex;
-        flex-direction: column;
-        text-align: left;
-        gap: 0.5em;
-        z-index: 1;
-        width: max-content;
-        transform: translateY(1.3em);
-        pointer-events: none;
+    @include afterMd {
+        .submenu__list {
+            list-style: none;
+            position: absolute;
+            top: 100%;
+            left: -1em;
+            background-color: $white;
+            border-radius: 25px;
+            padding: 1em;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            gap: 0.5em;
+            z-index: 1;
+            width: max-content;
+            transform: translateY(1.3em);
+            
+            pointer-events: none;
+            transition: all $transitionTime $transitionFunc;
+            visibility: hidden;
+            opacity: 0;
 
-        transition: all $transitionTime $transitionFunc;
-        visibility: hidden;
-        opacity: 0;
-
-        &.dropped {
-            pointer-events: all;
-            visibility: visible;
-            opacity: 1;
-            transform: translateY(0);
+            &.dropped {
+                pointer-events: all;
+                visibility: visible;
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-    }
 
-    .submenu__link {
-        @include purpleClickable('transparent');
+        .submenu__link {
+            @include purpleClickable('transparent');
+        }
     }
 }
 
@@ -158,18 +176,25 @@
                 visibility: hidden;
 
                 transition: all $transitionTime $transitionFunc;
-                display: block;
+                display: flex;
                 position: fixed;
                 width: 100%;
                 height: 100%;
                 top: 0;
                 left: 0;
                 background-color: $brightPurple;
-                z-index: 1;
+                z-index: 5;
+                padding: 1.5rem;
+                font-size: 1.4rem;
+                gap: 1em;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
             }
 
             &__item {
                 display: flex;
+                text-align: left;
             }
 
             &__burger {
@@ -204,7 +229,7 @@
                 }
             }
 
-            &_opened {
+            &.opened {
                 .menu__burger {
                     position: fixed;
                     z-index: 5;
@@ -230,12 +255,60 @@
                     transform: translateX(0);
                     opacity: 1;
                     visibility: visible;
+                    overflow: hidden;
                 }
+            }
+
+            &__other {
+                flex-direction: column;
+                width: 100%;
+            }
+        }
+
+        .submenu__list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: .3em;
+            margin: .7em 0;
+            transition: transform $transitionTime $transitionFunc;
+
+            position: absolute;
+            pointer-events: none;
+            visibility: hidden;
+            opacity: 0;
+            transform: translateY(-1.3em);
+            
+            &.dropped {
+                position: relative;
+                pointer-events: all;
+                visibility: visible;
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .social__list {
+            justify-content: center;
+            margin: 1rem 0;
+            font-size: 3rem;
+        }
+
+        .lang__list {
+            justify-content: center;
+        }
+
+        .lang__item {
+            display: flex;
+
+            &:not(:last-of-type)::after {
+                content: '';
+                display: block;
+                width: 1px;
+                height: 100%;
+                background-color: $purple;
+                margin: 0 .8em;
             }
         }
     }
 }
-
-@include sm {}
-
-@include xs {}

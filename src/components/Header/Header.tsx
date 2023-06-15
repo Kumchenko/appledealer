@@ -62,7 +62,7 @@ const Header = ({ navPoints, socialPoints }: IHeaderProps) => {
                     <button className={clsx('btn btn_green')}>{t('call-me')}</button>
                 </div>
             </div>
-            <nav className={clsx(styles.menu, navOpened && styles.menu_opened)}>
+            <nav className={clsx(styles.menu, navOpened && styles.opened)}>
                 <div className={clsx(styles.container, 'container')}>
                     <Link href="/">
                         <a className={styles.logo__link}>

@@ -26,25 +26,27 @@
 
 // MobileFirst mixins
 @mixin afterLg {
-    @media (min-width: 992px) {
+    @media (min-width: 1200px) {
         @content;
     }
 }
 
 @mixin afterMd {
-    @media (min-width: 768px) {
+    @media (min-width: 992px) {
         @content;
     }
 }
 
 @mixin afterSm {
-    @media (min-width: 576px) {
+    @media (min-width: 768px) {
         @content;
     }
 }
 
 @mixin afterXs {
-    @content;
+    @media (min-width: 576px) {
+        @content;
+    }
 }
 
 @mixin clickable {

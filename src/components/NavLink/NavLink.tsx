@@ -32,9 +32,9 @@ const NavLink = ({ point, styles, className }: INavLink) => {
     }
 
     return (
-        <div style={{ padding: 3 }} onMouseEnter={handleMouseEnter} onMouseLeave={() => setDropped(false)} >
+        <div onMouseEnter={handleMouseEnter} onMouseLeave={() => setDropped(false)} >
             <Link href={href} passHref>
-                <a className={clsx(styles?.menu__link, className, (href === pathname) && styles?.active)} {...args}>
+                <a className={clsx(styles?.menu__link, className, pathname === href && styles?.active)} {...args}>
                     {t(title)}
                 </a>
             </Link>

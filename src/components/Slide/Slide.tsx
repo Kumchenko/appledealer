@@ -4,7 +4,7 @@ import styles from './sass/Slide.module.scss';
 import { ISlideProps } from "./interfaces";
 import { useTranslation } from "@/hooks/useTranslation";
 
-const Slide = ({ title, desc, href, src, className, ...args }: ISlideProps) => {
+const Slide = ({ title, desc, href, src, className, priority, ...args }: ISlideProps) => {
     const { t } = useTranslation();
     return (
         <div className={clsx(styles.slide, className)} {...args}>
@@ -22,7 +22,13 @@ const Slide = ({ title, desc, href, src, className, ...args }: ISlideProps) => {
                 </a>
             </div>
             <div className={styles.slide__imgWrapper}>
-                <Image className={styles.slide__img} layout="fill" src={src} alt={title} />
+                <Image
+                    className={styles.slide__img}
+                    priority={priority}
+                    layout="fill"
+                    src={src}
+                    alt={title}
+                />
             </div>
         </div>
     )
