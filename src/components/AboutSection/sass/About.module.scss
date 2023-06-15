@@ -53,17 +53,34 @@
 
     .timetable {
         display: grid;
-        grid-template-columns: 2fr 1fr;
+        grid-template-columns: 1fr auto;
+        gap: .3em .1em;
+        align-items: center;
     }
 
     .timetable>*:nth-child(even) {
         text-align: right;
     }
 
+    &__mapWrapper {
+        grid-column: 7 / 13;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__loader {
+        position: absolute;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+    }
+
     &__map {
         border: none;
         border-radius: 25px;
-        grid-column: 7 / 13;
+        width: 100%;
+        height: 100%;
     }
 }
 
@@ -73,7 +90,7 @@
             grid-column: 2 / 12;
         }
 
-        &__map {
+        &__mapWrapper {
             margin-top: 1.875rem;
             grid-column: 2 / 12;
             height: 280px;
@@ -103,7 +120,7 @@
             }
         }
 
-        &__map {
+        &__mapWrapper {
             grid-column: 1 / 13;
         }
     }

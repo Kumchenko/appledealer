@@ -11,12 +11,15 @@ import { useRouter } from "next/router";
 import { IOrderReqQuery } from "pages/api/interfaces";
 import { useMemo } from "react";
 import { PulseLoader } from "react-spinners";
+import { useTranslation } from "@/hooks/useTranslation";
 
 
 const CheckSection = () => {
+    const { t: c } = useTranslation('check');
+    const { t } = useTranslation();
     const router = useRouter();
     const dispatch = useDispatch();
-    const { loadingStatus: orderLoadingStatus } = useSelector(({ orderSlice }) => orderSlice)
+    const { loadingStatus: orderLoadingStatus } = useSelector(({ orderSlice }) => orderSlice);
 
     const initialValues: IOrderReqQuery = {
         id: '',
@@ -25,12 +28,12 @@ const CheckSection = () => {
 
     const validationSchema = Yup.object({
         id: Yup.string()
-            .length(4, 'Лише 4 цифри')
-            .matches(/[0-9]{4}/, 'Некоректний формат')
-            .required('Обовʼязково'),
+            .length(4, args => t('errors.only', { count: args.length }))
+            .matches(/[0-9]{4}/, t('errors.incorrect'))
+            .required(t('errors.necessary')),
         tel: Yup.string()
-            .matches(/[+]{1}38[0]{1}[0-9]{9}/, 'Некоректний формат')
-            .required('Обовʼязково')
+            .matches(/[+]{1}38[0]{1}[0-9]{9}/, t('errors.incorrect'))
+            .required(t('errors.necessary'))
     });
 
     const formik = useFormik({
@@ -46,12 +49,12 @@ const CheckSection = () => {
                 })
         }
     });
-    const { values, errors, isSubmitting} = formik;
+    const { isSubmitting } = formik;
 
     // Prepare text for submit button
     const submitText = useMemo(() => {
         if (orderLoadingStatus === 'error') {
-            return 'Виникла помилка'
+            return t('errors.occured')
         }
         if (isSubmitting) {
             return <PulseLoader
@@ -60,19 +63,19 @@ const CheckSection = () => {
                 loading={isSubmitting}
                 aria-label="Loading pulseloader" />;
         }
-        return "Перевірити";
-    }, [isSubmitting, orderLoadingStatus]);
+        return c('submit');
+    }, [c, isSubmitting, orderLoadingStatus, t]);
 
     return (
         <section className={styles.check}>
             <div className={clsx(styles.container, 'container')}>
                 <h1 className={styles.check__title}>
-                    Перевірити статус замовлення
+                    {c('h1')}
                 </h1>
-                <Card className={styles.card} title="Перевірочні дані" single={true}>
+                <Card className={styles.card} title={c('header')} single={true}>
                     <Form className={styles.form} formik={formik}>
                         <FormInputExtended
-                            label="Номер замовлення"
+                            label={c('order-num')}
                             className={styles.form__field}
                             name="id"
                             type="text"
@@ -81,12 +84,13 @@ const CheckSection = () => {
                             required
                         />
                         <FormInputExtended
-                            label="Номер телефону"
+                            label={c('tel-num')}
                             className={styles.form__field}
                             name="tel"
                             type="tel"
                             pattern="[+]{1}38[0]{1}[0-9]{9}"
                             placeholder="+38(___)-___-__-__"
+                            autoComplete="on"
                             required
                         />
                         <button

@@ -7,8 +7,11 @@ import { useSelector } from '@/store';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { idToString } from '@/utils';
+import { useTranslation } from '@/hooks/useTranslation';
 
 const ThanksSection = () => {
+    const { t } = useTranslation();
+
     const router = useRouter();
     const { order, loadingStatus } = useSelector(({ orderSlice }) => orderSlice);
 
@@ -24,11 +27,11 @@ const ThanksSection = () => {
         <section className={styles.thanks}>
             <div className={clsx(styles.container, "container")}>
                 <h1 className={styles.thanks__title}>
-                    Дякуємо за замовлення!
+                    {t('thanks:h1')}
                 </h1>
-                <Card title={`Замовлення ${order?.id ? idToString(order.id) : 0}`} className={styles.card} single={true}>
+                <Card title={`${t('repair:order')} ${order?.id ? idToString(order.id) : 0}`} className={styles.card} single={true}>
                     <p className={styles.card__subtitle}>
-                        Наш менеджер зв’яжеться з вами для уточнення умов
+                        {t('thanks:will-contact')}
                     </p>
                     <Image
                         className={styles.card__img}
@@ -40,12 +43,12 @@ const ThanksSection = () => {
                         alt={order?.model}
                     />
                     <p className={styles.card__about}>
-                        <span>{order?.model} — {order?.component}</span>
-                        Вартість: {order?.cost}₴
+                        <span>{t(`repair:${order?.model}`)} — {t(`repair:${order?.component}`)}</span>
+                        {t('cost')}: {order?.cost}₴
                     </p>
                     <Link href="/" passHref>
                         <a className={clsx(styles.card__btn, "btn btn_green")}>
-                            На головну
+                            {t('to-main')}
                         </a>
                     </Link>
                 </Card>
