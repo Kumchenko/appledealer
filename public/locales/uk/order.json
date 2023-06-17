@@ -1,0 +1,15 @@
+{
+    "h1": "Замовити ремонт",
+    "model": "Модель",
+    "contact-data": "Контактні дані",
+    "order": "Замовлення",
+    "select-model": "Оберіть модель",
+    "submit": "Замовити",
+    "select-component": "Оберіть компонент",
+    "select-quality": "Оберіть якість",
+    "first-select-component": "Спочатку оберіть компонент",
+    "first-select-model": "Спочатку оберіть модель",
+    "no-components": "Немає компонентів",
+    "no-qualities": "Немає якостей",
+    "no-models": "Немає моделей"
+}

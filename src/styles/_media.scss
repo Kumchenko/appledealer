@@ -1,0 +1,36 @@
+@include lg {
+    .container {
+        width: 940px;
+    }
+
+    section {
+        padding-top: 68px;
+    }
+
+}
+
+@include md {
+    html {
+        font-size: 15px;
+    }
+
+    .container {
+        width: 720px;
+    }
+}
+
+@include sm {
+    html {
+        font-size: 14px;
+    }
+
+    .container {
+        width: 540px;
+    }
+}
+
+@include xs {
+    .container {
+        width: 90%;
+    }
+}

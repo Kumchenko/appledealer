@@ -1,0 +1,314 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.header {
+    box-shadow: 0 1px 8px #00000063;
+
+    .info {
+        padding: 10px 0;
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        address {
+            margin-right: 2em;
+        }
+    }
+
+    .logo__link {
+        width: 6.875em;
+        height: 3.125em;
+        flex-shrink: 0;
+    }
+
+    .menu {
+        padding: 5px 0;
+        background-color: $white;
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        &__list {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-grow: 1;
+
+            @include afterMd {
+                &:before {
+                    content: ''
+                }
+            }
+        }
+
+        &__item {
+            @include afterMd {
+                padding: 0 .5em;
+                text-align: center;
+                @include purpleClickable('transparent');
+
+                &>div {
+                    padding: 3px;
+                }
+            }
+
+        }
+
+        &__link {
+            &.active {
+                font-weight: 600;
+            }
+        }
+
+        &__arrow {
+            margin-left: .3em;
+            transition: transform $transitionTime $transitionFunc;
+
+            &.dropped {
+                transform: rotateX(180deg);
+            }
+        }
+
+        &__burger {
+            display: none;
+        }
+
+        &__other {
+            display: flex;
+        }
+    }
+
+    .social__list {
+        list-style-type: none;
+        font-size: 2.25rem;
+        display: flex;
+        align-items: center;
+        gap: 1.6rem;
+        padding: 0 .5em;
+    }
+
+    .social__item {
+        svg {
+            @include purpleClickable('transparent');
+        }
+    }
+
+    .lang__list {
+        list-style-type: none;
+        display: flex;
+
+        @include afterMd {
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 2px;
+            font-size: 0.8em;
+            padding: 0 .5em
+        }
+    }
+
+    .lang__item {
+        @include purpleClickable('transparent');
+
+        &.active {
+            font-weight: 600;
+        }
+
+        @include afterMd {
+            &:not(:last-of-type)::after {
+                content: '';
+                width: 100%;
+                height: 1px;
+                background-color: $purple;
+                display: block;
+            }
+        }
+    }
+
+    @include afterMd {
+        .submenu__list {
+            list-style: none;
+            position: absolute;
+            top: 100%;
+            left: -1em;
+            background-color: $white;
+            border-radius: 25px;
+            padding: 1em;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            gap: 0.5em;
+            z-index: 1;
+            width: max-content;
+            transform: translateY(1.3em);
+            
+            pointer-events: none;
+            transition: all $transitionTime $transitionFunc;
+            visibility: hidden;
+            opacity: 0;
+
+            &.dropped {
+                pointer-events: all;
+                visibility: visible;
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .submenu__link {
+            @include purpleClickable('transparent');
+        }
+    }
+}
+
+@include md {
+    .header {
+        .menu {
+            &__list {
+                transform: translateX(-100%);
+                opacity: 0;
+                visibility: hidden;
+
+                transition: all $transitionTime $transitionFunc;
+                display: flex;
+                position: fixed;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                background-color: $brightPurple;
+                z-index: 5;
+                padding: 1.5rem;
+                font-size: 1.4rem;
+                gap: 1em;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+            }
+
+            &__item {
+                display: flex;
+                text-align: left;
+            }
+
+            &__burger {
+                display: block;
+                width: 28px;
+                height: 20px;
+
+                &::before,
+                span,
+                &::after {
+                    position: absolute;
+                    content: '';
+                    width: 100%;
+                    height: 3px;
+                    background-color: $purple;
+                    display: block;
+                    transition: all $transitionTime $transitionFunc;
+                    border-radius: 3px;
+                }
+
+                &::before {
+                    top: 0;
+                }
+
+                span {
+                    top: 50%;
+                    transform: scale(1) translateY(-50%);
+                }
+
+                &::after {
+                    bottom: 0;
+                }
+            }
+
+            &.opened {
+                .menu__burger {
+                    position: fixed;
+                    z-index: 5;
+                    top: 1.5rem;
+                    right: 1.5rem;
+
+                    &::before {
+                        top: 8px;
+                        transform: rotate(-45deg);
+                    }
+
+                    span {
+                        transform: scale(0);
+                    }
+
+                    &::after {
+                        bottom: 9px;
+                        transform: rotate(45deg);
+                    }
+                }
+
+                .menu__list {
+                    transform: translateX(0);
+                    opacity: 1;
+                    visibility: visible;
+                    overflow: hidden;
+                }
+            }
+
+            &__other {
+                flex-direction: column;
+                width: 100%;
+            }
+        }
+
+        .submenu__list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: .3em;
+            margin: .7em 0;
+            transition: transform $transitionTime $transitionFunc;
+
+            position: absolute;
+            pointer-events: none;
+            visibility: hidden;
+            opacity: 0;
+            transform: translateY(-1.3em);
+            
+            &.dropped {
+                position: relative;
+                pointer-events: all;
+                visibility: visible;
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .social__list {
+            justify-content: center;
+            margin: 1rem 0;
+            font-size: 3rem;
+        }
+
+        .lang__list {
+            justify-content: center;
+        }
+
+        .lang__item {
+            display: flex;
+
+            &:not(:last-of-type)::after {
+                content: '';
+                display: block;
+                width: 1px;
+                height: 100%;
+                background-color: $purple;
+                margin: 0 .8em;
+            }
+        }
+    }
+}

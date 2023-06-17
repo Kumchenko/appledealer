@@ -1,0 +1,15 @@
+{
+    "h1": "Order repair",
+    "model": "Model",
+    "contact-data": "Contacts",
+    "order": "Details",
+    "select-model": "Choose model",
+    "submit": "Order",
+    "select-component": "Choose component",
+    "select-quality": "Choose quality",
+    "first-select-component": "First, choose a component",
+    "first-select-model": "First, choose a model",
+    "no-components": "No components",
+    "no-qualities": "No qualities",
+    "no-models": "No models"
+}

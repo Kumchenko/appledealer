@@ -1,0 +1,57 @@
+@import "../../../styles/variables";
+@import "../../../styles/mixins";
+
+.call {
+    display: flex;
+    flex-direction: column;
+    max-width: 320px;
+
+    &__desc {
+        text-align: center;
+        font-size: 1.1em;
+    }
+
+    &__icon {
+        font-size: 3rem;
+        border-radius: 50%;
+        padding: .8rem;
+        animation: pulse 2s infinite;
+        margin: .4em auto;
+    }
+
+    .form {
+        display: flex;
+        flex-direction: column;
+
+        &__loader {
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+        }
+
+        &__field:not(:first-of-type) {
+            margin-top: 18px;
+        }
+
+        button {
+            margin-top: 22px;
+        }
+    }
+}
+
+@keyframes pulse {
+    0% {
+        -moz-box-shadow: 0 0 0 0 $brightPurple;
+        box-shadow: 0 0 0 0 $brightPurple;
+    }
+
+    70% {
+        -moz-box-shadow: 0 0 0 10px transparent;
+        box-shadow: 0 0 0 10px transparent;
+    }
+
+    100% {
+        -moz-box-shadow: 0 0 0 0 transparent;
+        box-shadow: 0 0 0 0 transparent;
+    }
+}

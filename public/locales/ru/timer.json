@@ -1,0 +1,18 @@
+{
+    "second_zero": "Секунд",
+    "second_one": "Секунда",
+    "second_few": "Секунды",
+    "second_many": "Секунд",
+    "minute_zero": "Минут",
+    "minute_one": "Минута",
+    "minute_few": "Минуты",
+    "minute_many": "Минут",
+    "hour_zero": "Часов",
+    "hour_one": "Час",
+    "hour_few": "Часа",
+    "hour_many": "Часов",
+    "day_zero": "Дней",
+    "day_one": "День",
+    "day_few": "Дня",
+    "day_many": "Дней"
+}

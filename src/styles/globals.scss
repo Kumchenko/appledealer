@@ -1,0 +1,124 @@
+@use "sass:math";
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&display=swap');
+@import './variables';
+@import './mixins';
+@import './grid';
+@import './swiper';
+
+
+// ---- Default styles ----
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    position: relative;
+}
+
+html {
+    font-family: $fontFamily;
+    font-variant-numeric: lining-nums;
+    font-weight: 400;
+    font-size: 16px;
+    letter-spacing: 0.02em;
+    scroll-behavior: smooth;
+}
+
+body {
+    color: $purple;
+    background-color: $brightPurple;
+
+    &.opened {
+        overflow: hidden;
+    }
+}
+
+.container {
+    width: 1140px;
+    margin: 0 auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 600;
+    color: $deepPurple;
+}
+
+h1 {
+    font-size: 3rem;
+    color: $darkPurple;
+}
+
+h2 {
+    font-size: math.div(40, 16) * 1rem;
+}
+
+h3 {
+    font-size: math.div(36, 16) * 1rem;
+}
+
+h4 {
+    font-size: math.div(32, 16) * 1rem;
+}
+
+h5 {
+    font-size: math.div(24, 16) * 1rem;
+}
+
+h6 {
+    font-size: math.div(20, 16) * 1rem;
+}
+
+a,
+button {
+    font-family: inherit;
+    font-variant-numeric: inherit;
+    cursor: pointer;
+}
+
+a,
+a:hover,
+a:active {
+    color: inherit;
+    text-decoration: none;
+}
+
+select,
+input {
+    font-family: inherit;
+    font-variant-numeric: inherit;
+}
+
+address {
+    font-style: normal;
+}
+
+// ---- Design Basic Styles ----
+
+section {
+    padding-top: 4.625rem;
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 20px;
+    font-size: 1rem;
+    padding: 0.625em 1.625rem;
+    @include clickable;
+
+    &_green {
+        @include greenClickable;
+    }
+
+    &_purple {
+        @include purpleClickable('fill');
+    }
+}
+
+@import "../styles/media";

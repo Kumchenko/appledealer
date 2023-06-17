@@ -1,0 +1,118 @@
+// DesktopFirst mixins
+@mixin lg {
+    @media (max-width: 1199px) {
+        @content;
+    }
+}
+
+@mixin md {
+    @media (max-width: 991px) {
+        @content;
+    }
+}
+
+@mixin sm {
+    @media (max-width: 767px) {
+        @content;
+    }
+}
+
+@mixin xs {
+    @media (max-width: 575px) {
+        @content;
+    }
+}
+
+
+// MobileFirst mixins
+@mixin afterLg {
+    @media (min-width: 1200px) {
+        @content;
+    }
+}
+
+@mixin afterMd {
+    @media (min-width: 992px) {
+        @content;
+    }
+}
+
+@mixin afterSm {
+    @media (min-width: 768px) {
+        @content;
+    }
+}
+
+@mixin afterXs {
+    @media (min-width: 576px) {
+        @content;
+    }
+}
+
+@mixin clickable {
+    transition: all $transitionTime $transitionFunc;
+
+    &:not(:disabled) {
+        &:hover {
+            transform: translateY(-3px);
+        }
+
+        &:active {
+            transform: translateY(3px);
+        }
+    }
+}
+
+@mixin greenClickable {
+    color: $white;
+    background-color: $green;
+
+    &:hover {
+        color: $white;
+        background-color: $lightGreen;
+    }
+
+    &:active {
+        color: $white;
+        background-color: $deepGreen;
+    }
+
+    &:disabled {
+        cursor: not-allowed;
+        background-color: $deepGreen;
+    }
+}
+
+@mixin purpleClickable($obj) {
+    @if $obj =='transparent' {
+        & {
+            transition: color $transitionTime $transitionFunc;
+            color: $purple;
+        }
+
+        &:hover {
+            color: $lightPurple;
+        }
+
+        &:active {
+            color: $deepPurple;
+        }
+    }
+
+    @if $obj =='fill' {
+        & {
+            color: $white;
+            background-color: $purple;
+        }
+
+        &:hover {
+            color: $white;
+            background-color: $lightPurple;
+        }
+
+        &:active {
+            color: $white;
+            background-color: $deepPurple;
+        }
+    }
+}

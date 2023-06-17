@@ -1,0 +1,91 @@
+@import '../../../styles/variables';
+@import "../../../styles/mixins";
+
+.timerLocation {
+    grid-column: 7 / 12;
+    grid-row: 2 / 5;
+}
+
+.loader {
+    justify-self: center;
+}
+
+.completed {
+    justify-self: center;
+    text-align: center;
+    font-size: 1.25rem;
+}
+
+.timer {
+    display: flex;
+    gap: 1.7em;
+    justify-self: right;
+}
+
+.timer__block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.timer__field {
+    width: 5.375rem;
+    background-color: $white;
+    font-weight: 500;
+    font-size: 3rem;
+    border-radius: 25px;
+    height: 2em;
+    overflow: hidden;
+}
+
+.timer__track {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform $transitionTime $transitionFunc;
+
+    &.anim {
+        transform: translateY(-2em);
+    }
+
+    &.animActive {
+        transition: none;
+        transform: translateY(0);
+    }
+}
+
+.timer__count {
+    height: 2em;
+    font-size: 3rem;
+    line-height: 2em;
+    text-align: center;
+}
+
+.timer__label {
+    margin-top: 3px;
+}
+
+@include lg {
+    .timerLocation {
+        grid-column: 7 / 13;
+    }
+}
+
+@include md {
+    .timerLocation {
+        grid-row-start: 4;
+        grid-column: 1 / 13;
+        margin: 1.2rem;
+    }
+    .timer {
+        justify-self: center;
+    }
+}
+
+@include xs {
+    .timer {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5em;
+    }
+}
