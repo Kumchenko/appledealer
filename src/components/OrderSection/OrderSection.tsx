@@ -20,6 +20,7 @@ import { postOrder } from "@/slices/OrderSlice"
 import { IOrderReqBody } from "pages/api/interfaces"
 import { useRouter } from "next/router"
 import { useTranslation } from "@/hooks/useTranslation"
+import { Modal } from "@/utils/Modal"
 
 
 const OrderSection = ({ models }: IModels) => {
@@ -34,8 +35,7 @@ const OrderSection = ({ models }: IModels) => {
     const {
         services,
         loadingStatus: servicesLoadingStatus
-    } = useSelector(({ servicesSlice }) => servicesSlice);
-    const { loadingStatus: orderLoadingStatus } = useSelector(({ orderSlice }) => orderSlice)
+    } = useSelector(({ servicesSlice }) => servicesSlice)
 
     // Initial form values
     const initialValues: IOrderReqBody = {
@@ -86,6 +86,9 @@ const OrderSection = ({ models }: IModels) => {
                 })
                 .catch(() => {
                     formik.resetForm();
+                    Modal.open({
+                        title: t('errors.occured')
+                    })
                 })
         }
     })
@@ -178,9 +181,6 @@ const OrderSection = ({ models }: IModels) => {
     // Prepare text for submit button
     const submitText = useMemo(() => {
         const service = services.find(service => service.quality.id === values.quality);
-        if (orderLoadingStatus === 'error') {
-            return t('errors.occured')
-        }
         if (isSubmitting) {
             return <PulseLoader
                 color={styles.white}
@@ -193,7 +193,7 @@ const OrderSection = ({ models }: IModels) => {
         } else {
             return t('order:submit');
         }
-    }, [isSubmitting, orderLoadingStatus, services, t, values.quality]);
+    }, [isSubmitting, services, t, values.quality]);
 
     // Transition implementation
     const [modelList, setModelList] = useState([initialValues.model]);
@@ -236,25 +236,25 @@ const OrderSection = ({ models }: IModels) => {
                     <Card title={t('order:contact-data')} className={styles.form__card}>
                         <FormInputExtended
                             className={styles.form__field}
-                            label={t('order:name')}
+                            label={t('name')}
                             name="name"
                             type="text"
-                            placeholder={t('order:your-name')}
+                            placeholder={t('your-name')}
                             autoComplete="on"
                             required
                         />
                         <FormInputExtended
                             className={styles.form__field}
-                            label={t('order:surname')}
+                            label={t('surname')}
                             name="surname"
                             type="text"
-                            placeholder={t('order:your-surname')}
+                            placeholder={t('your-surname')}
                             autoComplete="on"
                             required
                         />
                         <FormInputExtended
                             className={styles.form__field}
-                            label={t('order:tel')}
+                            label={t('tel')}
                             name="tel"
                             type="tel"
                             pattern="[+]{1}38[0]{1}[0-9]{9}"
@@ -264,7 +264,7 @@ const OrderSection = ({ models }: IModels) => {
                         />
                         <FormInputExtended
                             className={styles.form__field}
-                            label={t('order:email')}
+                            label={t('email')}
                             name="email"
                             type="email"
                             placeholder="example@example.com"
@@ -275,7 +275,7 @@ const OrderSection = ({ models }: IModels) => {
                     <Card title={t('order:order')} className={styles.form__card}>
                         <FormSelectExtended
                             className={styles.form__field}
-                            label={t('order:component')}
+                            label={t('component')}
                             name="component"
                             placeholder={componentPlaceholder}
                             disabled={!(values.model)}
@@ -284,7 +284,7 @@ const OrderSection = ({ models }: IModels) => {
                         </FormSelectExtended>
                         <FormSelectExtended
                             className={styles.form__field}
-                            label={t('order:quality')}
+                            label={t('quality')}
                             name="quality"
                             placeholder={qualityPlaceholder}
                             disabled={!(values.component)}
@@ -292,7 +292,7 @@ const OrderSection = ({ models }: IModels) => {
                             {qualityElems}
                         </FormSelectExtended>
                         <button
-                            disabled={isSubmitting || !(values.quality) || orderLoadingStatus === 'error'}
+                            disabled={isSubmitting || !(values.quality)}
                             className={clsx(styles.form__btn, "btn btn_green")}
                             type="submit"
                         >

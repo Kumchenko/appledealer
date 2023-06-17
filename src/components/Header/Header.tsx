@@ -7,17 +7,27 @@ import styles from './sass/Header.module.scss'
 import { useRouter } from 'next/router'
 import { useTranslation } from "next-i18next"
 import { IHeaderProps } from './interfaces'
+import { useDispatch } from '@/store'
+import { Modal } from '@/utils/Modal'
+import CallModal from '../CallModal/CallModal'
 
 const Header = ({ navPoints, socialPoints }: IHeaderProps) => {
     const { t } = useTranslation();
     const [navOpened, setNavOpened] = useState(false);
     const router = useRouter();
+    const dispatch = useDispatch();
 
+    // Open navigation func
+    const openNav = useCallback(() => {
+        document.body.style.overflow = 'hidden'
+        setNavOpened(true);
+    }, []);
+
+    // Close navigation func
     const closeNav = useCallback(() => {
-        if (navOpened) {
-            setNavOpened(false);
-        }
-    }, [navOpened]);
+        document.body.style.overflow = 'initial'
+        setNavOpened(false);
+    }, []);
 
     // Closing opened navigation menu when changing page
     useEffect(() => {
@@ -50,6 +60,15 @@ const Header = ({ navPoints, socialPoints }: IHeaderProps) => {
         </li>
     ), [router.locale, router.locales, router.pathname, t])
 
+    // Handle click on CallMe btn
+    const handleCallClick = () => {
+        Modal.open({
+            closeIcon: true,
+            title: t('call-back'),
+            content: CallModal
+        })
+    }
+
     return (
         <header className={styles.header}>
             <div className={styles.info}>
@@ -59,7 +78,7 @@ const Header = ({ navPoints, socialPoints }: IHeaderProps) => {
                             {t('address')}
                         </a>
                     </address>
-                    <button className={clsx('btn btn_green')}>{t('call-me')}</button>
+                    <button onClick={handleCallClick} className={clsx('btn btn_green')}>{t('call-me')}</button>
                 </div>
             </div>
             <nav className={clsx(styles.menu, navOpened && styles.opened)}>
@@ -80,7 +99,7 @@ const Header = ({ navPoints, socialPoints }: IHeaderProps) => {
                             </ul>
                         </div>
                     </ul>
-                    <div className={styles.menu__burger} onClick={() => setNavOpened(!navOpened)}>
+                    <div className={styles.menu__burger} onClick={() => !navOpened ? openNav() : closeNav()}>
                         <span></span>
                     </div>
                 </div>

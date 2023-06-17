@@ -1,5 +1,5 @@
 import { FormikContextType } from "formik";
 
-export interface IForm extends React.ComponentProps<'form'> {
+export type IForm = {
     formik: FormikContextType<any>
-}
+} & React.PropsWithChildren & React.ComponentProps<'form'>

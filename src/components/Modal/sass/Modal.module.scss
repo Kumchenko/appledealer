@@ -1,0 +1,20 @@
+@import "../../../styles/variables";
+@import "../../../styles/mixins";
+
+.modal {
+    box-shadow: 0 0 15px 5px #00000039;
+
+    .title_only {
+        margin-bottom: 0;
+    }
+    
+    &__close {
+        font-size: 2rem;
+        top: .4em;
+        right: .5em;
+        position: absolute;
+        background-color: transparent;
+        border: none;   
+        @include purpleClickable('transparent');
+    }
+}

@@ -1,8 +1,7 @@
 const WorkSlides = [
     {
         src: "/img/changing-glass.png",
-        href: "https://www.youtube.com/watch?v=sNesBB7sOaw",
-        priority: true
+        href: "https://www.youtube.com/watch?v=sNesBB7sOaw"
     },
     {
         src: "/img/changing-display.jpg",

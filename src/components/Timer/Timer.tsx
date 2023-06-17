@@ -12,6 +12,7 @@ const TimerBlock = ({ value, name }: ITimerBlock) => {
     const trackRef = useRef<HTMLDivElement>(null);
     const prevValue = usePrevious(value);
 
+    // Animation realization
     useEffect(() => {
         trackRef.current?.classList.remove(styles.animActive);
 

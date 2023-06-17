@@ -9,8 +9,8 @@ const DiscountSection = () => {
     const { t: r } = useTranslation('repair');
     // Temporary solution when there isn't backend
     const time = useMemo(() => {
-        // 86400000
-        return Date.now() + 12000
+        // 12000
+        return Date.now() + 86400000
     }, []);
 
     return (

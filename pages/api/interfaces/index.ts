@@ -46,3 +46,8 @@ export interface IServicesReqData {
     component: string;
 }
 
+export interface ICallReqData {
+    name: string;
+    tel: string;
+}
+

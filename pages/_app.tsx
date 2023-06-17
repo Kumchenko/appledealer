@@ -11,10 +11,14 @@ import store from '@/store'
 import { Provider } from 'react-redux'
 import { appWithTranslation } from 'next-i18next'
 import NavPoints from '@/constants/NavPoints'
-import SocialPoints from '@/constants/socialPoints'
+import SocialPoints from '@/constants/SocialPoints'
+import { ModalWrapper } from '@/components/ModalWrapper/ModalWrapper'
+import { Modal } from '@/utils/Modal'
 
 config.autoAddCss = false
 
+//our modal ref
+let modalWrapperRef: any;
 
 function MyApp({ Component, pageProps, router }: AppProps) {
   const [pagesArr, setPagesArr] = useState([<Component key={router.asPath} {...pageProps} />]);
@@ -29,6 +33,10 @@ function MyApp({ Component, pageProps, router }: AppProps) {
     setPagesArr([<Component key={router.pathname} {...pageProps} />])
   }, [Component, pageProps, router.pathname]);
 
+  useEffect(() => {
+    Modal.registerModal(modalWrapperRef);
+  }, []);
+
   return (
     <Provider store={store}>
       <div style={{ overflowX: 'hidden' }}>
@@ -39,6 +47,7 @@ function MyApp({ Component, pageProps, router }: AppProps) {
         {transitions((style, item) => <a.div style={style}>{item}</a.div>)}
         <Footer />
       </div>
+      <ModalWrapper ref={ref => modalWrapperRef = ref} />
     </Provider>
   )
 }

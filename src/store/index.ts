@@ -2,13 +2,15 @@ import { configureStore } from "@reduxjs/toolkit";
 import componentsSlice from "../slices/ComponentSlice"
 import servicesSlice from "../slices/ServicesSlice"
 import orderSlice from "../slices/OrderSlice"
+import callSlice from "../slices/CallSlice"
 import { TypedUseSelectorHook, useDispatch as useReduxDispatch, useSelector as useReduxSelector } from "react-redux";
 
 const store = configureStore({
     reducer: {
         componentsSlice,
         servicesSlice,
-        orderSlice
+        orderSlice,
+        callSlice
     },
     devTools: process.env.NODE_ENV !== 'production'
 })

@@ -12,6 +12,7 @@ import { IOrderReqQuery } from "pages/api/interfaces";
 import { useMemo } from "react";
 import { PulseLoader } from "react-spinners";
 import { useTranslation } from "@/hooks/useTranslation";
+import { Modal } from "@/utils/Modal";
 
 
 const CheckSection = () => {
@@ -19,7 +20,6 @@ const CheckSection = () => {
     const { t } = useTranslation();
     const router = useRouter();
     const dispatch = useDispatch();
-    const { loadingStatus: orderLoadingStatus } = useSelector(({ orderSlice }) => orderSlice);
 
     const initialValues: IOrderReqQuery = {
         id: '',
@@ -46,6 +46,9 @@ const CheckSection = () => {
                 })
                 .catch(() => {
                     formik.resetForm();
+                    Modal.open({
+                        title: t('errors.occured')
+                    })
                 })
         }
     });
@@ -53,9 +56,6 @@ const CheckSection = () => {
 
     // Prepare text for submit button
     const submitText = useMemo(() => {
-        if (orderLoadingStatus === 'error') {
-            return t('errors.occured')
-        }
         if (isSubmitting) {
             return <PulseLoader
                 color={styles.white}
@@ -64,7 +64,7 @@ const CheckSection = () => {
                 aria-label="Loading pulseloader" />;
         }
         return c('submit');
-    }, [c, isSubmitting, orderLoadingStatus, t]);
+    }, [c, isSubmitting]);
 
     return (
         <section className={styles.check}>
@@ -94,6 +94,7 @@ const CheckSection = () => {
                             required
                         />
                         <button
+                            disabled={isSubmitting}
                             className="btn btn_green"
                             type="submit"
                         >

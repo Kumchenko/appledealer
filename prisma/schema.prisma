@@ -83,6 +83,15 @@ model Quality {
   @@map("qualities")
 }
 
+model CallMe {
+  id      Int      @id @default(autoincrement())
+  name    String
+  tel     String
+  created DateTime @default(now())
+
+  @@map("calls")
+}
+
 enum Status {
   INPROCESS
   DONE

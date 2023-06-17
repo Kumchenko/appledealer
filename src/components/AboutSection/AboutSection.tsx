@@ -5,17 +5,32 @@ import { useRouter } from 'next/router';
 import { useMemo, useState } from 'react';
 import { PulseLoader } from 'react-spinners';
 import { createTime } from '@/utils';
+import CallModal from '../CallModal/CallModal';
+import { Modal } from '@/utils/Modal';
 
 const AboutSection = () => {
     const { t } = useTranslation();
     const { t: i } = useTranslation('index');
 
     const router = useRouter();
+
+    // Memoizing locale
     const locale = useMemo(() => router.locale || router.defaultLocale, [router.defaultLocale, router.locale]);
 
+    // Loading state of Embed GMap
     const [loading, setLoading] = useState(true);
 
+    // Setting time format
     const timeFormat: Intl.DateTimeFormatOptions = { hour: '2-digit', minute: '2-digit' }
+
+    // Handle click on CallMe btn
+    const handleCallClick = () => {
+        Modal.open({
+            closeIcon: true,
+            title: t('call-back'),
+            content: CallModal
+        })
+    }
 
     return (
         <section id="about" className={styles.about}>
@@ -51,7 +66,12 @@ const AboutSection = () => {
                     </a>
                     <div className={styles.info__contacts}>
                         <a className="info__call btn btn_purple" href="tel:+380635005050">+380635005050</a>
-                        <button className="info__callme btn btn_green">{t('call-back')}</button>
+                        <button
+                            onClick={handleCallClick}
+                            className="info__callme btn btn_green"
+                        >
+                            {t('call-back')}
+                        </button>
                     </div>
                 </address>
                 <div className={styles.about__mapWrapper}>
