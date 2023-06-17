@@ -3,6 +3,7 @@ import styles from './sass/Discount.module.scss'
 import Timer from '../Timer/Timer'
 import { useMemo } from 'react'
 import { useTranslation } from '@/hooks/useTranslation';
+import Link from 'next/link';
 
 const DiscountSection = () => {
     const { t: o } = useTranslation('index', { keyPrefix: 'offer' });
@@ -25,7 +26,9 @@ const DiscountSection = () => {
                 <p className={styles.discount__desc}>
                     {o('desc')}: {r('display')}
                 </p>
-                <button className={clsx(styles.discount__order, "btn btn_green")}>{o('submit')}</button>
+                <Link href="/order" passHref>
+                    <a className={clsx(styles.discount__order, "btn btn_green")}>{o('submit')}</a>
+                </Link>
                 <Timer date={time} ended={o('ended')} />
             </div>
         </section>
