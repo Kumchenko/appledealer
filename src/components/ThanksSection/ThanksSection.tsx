@@ -46,7 +46,7 @@ const ThanksSection = () => {
                         <span>{t(`repair:${order?.model}`)} — {t(`repair:${order?.component}`)}</span>
                         {t('cost')}: {order?.cost}₴
                     </p>
-                    <Link href="/" passHref>
+                    <Link href="/" legacyBehavior>
                         <a className={clsx(styles.card__btn, "btn btn_green")}>
                             {t('to-main')}
                         </a>

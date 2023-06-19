@@ -12,6 +12,7 @@ import { appWithTranslation } from 'next-i18next'
 import { NavPoints, SocialPoints } from '@/constants'
 import { ModalWrapper } from '@/components/ModalWrapper/ModalWrapper'
 import { Modal } from '@/utils/Modal'
+import { useNextCssRemovalPrevention } from '@madeinhaus/nextjs-page-transition'
 
 config.autoAddCss = false
 
@@ -19,7 +20,7 @@ config.autoAddCss = false
 let modalWrapperRef: any;
 
 function MyApp({ Component, pageProps, router }: AppProps) {
-  const [pagesArr, setPagesArr] = useState([<Component key={router.asPath} {...pageProps} />]);
+  const [pagesArr, setPagesArr] = useState([<Component key={router.pathname} {...pageProps} />]);
 
   const transitions = useTransition(pagesArr, {
     from: { opacity: 0, x: '100%' },
@@ -27,10 +28,14 @@ function MyApp({ Component, pageProps, router }: AppProps) {
     leave: { opacity: 0, x: '-50%', position: 'absolute' }
   })
 
+  // Temporary fix for Page Transition while officialy not fixed
+  useNextCssRemovalPrevention();
+
   useEffect(() => {
     setPagesArr([<Component key={router.pathname} {...pageProps} />])
-  }, [Component, pageProps, router.asPath, router.pathname]);
+  }, [Component, router.pathname, pageProps]);
 
+  // Register modalWrapper
   useEffect(() => {
     Modal.registerModal(modalWrapperRef);
   }, []);

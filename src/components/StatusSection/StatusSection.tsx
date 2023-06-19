@@ -70,10 +70,10 @@ const StatusSection = () => {
                         <span>{r(order?.model)} — {r(order?.component)}</span>
                         {t('cost')}: {order?.cost}₴
                     </p>
-                    <Link href="/check" passHref>
+                    <Link href="/check" legacyBehavior>
                         <a className={clsx(styles.card__btn, "btn btn_purple")}>{t('back')}</a>
                     </Link>
-                    <Link href="/" passHref>
+                    <Link href="/" legacyBehavior>
                         <a className={clsx(styles.card__btn, "btn btn_green")}>{t('to-main')}</a>
                     </Link>
                 </Card>

@@ -27,7 +27,7 @@ const ErrorSection = () => {
                     <p className={styles.error__desc}>
                         {e('detail')}
                     </p>
-                    <Link href="/" passHref>
+                    <Link href="/" legacyBehavior>
                         <a className={clsx(styles.card__btn, "btn btn_green")}>{t('to-main')}</a>
                     </Link>
                 </Card>
