@@ -9,7 +9,6 @@ import { fetchComponents, clearComponents } from "@/slices/ComponentSlice"
 import { fetchServices, clearServices } from "@/slices/ServicesSlice"
 import { useDispatch, useSelector } from "@/store"
 import { useMemo, useState } from "react"
-import useUpdate from "@/hooks/useUpdate"
 import Form from "../Form/Form"
 import FormSelect from "../FormSelect/FormSelect"
 import FormInputExtended from "../FormInputExtended/FormInputExtended"
@@ -19,8 +18,8 @@ import { PulseLoader } from "react-spinners"
 import { postOrder } from "@/slices/OrderSlice"
 import { IOrderReqBody } from "pages/api/interfaces"
 import { useRouter } from "next/router"
-import { useTranslation } from "@/hooks/useTranslation"
-import { Modal } from "@/utils/Modal"
+import { useTranslation, useUpdate } from "@/hooks"
+import { Modal } from "@/utils"
 
 
 const OrderSection = ({ models }: IModels) => {
@@ -140,12 +139,18 @@ const OrderSection = ({ models }: IModels) => {
     }, [servicesLoadingStatus, t]);
 
     // Preparing options for select elements
-    const modelElems = useMemo(() => models.map(({ id }) =>
-        <option key={id} value={id}>{t(`repair:${id}`)}</option>), [models, t]);
-    const componentElems = useMemo(() => components.map(({ id }) =>
-        <option key={id} value={id}>{t(`repair:${id}`)}</option>), [components, t]);
-    const qualityElems = useMemo(() => services.map(({ quality: { id } }) =>
-        <option key={id} value={id}>{t(`repair:${id}`)}</option>), [services, t]);
+    const modelElems = useMemo(() => models
+        .map(({ id }) => <option key={id} value={id}>{t(`repair:${id}`)}</option>)
+        .sort((a, b) => a.props.children.localeCompare(b.props.children)),
+        [models, t]);
+    const componentElems = useMemo(() => components
+        .map(({ id }) => <option key={id} value={id}>{t(`repair:${id}`)}</option>)
+        .sort((a, b) => a.props.children.localeCompare(b.props.children)),
+        [components, t]);
+    const qualityElems = useMemo(() => services
+        .map(({ quality: { id } }) => <option key={id} value={id}>{t(`repair:${id}`)}</option>)
+        .sort((a, b) => a.props.children.localeCompare(b.props.children)),
+        [services, t]);
 
     // Download available components for selected model
     const getComponents = (model: string) => {

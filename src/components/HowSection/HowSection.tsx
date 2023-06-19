@@ -2,7 +2,7 @@ import clsx from "clsx"
 import styles from "./sass/How.module.scss"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faReply, faPhone, faGear, faWrench, faSmile, faCircleExclamation } from '@fortawesome/free-solid-svg-icons'
-import { useTranslation } from "@/hooks/useTranslation"
+import { useTranslation } from "@/hooks"
 import { useMemo } from "react"
 
 const HowSection = () => {

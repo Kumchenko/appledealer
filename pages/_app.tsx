@@ -1,19 +1,18 @@
-import Head from 'next/head'
+import '@/styles/globals.scss'
+import '@fortawesome/fontawesome-svg-core/styles.css'
 import Header from "@/components/Header/Header"
 import Footer from "@/components/Footer/Footer"
 import { config } from '@fortawesome/fontawesome-svg-core'
-import '@fortawesome/fontawesome-svg-core/styles.css'
-import '@/styles/globals.scss'
 import { AppProps } from 'next/app'
 import { useEffect, useState } from 'react'
 import { a, useTransition } from '@react-spring/web'
 import store from '@/store'
 import { Provider } from 'react-redux'
 import { appWithTranslation } from 'next-i18next'
-import NavPoints from '@/constants/NavPoints'
-import SocialPoints from '@/constants/SocialPoints'
+import { NavPoints, SocialPoints } from '@/constants'
 import { ModalWrapper } from '@/components/ModalWrapper/ModalWrapper'
 import { Modal } from '@/utils/Modal'
+import { useNextCssRemovalPrevention } from '@madeinhaus/nextjs-page-transition'
 
 config.autoAddCss = false
 
@@ -21,7 +20,7 @@ config.autoAddCss = false
 let modalWrapperRef: any;
 
 function MyApp({ Component, pageProps, router }: AppProps) {
-  const [pagesArr, setPagesArr] = useState([<Component key={router.asPath} {...pageProps} />]);
+  const [pagesArr, setPagesArr] = useState([<Component key={router.pathname} {...pageProps} />]);
 
   const transitions = useTransition(pagesArr, {
     from: { opacity: 0, x: '100%' },
@@ -29,10 +28,14 @@ function MyApp({ Component, pageProps, router }: AppProps) {
     leave: { opacity: 0, x: '-50%', position: 'absolute' }
   })
 
+  // Temporary fix for Page Transition while officialy not fixed
+  useNextCssRemovalPrevention();
+
   useEffect(() => {
     setPagesArr([<Component key={router.pathname} {...pageProps} />])
-  }, [Component, pageProps, router.pathname]);
+  }, [Component, router.pathname, pageProps]);
 
+  // Register modalWrapper
   useEffect(() => {
     Modal.registerModal(modalWrapperRef);
   }, []);
@@ -40,10 +43,7 @@ function MyApp({ Component, pageProps, router }: AppProps) {
   return (
     <Provider store={store}>
       <div style={{ overflowX: 'hidden' }}>
-        <Head>
-          <link rel="shortcut icon" href="/favicon.png" type="image/png" />
-        </Head>
-        <Header navPoints={NavPoints} socialPoints={SocialPoints}/>
+        <Header navPoints={NavPoints} socialPoints={SocialPoints} />
         {transitions((style, item) => <a.div style={style}>{item}</a.div>)}
         <Footer />
       </div>

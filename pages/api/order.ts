@@ -12,17 +12,17 @@ const handler = async (req: IOrderRequest, res: NextApiResponse) => {
     try {
         switch (req.method) {
             case 'GET': {
-                getHandler(req, res);
+                await getHandler(req, res);
                 break;
             }
             case 'POST': {
-                postHandler(req, res);
+                await postHandler(req, res);
                 break;
             }
         }
     }
-    catch (error) {
-        return res.status(400).json(error);
+    catch (error: any) {
+        return res.status(400).json({ Error: error.message });
     }
 }
 
@@ -67,7 +67,7 @@ const getHandler = async (req: IOrderRequest, res: NextApiResponse) => {
             operations
         });
     } else {
-        return res.status(200).json(null);
+        throw Error('Order not found')
     }
 }
 

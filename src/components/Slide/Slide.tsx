@@ -2,7 +2,7 @@ import clsx from "clsx";
 import Image from "next/image";
 import styles from './sass/Slide.module.scss';
 import { ISlideProps } from "./interfaces";
-import { useTranslation } from "@/hooks/useTranslation";
+import { useTranslation } from "@/hooks";
 
 const Slide = ({ title, desc, href, src, className, priority, ...args }: ISlideProps) => {
     const { t } = useTranslation();

@@ -1,4 +1,6 @@
+import { _apiBase } from "@/constants";
 import { ILoadingStatus } from "@/interfaces";
+import { fetchJSON } from "@/utils";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { IOrderReqQuery, IOrderReqBody, IOrderResData } from "pages/api/interfaces";
 
@@ -13,26 +15,29 @@ const initialState: IInitialState = {
 
 const getOrder = createAsyncThunk(
     'order/getOrder',
-    async ({ id, tel }: IOrderReqQuery, thunkAPI) => {
-        const response = await fetch(`http://localhost:3000/api/order?id=${id}&tel=${encodeURIComponent(tel)}`)
-        const order = await response.json();
+    async ({ id, tel }: IOrderReqQuery) => {
+        const order = await fetchJSON(`${_apiBase}/api/order?id=${id}&tel=${encodeURIComponent(tel)}`);
         if (order) {
             return order;
         } else {
-            return thunkAPI.rejectWithValue(null);
+            throw Error(`Received empty order`)
         }
     }
 )
 
 const postOrder = createAsyncThunk(
     'order/postOrder',
-    async (order: IOrderReqBody) => {
-        const response = await fetch('http://localhost:3000/api/order', {
+    async (orderData: IOrderReqBody) => {
+        const order = await fetchJSON(`${_apiBase}/api/order`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ ...order })
+            body: JSON.stringify({ ...orderData })
         })
-        return response.json();
+        if (order) {
+            return order;
+        } else {
+            throw Error(`Received empty order`)
+        }
     })
 
 const OrderSlice = createSlice({

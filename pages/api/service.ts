@@ -9,7 +9,7 @@ interface IServiceRequest extends NextApiRequest {
 const handler = async (req: IServiceRequest, res: NextApiResponse) => {
     try {
         if (req.method !== 'POST') {
-            throw new Error("Sorry, we support only POST method!");
+            throw Error("Sorry, we support only POST method!");
         }
         const { model, component, quality } = req.body;
         const service = await prisma.service.findUnique({
@@ -27,8 +27,8 @@ const handler = async (req: IServiceRequest, res: NextApiResponse) => {
         })
         return res.status(200).json(service);
     }
-    catch (error) {
-        return res.status(400).json(error);
+    catch (error: any) {
+        return res.status(400).json({Error: error.message});
     }
 }
 
