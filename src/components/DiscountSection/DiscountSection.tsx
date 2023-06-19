@@ -2,7 +2,7 @@ import clsx from 'clsx'
 import styles from './sass/Discount.module.scss'
 import Timer from '../Timer/Timer'
 import { useMemo } from 'react'
-import { useTranslation } from '@/hooks/useTranslation';
+import { useTranslation } from '@/hooks';
 import Link from 'next/link';
 
 const DiscountSection = () => {

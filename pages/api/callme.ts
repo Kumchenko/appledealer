@@ -20,8 +20,8 @@ const handler = async (req: ICallRequest, res: NextApiResponse) => {
         })
         return res.status(200).json(createdCall);
     }
-    catch (error) {
-        return res.status(400).json(error);
+    catch (error: any) {
+        return res.status(400).json({Error: error.message});
     }
 }
 

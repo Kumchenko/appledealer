@@ -1,11 +1,10 @@
 import { useState, useEffect, useRef } from 'react'
-import useCountdown from '@/hooks/useCountdown'
-import usePrevious from '@/hooks/usePrevious'
+import { useCountdown, usePrevious } from '@/hooks'
 import styles from './sass/Timer.module.scss'
 import { ITimer, ITimerBlock } from './interfaces'
 import { PulseLoader } from 'react-spinners'
 import clsx from 'clsx'
-import { useTranslation } from '@/hooks/useTranslation'
+import { useTranslation } from '@/hooks'
 
 
 const TimerBlock = ({ value, name }: ITimerBlock) => {

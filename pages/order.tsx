@@ -11,15 +11,18 @@ export default function Order({ models }: IModels) {
 }
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-    const models = await prisma?.model.findMany();
+    const models = await prisma?.model.findMany({
+        orderBy: {id: "asc"}
+    });
     return {
         props: {
-            models,
+            models: models.sort(),
             ...(await serverSideTranslations(locale ?? 'uk', [
                 'common',
                 'order',
                 'repair'
             ]))
-        }
+        },
+        revalidate: 300
     }
 }

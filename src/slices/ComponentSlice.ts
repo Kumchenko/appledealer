@@ -1,4 +1,6 @@
+import { _apiBase } from "@/constants";
 import { IComponents, ILoadingStatus } from "@/interfaces";
+import { fetchJSON } from "@/utils";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 interface IInitialState extends IComponents, ILoadingStatus { }
@@ -11,12 +13,11 @@ const initialState: IInitialState = {
 const fetchComponents = createAsyncThunk(
     'components/fetchComponents',
     async (model: string) => {
-        const response = await fetch('http://localhost:3000/api/components', {
+        return await fetchJSON(`${_apiBase}/api/components`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ model })
         });
-        return await response.json();
     }
 );
 

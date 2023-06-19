@@ -8,7 +8,7 @@ import { useEffect, useMemo } from "react";
 import { useRouter } from "next/router";
 import { useSelector } from "@/store";
 import Head from "next/head";
-import { useTranslation } from "@/hooks/useTranslation";
+import { useTranslation } from "@/hooks";
 
 const StatusSection = () => {
     const { t } = useTranslation();

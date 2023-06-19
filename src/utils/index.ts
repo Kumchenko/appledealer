@@ -1,3 +1,6 @@
+export { Modal } from './Modal'
+export { fetchJSON } from './fetchJSON'
+
 export function idToString(id: number): string {
     const res = id.toString().split('');
     const length = res.length

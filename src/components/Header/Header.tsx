@@ -8,7 +8,7 @@ import { useRouter } from 'next/router'
 import { useTranslation } from "next-i18next"
 import { IHeaderProps } from './interfaces'
 import { useDispatch } from '@/store'
-import { Modal } from '@/utils/Modal'
+import { Modal } from '@/utils'
 import CallModal from '../CallModal/CallModal'
 
 const Header = ({ navPoints, socialPoints }: IHeaderProps) => {

@@ -1,4 +1,4 @@
-import { useTranslation } from "@/hooks/useTranslation";
+import { useTranslation } from "@/hooks";
 import { useDispatch } from "@/store";
 import { useFormik } from "formik";
 import * as Yup from "yup"
@@ -10,7 +10,7 @@ import { faPhone } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useMemo, useRef } from "react";
 import { PulseLoader } from "react-spinners";
 import { postCall } from "@/slices/CallSlice";
-import { Modal } from "@/utils/Modal";
+import { Modal } from "@/utils";
 
 const CallModal = ({ closeModal }: { closeModal: Function }) => {
     const { t } = useTranslation();
