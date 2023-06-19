@@ -78,7 +78,7 @@ const Header = ({ navPoints, socialPoints }: IHeaderProps) => {
                             {t('address')}
                         </a>
                     </address>
-                    <button onClick={handleCallClick} className={clsx('btn btn_green')}>{t('call-me')}</button>
+                    <button onClick={handleCallClick} className={clsx(styles.info__call, 'btn btn_green')}>{t('call-me')}</button>
                 </div>
             </div>
             <nav className={clsx(styles.menu, navOpened && styles.opened)}>
