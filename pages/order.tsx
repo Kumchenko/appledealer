@@ -22,6 +22,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
                 'order',
                 'repair'
             ]))
-        }
+        },
+        revalidate: 300
     }
 }
