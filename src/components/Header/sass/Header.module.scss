@@ -16,6 +16,10 @@
         address {
             margin-right: 2em;
         }
+
+        &__call {
+            flex-shrink: 0;
+        }
     }
 
     .logo__link {

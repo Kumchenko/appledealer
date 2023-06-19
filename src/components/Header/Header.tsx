@@ -8,7 +8,7 @@ import { useRouter } from 'next/router'
 import { useTranslation } from "next-i18next"
 import { IHeaderProps } from './interfaces'
 import { useDispatch } from '@/store'
-import { Modal } from '@/utils/Modal'
+import { Modal } from '@/utils'
 import CallModal from '../CallModal/CallModal'
 
 const Header = ({ navPoints, socialPoints }: IHeaderProps) => {
@@ -78,7 +78,7 @@ const Header = ({ navPoints, socialPoints }: IHeaderProps) => {
                             {t('address')}
                         </a>
                     </address>
-                    <button onClick={handleCallClick} className={clsx('btn btn_green')}>{t('call-me')}</button>
+                    <button onClick={handleCallClick} className={clsx(styles.info__call, 'btn btn_green')}>{t('call-me')}</button>
                 </div>
             </div>
             <nav className={clsx(styles.menu, navOpened && styles.opened)}>

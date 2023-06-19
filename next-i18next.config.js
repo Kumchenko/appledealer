@@ -3,10 +3,6 @@
 module.exports = {
     i18n: {
         locales: ['uk', 'ru', 'en'],
-<<<<<<< Updated upstream
-        defaultLocale: 'uk'
-    }
-=======
         defaultLocale: 'uk',
     },
     localePath:
@@ -17,5 +13,4 @@ module.exports = {
         process.env.NODE_ENV === 'production'
             ? false
             : true
->>>>>>> Stashed changes
 }

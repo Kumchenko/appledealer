@@ -1,4 +1,6 @@
+import { _apiBase } from "@/constants";
 import { ILoadingStatus, IServices } from "@/interfaces";
+import { fetchJSON } from "@/utils";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 interface IInitialState extends ILoadingStatus, IServices { }
@@ -11,12 +13,11 @@ const initialState: IInitialState = {
 const fetchServices = createAsyncThunk(
     'services/fetchServices',
     async ({ model, component }: { model: string, component: string }) => {
-        const response = await fetch('http://localhost:3000/api/services', {
+        return await fetchJSON(`${_apiBase}/api/services`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ model, component })
         });
-        return await response.json();
     }
 );
 

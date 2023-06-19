@@ -6,13 +6,13 @@ import clsx from "clsx";
 import styles from "./sass/Сheck.module.scss";
 import FormInputExtended from "../FormInputExtended/FormInputExtended";
 import { getOrder } from "@/slices/OrderSlice";
-import { useDispatch, useSelector } from "@/store";
+import { useDispatch } from "@/store";
 import { useRouter } from "next/router";
 import { IOrderReqQuery } from "pages/api/interfaces";
 import { useMemo } from "react";
 import { PulseLoader } from "react-spinners";
-import { useTranslation } from "@/hooks/useTranslation";
-import { Modal } from "@/utils/Modal";
+import { useTranslation } from "@/hooks";
+import { Modal } from "@/utils";
 
 
 const CheckSection = () => {

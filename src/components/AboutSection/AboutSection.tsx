@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import styles from './sass/About.module.scss';
-import { useTranslation } from '@/hooks/useTranslation';
+import { useTranslation } from '@/hooks';
 import { useRouter } from 'next/router';
 import { useMemo, useState } from 'react';
 import { PulseLoader } from 'react-spinners';

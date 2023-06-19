@@ -23,8 +23,8 @@ const handler = async (req: IComponentsRequest, res: NextApiResponse) => {
         })
         return res.status(200).json(components);
     }
-    catch (error) {
-        return res.status(400).json(error);
+    catch (error: any) {
+        return res.status(400).json({Error: error.message});
     }
 }
 

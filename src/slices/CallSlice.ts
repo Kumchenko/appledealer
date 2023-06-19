@@ -1,4 +1,6 @@
+import { _apiBase } from "@/constants";
 import { ILoadingStatus } from "@/interfaces";
+import { fetchJSON } from "@/utils";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { ICallReqData } from "pages/api/interfaces";
 
@@ -8,17 +10,14 @@ const initialState: ILoadingStatus = {
 
 const postCall = createAsyncThunk(
     'call/postCall',
-    async (call: ICallReqData, thunkAPI) => {
-        const response = await fetch(`http://localhost:3000/api/callme`, {
+    async (callData: ICallReqData) => {
+        const call = await fetchJSON(`${_apiBase}/api/callme`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ ...call })
+            body: JSON.stringify({ ...callData })
         })
-        const callResponse = await response.json();
-        if (callResponse) {
-            return true;
-        } else {
-            return thunkAPI.rejectWithValue(null);
+        if (!call) {
+            throw Error('Received empty callme');
         }
     }
 )
@@ -26,9 +25,7 @@ const postCall = createAsyncThunk(
 const CallSlice = createSlice({
     name: 'call',
     initialState,
-    reducers: {
-
-    },
+    reducers: {},
     extraReducers: builder =>
         builder
             .addCase(postCall.pending, state => { state.loadingStatus = 'fetching' })
