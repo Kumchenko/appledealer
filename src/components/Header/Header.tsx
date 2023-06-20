@@ -15,7 +15,6 @@ const Header = ({ navPoints, socialPoints }: IHeaderProps) => {
     const { t } = useTranslation();
     const [navOpened, setNavOpened] = useState(false);
     const router = useRouter();
-    const dispatch = useDispatch();
 
     // Open navigation func
     const openNav = useCallback(() => {

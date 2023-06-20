@@ -33,7 +33,7 @@ const NavLink = ({ point, styles, className }: INavLink) => {
 
     return (
         <div onMouseEnter={handleMouseEnter} onMouseLeave={() => setDropped(false)} >
-            <Link href={href} legacyBehavior>
+            <Link href={href} legacyBehavior scroll={false}>
                 <a className={clsx(styles?.menu__link, className, pathname === href && styles?.active)} {...args}>
                     {t(title)}
                 </a>
