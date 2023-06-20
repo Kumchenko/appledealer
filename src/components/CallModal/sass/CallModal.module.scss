@@ -11,12 +11,15 @@
         font-size: 1.1em;
     }
 
+    &__iconWrapper {
+        margin: 1.2em auto;
+        animation: pulse 2s infinite;
+        border-radius: 50%;
+    }
+
     &__icon {
         font-size: 3rem;
-        border-radius: 50%;
         padding: .8rem;
-        animation: pulse 2s infinite;
-        margin: .4em auto;
     }
 
     .form {
