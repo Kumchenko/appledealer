@@ -4,6 +4,7 @@
 .timerLocation {
     grid-column: 7 / 12;
     grid-row: 2 / 5;
+    height: 6em;
 }
 
 .loader {
@@ -30,7 +31,7 @@
 
 .timer__field {
     font-weight: 500;
-    font-size: 3rem;
+    font-size: 3em;
     width: 1.8em;
     height: 2em;
     background-color: $white;

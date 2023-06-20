@@ -4,9 +4,8 @@
     }
 
     section {
-        padding-top: 68px;
+        padding-top: 4.5rem;
     }
-
 }
 
 @include md {
@@ -32,5 +31,8 @@
 @include xs {
     .container {
         width: 90%;
+    }
+    section {
+        padding-top: 4.2rem;
     }
 }

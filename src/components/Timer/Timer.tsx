@@ -9,8 +9,6 @@ import { a, useTransition } from '@react-spring/web'
 
 
 const TimerBlock = ({ value, name }: ITimerBlock) => {
-    const trackRef = useRef<HTMLDivElement>(null);
-
     const [values, setValues] = useState([value]);
 
     const transitions = useTransition(values, {
