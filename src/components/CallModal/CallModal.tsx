@@ -79,7 +79,9 @@ const CallModal = ({ closeModal }: { closeModal: Function }) => {
             <p className={styles.call__desc}>
                 {t('call-me-detail')}
             </p>
-            <FontAwesomeIcon className={styles.call__icon} icon={faPhone} />
+            <div className={styles.call__iconWrapper}>
+                <FontAwesomeIcon className={styles.call__icon} icon={faPhone} />
+            </div>
             <Form className={styles.form} formik={formik}>
                 <FormInputExtended
                     label={t('name')}
