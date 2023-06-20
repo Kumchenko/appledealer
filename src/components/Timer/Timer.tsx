@@ -1,41 +1,32 @@
 import { useState, useEffect, useRef } from 'react'
-import { useCountdown, usePrevious } from '@/hooks'
+import { useCountdown } from '@/hooks'
 import styles from './sass/Timer.module.scss'
 import { ITimer, ITimerBlock } from './interfaces'
 import { PulseLoader } from 'react-spinners'
 import clsx from 'clsx'
 import { useTranslation } from '@/hooks'
+import { a, useTransition } from '@react-spring/web'
 
 
 const TimerBlock = ({ value, name }: ITimerBlock) => {
     const trackRef = useRef<HTMLDivElement>(null);
-    const prevValue = usePrevious(value);
 
-    // Animation realization
+    const [values, setValues] = useState([value]);
+
+    const transitions = useTransition(values, {
+        from: { y: '100%' },
+        enter: { y: '0px' },
+        leave: { y: '-100%', position: 'absolute' }
+    })
+
     useEffect(() => {
-        trackRef.current?.classList.remove(styles.animActive);
-
-        const node = document.createElement("span");
-        node.classList.add(styles.timer__count);
-        node.innerText = `${prevValue}`;
-
-        trackRef.current?.prepend(node);
-        trackRef.current?.classList.add(styles.anim);
-
-        setTimeout(() => {
-            trackRef.current?.firstElementChild?.remove();
-            trackRef.current?.classList.add(styles.animActive);
-        }, 500);
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [value]);
+        setValues([value])
+    }, [value])
 
     return (
         <div className={styles.timer__block}>
             <div className={styles.timer__field}>
-                <div ref={trackRef} className={styles.timer__track}>
-                    <span className={styles.timer__count}>{value}</span>
-                </div>
+                {transitions((style, item) => <a.span className={styles.timer__count} style={style}>{item}</a.span>)}
             </div>
             <span className={styles.timer__label}>{name}</span>
         </div>
