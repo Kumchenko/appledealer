@@ -1,3 +1,5 @@
+import { Router } from 'next/router';
+
 export { Modal } from './Modal'
 export { fetchJSON } from './fetchJSON'
 
@@ -24,4 +26,11 @@ export function createTime(hours: number, minutes: number): Date {
     const dateHours = new Date(0).setHours(hours);
     const dateMinutes = new Date(dateHours).setMinutes(minutes);
     return new Date(dateMinutes);
+}
+
+export function scrollToId(router: Router) {
+    const selector = router.asPath.replace(router.pathname, '');
+    if (selector) {
+        document.querySelector(selector)?.scrollIntoView();
+    }
 }

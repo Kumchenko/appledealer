@@ -4,6 +4,7 @@
 .timerLocation {
     grid-column: 7 / 12;
     grid-row: 2 / 5;
+    height: 6em;
 }
 
 .loader {
@@ -29,34 +30,19 @@
 }
 
 .timer__field {
-    width: 5.375rem;
-    background-color: $white;
     font-weight: 500;
-    font-size: 3rem;
-    border-radius: 25px;
+    font-size: 3em;
+    width: 1.8em;
     height: 2em;
+    background-color: $white;
+    border-radius: .5em;
     overflow: hidden;
 }
 
-.timer__track {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transition: transform $transitionTime $transitionFunc;
-
-    &.anim {
-        transform: translateY(-2em);
-    }
-
-    &.animActive {
-        transition: none;
-        transform: translateY(0);
-    }
-}
-
 .timer__count {
+    display: block;
+    width: 1.8em;
     height: 2em;
-    font-size: 3rem;
     line-height: 2em;
     text-align: center;
 }
@@ -84,8 +70,9 @@
 
 @include xs {
     .timer {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 1.5em;
+        gap: 1em;
+    }
+    .timer__field {
+        font-size: 2.3rem;
     }
 }

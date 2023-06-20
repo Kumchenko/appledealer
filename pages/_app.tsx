@@ -13,6 +13,7 @@ import { NavPoints, SocialPoints } from '@/constants'
 import { ModalWrapper } from '@/components/ModalWrapper/ModalWrapper'
 import { Modal } from '@/utils/Modal'
 import { useNextCssRemovalPrevention } from '@madeinhaus/nextjs-page-transition'
+import { scrollToId } from '@/utils'
 
 config.autoAddCss = false
 
@@ -22,10 +23,15 @@ let modalWrapperRef: any;
 function MyApp({ Component, pageProps, router }: AppProps) {
   const [pagesArr, setPagesArr] = useState([<Component key={router.pathname} {...pageProps} />]);
 
+  // console.log(router)
+
   const transitions = useTransition(pagesArr, {
     from: { opacity: 0, x: '100%' },
     enter: { opacity: 1, x: '0px' },
-    leave: { opacity: 0, x: '-50%', position: 'absolute' }
+    leave: { opacity: 0, x: '-50%', position: 'absolute' },
+    onRest: () => {
+      scrollToId(router)
+    }
   })
 
   // Temporary fix for Page Transition while officialy not fixed

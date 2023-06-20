@@ -1,7 +1,8 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "@/lib/prisma";
 import { IOrderReqBody, IOrderReqQuery, IServiceReqData, IServiceResData } from "./interfaces";
-import { idToNumber } from "@/utils";
+import { fetchJSON, idToNumber } from "@/utils";
+import { _apiBase } from "@/constants";
 
 interface IOrderRequest extends NextApiRequest {
     query: IOrderReqQuery
@@ -90,14 +91,13 @@ const postHandler = async (req: IOrderRequest, res: NextApiResponse) => {
         component,
         quality
     }
-    const serviceResponse = await fetch('http://localhost:3000/api/service', {
+    const service: IServiceResData = await fetchJSON(`${_apiBase}/api/service`, {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(serviceReqData)
     });
-    const service: IServiceResData = await serviceResponse.json();
 
     // Creating order in DB
     const createdOrder = await prisma.order.create({
