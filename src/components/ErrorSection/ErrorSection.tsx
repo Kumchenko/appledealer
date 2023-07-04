@@ -1,9 +1,8 @@
 import Image from 'next/image'
 import Card from '../Card/Card'
 import styles from './sass/ErrorSection.module.scss'
-import Link from 'next/link'
-import clsx from 'clsx'
 import { useTranslation } from '@/hooks'
+import Button from '../Button/Button'
 
 const ErrorSection = () => {
     const { t } = useTranslation();
@@ -22,14 +21,19 @@ const ErrorSection = () => {
                             src="/img/error.gif"
                             alt={e('alt')}
                             layout='fill'
+                            priority={true}
                         />
                     </div>
                     <p className={styles.error__desc}>
                         {e('detail')}
                     </p>
-                    <Link href="/" legacyBehavior>
-                        <a className={clsx(styles.card__btn, "btn btn_green")}>{t('to-main')}</a>
-                    </Link>
+                    <Button
+                        className={styles.card__btn}
+                        color='green'
+                        href="/"
+                    >
+                        {t('to-main')}
+                    </Button>
                 </Card>
             </div>
         </section>

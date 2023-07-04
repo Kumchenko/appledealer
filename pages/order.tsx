@@ -1,18 +1,34 @@
-import { IModels } from "@/interfaces";
+import { IModels, NextPageWithLayout } from "@/interfaces";
+import MetaLayout from "@/layouts/MetaLayout";
+import NavLayout from "@/layouts/NavLayout";
+import TransitionLayout from "@/layouts/TransitionLayout";
 import prisma from "@/lib/prisma";
 import OrderPageView from "@/pages/OrderPage/OrderPageView";
 import { GetStaticProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { ReactElement } from "react";
 
-export default function Order({ models }: IModels) {
+const Order: NextPageWithLayout<IModels> = ({ models }) => {
     return (
         <OrderPageView models={models} />
     )
 }
 
+Order.getLayout = function getLayout(page: ReactElement) {
+    return (
+        <MetaLayout>
+            <NavLayout>
+                <TransitionLayout>
+                    {page}
+                </TransitionLayout>
+            </NavLayout>
+        </MetaLayout>
+    )
+}
+
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
     const models = await prisma?.model.findMany({
-        orderBy: {id: "asc"}
+        orderBy: { id: "asc" }
     });
     return {
         props: {
@@ -26,3 +42,5 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
         revalidate: 300
     }
 }
+
+export default Order

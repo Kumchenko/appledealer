@@ -2,11 +2,11 @@ import { IModalOpenParams, ModalWrapper } from "@/components/ModalWrapper/ModalW
 import { Ref } from "react";
 
 export class Modal {
-    static _currentGlobalLoader: Ref<ModalWrapper> = null; //reference variable
+    static _currentGlobalLoader: ModalWrapper | null = null; //reference variable
 
     // getting reference of bottom wrapper component
-    static registerModal(ref: Ref<ModalWrapper>) {
-        this._currentGlobalLoader = ref;
+    static registerModal(ref: ModalWrapper | null) {
+        if (ref) this._currentGlobalLoader = ref;
     }
 
     static open({ ...args }: IModalOpenParams) {

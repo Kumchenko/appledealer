@@ -1,10 +1,27 @@
+import { NextPageWithLayout } from "@/interfaces"
+import MetaLayout from "@/layouts/MetaLayout"
+import NavLayout from "@/layouts/NavLayout"
+import TransitionLayout from "@/layouts/TransitionLayout"
 import IndexPageView from "@/pages/IndexPage/IndexPageView"
 import { GetStaticProps } from "next"
 import { serverSideTranslations } from "next-i18next/serverSideTranslations"
+import { ReactElement } from "react"
 
-export default function Index() {
+const Index: NextPageWithLayout = () => {
     return (
         <IndexPageView />
+    )
+}
+
+Index.getLayout = function getLayout(page: ReactElement) {
+    return (
+        <MetaLayout>
+            <NavLayout>
+                <TransitionLayout>
+                    {page}
+                </TransitionLayout>
+            </NavLayout>
+        </MetaLayout>
     )
 }
 
@@ -20,3 +37,5 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
         }
     }
 }
+
+export default Index
