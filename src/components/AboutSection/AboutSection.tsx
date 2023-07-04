@@ -6,7 +6,8 @@ import { useMemo, useState } from 'react';
 import { PulseLoader } from 'react-spinners';
 import { createTime } from '@/utils';
 import CallModal from '../CallModal/CallModal';
-import { Modal } from '@/utils/Modal';
+import { Modal } from '@/utils';
+import Button from '../Button/Button';
 
 const AboutSection = () => {
     const { t } = useTranslation();
@@ -65,13 +66,21 @@ const AboutSection = () => {
                         {t('address')}
                     </a>
                     <div className={styles.info__contacts}>
-                        <a className="info__call btn btn_purple" href="tel:+380635005050">+380635005050</a>
-                        <button
+                        <Button 
+                            className={styles.info__call}
+                            color='purple'
+                            href='tel:+380635005050'
+                            target='_self'
+                        >
+                            +380635005050
+                        </Button>
+                        <Button
                             onClick={handleCallClick}
-                            className="info__callme btn btn_green"
+                            className={styles.info__callme}
+                            color='green'
                         >
                             {t('call-back')}
-                        </button>
+                        </Button>
                     </div>
                 </address>
                 <div className={styles.about__mapWrapper}>

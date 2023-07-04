@@ -1,22 +1,23 @@
-import { IModalOpenParams } from "@/components/ModalWrapper/ModalWrapper";
+import { IModalOpenParams, ModalWrapper } from "@/components/ModalWrapper/ModalWrapper";
+import { Ref } from "react";
 
 export class Modal {
-    _currentGlobalLoader = null; //reference variable
+    static _currentGlobalLoader: Ref<ModalWrapper> = null; //reference variable
 
     // getting reference of bottom wrapper component
-    static registerModal(ref: React.Ref<any>) {
-        (this as any)._currentGlobalLoader = ref;
+    static registerModal(ref: Ref<ModalWrapper>) {
+        this._currentGlobalLoader = ref;
     }
 
     static open({ ...args }: IModalOpenParams) {
-        if ((this as any)._currentGlobalLoader) {
-            ((this as any)._currentGlobalLoader as any).open({ ...args });
+        if (this._currentGlobalLoader instanceof ModalWrapper) {
+            this._currentGlobalLoader.open({ ...args });
         }
     }
 
     static close(index?: number) {
-        if ((this as any)._currentGlobalLoader) {
-            ((this as any)._currentGlobalLoader as any).close(index);
+        if (this._currentGlobalLoader instanceof ModalWrapper) {
+            this._currentGlobalLoader.close(index);
         }
     }
 }

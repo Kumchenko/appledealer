@@ -1,5 +1,5 @@
 export type IFormInputProps = {
     name: string
-}
+} & React.PropsWithChildren
 
-export type IFormInput = {} & IFormInputProps & React.PropsWithChildren & React.ComponentProps<'input'>;
+export type IFormInput = {} & IFormInputProps  & React.ComponentProps<'input'>;

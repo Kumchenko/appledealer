@@ -1,0 +1,21 @@
+@import "../../../styles/variables";
+@import "../../../styles/mixins";
+
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 20px;
+    font-size: 1rem;
+    padding: 0.625em 1.625rem;
+    @include clickable;
+
+    &.green {
+        @include greenClickable;
+    }
+
+    &.purple {
+        @include purpleClickable('fill');
+    }
+}

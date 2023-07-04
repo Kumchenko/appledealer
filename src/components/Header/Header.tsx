@@ -7,7 +7,7 @@ import styles from './sass/Header.module.scss'
 import { useRouter } from 'next/router'
 import { useTranslation } from "next-i18next"
 import { IHeaderProps } from './interfaces'
-import { useDispatch } from '@/store'
+import Button from '../Button/Button'
 import { Modal } from '@/utils'
 import CallModal from '../CallModal/CallModal'
 
@@ -77,7 +77,13 @@ const Header = ({ navPoints, socialPoints }: IHeaderProps) => {
                             {t('address')}
                         </a>
                     </address>
-                    <button onClick={handleCallClick} className={clsx(styles.info__call, 'btn btn_green')}>{t('call-me')}</button>
+                    <Button
+                        onClick={handleCallClick}
+                        className={styles.info__call}
+                        color="green"
+                    >
+                        {t('call-me')}
+                    </Button>
                 </div>
             </div>
             <nav className={clsx(styles.menu, navOpened && styles.opened)}>

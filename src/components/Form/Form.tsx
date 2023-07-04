@@ -1,9 +1,9 @@
-import { FormikProvider, FormikContextType } from "formik";
+import { FormikProvider } from "formik";
 import { IForm } from "./interfaces";
 
-const Form = ({ children, formik, ...args }: IForm) => {
+const Form = ({ children, className, formik }: IForm) => {
     return (
-        <form onSubmit={formik.handleSubmit} {...args}>
+        <form className={className} onSubmit={formik.handleSubmit}>
             <FormikProvider value={formik}>
                 {children}
             </FormikProvider>

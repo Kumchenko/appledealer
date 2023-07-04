@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { idToString } from '@/utils';
 import { useTranslation } from '@/hooks';
+import Button from '../Button/Button';
 
 const ThanksSection = () => {
     const { t } = useTranslation();
@@ -39,18 +40,20 @@ const ThanksSection = () => {
                         height={260}
                         quality={90}
                         priority={true}
-                        src={order?.model ? `/img/iphones/${order.model}.png` : `/img/iphones/empty.png`}
+                        src={order?.model ? `/img/iphones/${order.model}.jpg` : `/img/iphones/empty.jpg`}
                         alt={order?.model}
                     />
                     <p className={styles.card__about}>
                         <span>{t(`repair:${order?.model}`)} — {t(`repair:${order?.component}`)}</span>
                         {t('cost')}: {order?.cost}₴
                     </p>
-                    <Link href="/" legacyBehavior>
-                        <a className={clsx(styles.card__btn, "btn btn_green")}>
-                            {t('to-main')}
-                        </a>
-                    </Link>
+                    <Button 
+                        href="/"
+                        className={styles.card__btn}
+                        color="green"
+                    >
+                        {t('to-main')}
+                    </Button>
                 </Card>
             </div>
         </section>

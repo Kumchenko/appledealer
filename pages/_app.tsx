@@ -14,6 +14,8 @@ import { ModalWrapper } from '@/components/ModalWrapper/ModalWrapper'
 import { Modal } from '@/utils/Modal'
 import { useNextCssRemovalPrevention } from '@madeinhaus/nextjs-page-transition'
 import { scrollToId } from '@/utils'
+import Head from 'next/head'
+import { useTranslation } from 'next-i18next'
 
 config.autoAddCss = false
 
@@ -23,7 +25,7 @@ let modalWrapperRef: any;
 function MyApp({ Component, pageProps, router }: AppProps) {
   const [pagesArr, setPagesArr] = useState([<Component key={router.pathname} {...pageProps} />]);
 
-  // console.log(router)
+  const { t } = useTranslation();
 
   const transitions = useTransition(pagesArr, {
     from: { opacity: 0, x: '100%' },
@@ -46,8 +48,15 @@ function MyApp({ Component, pageProps, router }: AppProps) {
     Modal.registerModal(modalWrapperRef);
   }, []);
 
+  const metaTitle = t(NavPoints
+    .filter(navPoint => navPoint.href.startsWith(router.pathname))
+    .map(navTitle => navTitle.title)[0]) + ' – AppleDealer'
+
   return (
     <Provider store={store}>
+      <Head>
+        {metaTitle ? <title>{metaTitle}</title> : null}
+      </Head>
       <div style={{ overflowX: 'hidden' }}>
         <Header navPoints={NavPoints} socialPoints={SocialPoints} />
         {transitions((style, item) => <a.div style={style}>{item}</a.div>)}

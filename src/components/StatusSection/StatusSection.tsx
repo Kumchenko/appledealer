@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import { useSelector } from "@/store";
 import Head from "next/head";
 import { useTranslation } from "@/hooks";
+import Button from "../Button/Button";
 
 const StatusSection = () => {
     const { t } = useTranslation();
@@ -48,7 +49,7 @@ const StatusSection = () => {
                             layout="fill"
                             priority={true}
                             quality={90}
-                            src={order?.model ? `/img/iphones/${order.model}.png` : `/img/iphones/empty.png`}
+                            src={order?.model ? `/img/iphones/${order.model}.jpg` : `/img/iphones/empty.jpg`}
                             alt={r(order?.model)}
                         />
                     </div>
@@ -70,12 +71,20 @@ const StatusSection = () => {
                         <span>{r(order?.model)} — {r(order?.component)}</span>
                         {t('cost')}: {order?.cost}₴
                     </p>
-                    <Link href="/check" legacyBehavior>
-                        <a className={clsx(styles.card__btn, "btn btn_purple")}>{t('back')}</a>
-                    </Link>
-                    <Link href="/" legacyBehavior>
-                        <a className={clsx(styles.card__btn, "btn btn_green")}>{t('to-main')}</a>
-                    </Link>
+                    <Button
+                        className={styles.card__btn}
+                        color='purple'
+                        href='/check'
+                    >
+                        {t('back')}
+                    </Button>
+                    <Button
+                        className={styles.card__btn}
+                        color='green'
+                        href='/'
+                    >
+                        {t('to-main')}
+                    </Button>
                 </Card>
             </div>
         </section>

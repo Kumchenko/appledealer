@@ -5,14 +5,28 @@ import FormSelect from "../FormSelect/FormSelect"
 import { IFormSelectExtended } from "./interfaces"
 import { useFormikContext } from "formik"
 
-const FormSelectExtended = ({className, label, name, ...args}: IFormSelectExtended) => {
-    const {getFieldMeta} = useFormikContext();
-    const {error, touched} = getFieldMeta(name);
+const FormSelectExtended = ({
+    className,
+    label,
+    name,
+    placeholder,
+    disabled,
+    children
+}: IFormSelectExtended) => {
+    const { getFieldMeta } = useFormikContext();
+    const { error, touched } = getFieldMeta(name);
     return (
         <label className={clsx(styles.form__field, className)}>
             {label}
             <FormError className={styles.form__error} error={error} touched={touched} />
-            <FormSelect className={styles.form__select} name={name} {...args}/>
+            <FormSelect
+                className={styles.form__select}
+                name={name}
+                placeholder={placeholder}
+                disabled={disabled}
+            >
+                {children}
+            </FormSelect>
         </label>
     )
 }

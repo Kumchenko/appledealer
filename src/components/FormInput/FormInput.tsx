@@ -3,7 +3,17 @@ import styles from "./sass/FormInput.module.scss"
 import { IFormInput } from "./interfaces";
 import { useFormikContext } from "formik";
 
-const FormInput = ({ name, className, onChange, onBlur, ...args }: IFormInput) => {
+const FormInput = ({ 
+    name, 
+    className, 
+    onChange, 
+    onBlur, 
+    placeholder, 
+    type, 
+    autoComplete, 
+    required,
+    disabled 
+}: IFormInput) => {
     const { handleBlur, handleChange, getFieldProps } = useFormikContext();
     const { value } = getFieldProps(name);
     return (
@@ -27,7 +37,11 @@ const FormInput = ({ name, className, onChange, onBlur, ...args }: IFormInput) =
                     onBlur(e);
                 }
             }}
-            {...args}
+            placeholder={placeholder}
+            type={type}
+            autoComplete={autoComplete}
+            required={required}
+            disabled={disabled}
         />
     )
 }

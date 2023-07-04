@@ -22,7 +22,14 @@ export interface IServices {
 }
 
 export interface ILoadingStatus {
-    loadingStatus: 'idle' | 'fetching' | 'fetched' | 'error'
+    loadingStatus: LoadingStatus
+}
+
+export enum LoadingStatus {
+    Idle = 'idle',
+    Fetching = 'fetching',
+    Fetched = 'fetched',
+    Error = 'error'
 }
 
 export interface IUseCountdown {

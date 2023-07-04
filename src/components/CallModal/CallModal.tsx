@@ -11,6 +11,8 @@ import { useEffect, useMemo, useRef } from "react";
 import { PulseLoader } from "react-spinners";
 import { postCall } from "@/slices/CallSlice";
 import { Modal } from "@/utils";
+import Button from "../Button/Button";
+import { callInitialValues as initialValues } from "@/constants";
 
 const CallModal = ({ closeModal }: { closeModal: Function }) => {
     const { t } = useTranslation();
@@ -23,12 +25,6 @@ const CallModal = ({ closeModal }: { closeModal: Function }) => {
     useEffect(() => {
         submitRef.current?.focus();
     }, [])
-
-    // Initial form values
-    const initialValues = {
-        name: '',
-        tel: ''
-    }
 
     // Creating Validation schema for form
     const validationSchema = Yup.object({
@@ -102,14 +98,14 @@ const CallModal = ({ closeModal }: { closeModal: Function }) => {
                     autoComplete="on"
                     required
                 />
-                <button
-                    className="btn btn_green"
+                <Button
                     type="submit"
                     disabled={isSubmitting}
                     ref={submitRef}
+                    color="green"
                 >
                     {submitText}
-                </button>
+                </Button>
             </Form>
         </div>
     )

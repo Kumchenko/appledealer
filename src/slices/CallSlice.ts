@@ -1,11 +1,11 @@
 import { _apiBase } from "@/constants";
-import { ILoadingStatus } from "@/interfaces";
+import { LoadingStatus } from "@/interfaces";
 import { fetchJSON } from "@/utils";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { ICallReqData } from "pages/api/interfaces";
 
-const initialState: ILoadingStatus = {
-    loadingStatus: 'idle'
+const initialState = {
+    loadingStatus: LoadingStatus.Idle
 }
 
 const postCall = createAsyncThunk(
@@ -28,9 +28,9 @@ const CallSlice = createSlice({
     reducers: {},
     extraReducers: builder =>
         builder
-            .addCase(postCall.pending, state => { state.loadingStatus = 'fetching' })
-            .addCase(postCall.fulfilled, state => { state.loadingStatus = 'fetched' })
-            .addCase(postCall.rejected, state => { state.loadingStatus = 'error' })
+            .addCase(postCall.pending, state => { state.loadingStatus = LoadingStatus.Fetching })
+            .addCase(postCall.fulfilled, state => { state.loadingStatus = LoadingStatus.Fetched })
+            .addCase(postCall.rejected, state => { state.loadingStatus = LoadingStatus.Error })
 });
 
 const { actions, reducer } = CallSlice;

@@ -15,7 +15,7 @@ const NavLink = ({ point, styles, className }: INavLink) => {
     const [dropped, setDropped] = useState(false);
 
     // Destructuring point params
-    const { href, title, subPoints, ...args } = point;
+    const { href, title, subPoints } = point;
 
     // Handle mouseEnter event
     const handleMouseEnter = (e: React.MouseEvent) => {
@@ -34,7 +34,7 @@ const NavLink = ({ point, styles, className }: INavLink) => {
     return (
         <div onMouseEnter={handleMouseEnter} onMouseLeave={() => setDropped(false)} >
             <Link href={href} legacyBehavior scroll={false}>
-                <a className={clsx(styles?.menu__link, className, pathname === href && styles?.active)} {...args}>
+                <a className={clsx(styles?.menu__link, className, pathname === href && styles?.active)}>
                     {t(title)}
                 </a>
             </Link>

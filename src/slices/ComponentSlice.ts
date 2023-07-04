@@ -1,5 +1,5 @@
 import { _apiBase } from "@/constants";
-import { IComponents, ILoadingStatus } from "@/interfaces";
+import { IComponents, ILoadingStatus, LoadingStatus } from "@/interfaces";
 import { fetchJSON } from "@/utils";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
@@ -7,7 +7,7 @@ interface IInitialState extends IComponents, ILoadingStatus { }
 
 const initialState: IInitialState = {
     components: [],
-    loadingStatus: 'idle'
+    loadingStatus: LoadingStatus.Idle
 }
 
 const fetchComponents = createAsyncThunk(
@@ -29,12 +29,12 @@ const ComponentsSlice = createSlice({
     },
     extraReducers: builder => {
         builder
-            .addCase(fetchComponents.pending, state => { state.loadingStatus = 'fetching' })
+            .addCase(fetchComponents.pending, state => { state.loadingStatus = LoadingStatus.Fetching })
             .addCase(fetchComponents.fulfilled, (state, action) => {
                 state.components = action.payload;
-                state.loadingStatus = 'fetched';
+                state.loadingStatus = LoadingStatus.Fetched;
             })
-            .addCase(fetchComponents.rejected, state => { state.loadingStatus = 'error' })
+            .addCase(fetchComponents.rejected, state => { state.loadingStatus = LoadingStatus.Error })
     }
 })
 

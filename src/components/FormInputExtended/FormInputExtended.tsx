@@ -5,14 +5,35 @@ import FormInput from "../FormInput/FormInput"
 import { IFormInputExtended } from "./interfaces"
 import { useFormikContext } from "formik"
 
-const FormInputExtended = ({className, label, name, ...args}: IFormInputExtended) => {
-    const {getFieldMeta} = useFormikContext();
-    const {error, touched} = getFieldMeta(name);
+const FormInputExtended = ({ 
+    className, 
+    label, 
+    name, 
+    placeholder, 
+    type, 
+    autoComplete, 
+    required,
+    disabled
+}: IFormInputExtended) => {
+    const { getFieldMeta } = useFormikContext();
+    const { error, touched } = getFieldMeta(name);
     return (
         <label className={clsx(styles.form__field, className)}>
             {label}
-            <FormError className={styles.form__error} error={error} touched={touched} />
-            <FormInput className={styles.form__input} name={name} {...args}/>
+            <FormError
+                className={styles.form__error}
+                error={error}
+                touched={touched}
+            />
+            <FormInput
+                className={styles.form__input}
+                name={name}
+                placeholder={placeholder}
+                type={type}
+                autoComplete={autoComplete}
+                required={required}
+                disabled={disabled}
+            />
         </label>
     )
 }

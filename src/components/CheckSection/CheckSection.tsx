@@ -8,11 +8,12 @@ import FormInputExtended from "../FormInputExtended/FormInputExtended";
 import { getOrder } from "@/slices/OrderSlice";
 import { useDispatch } from "@/store";
 import { useRouter } from "next/router";
-import { IOrderReqQuery } from "pages/api/interfaces";
 import { useMemo } from "react";
 import { PulseLoader } from "react-spinners";
 import { useTranslation } from "@/hooks";
 import { Modal } from "@/utils";
+import Button from "../Button/Button";
+import { checkInitialValues as initialValues } from "@/constants";
 
 
 const CheckSection = () => {
@@ -20,11 +21,6 @@ const CheckSection = () => {
     const { t } = useTranslation();
     const router = useRouter();
     const dispatch = useDispatch();
-
-    const initialValues: IOrderReqQuery = {
-        id: '',
-        tel: ''
-    }
 
     const validationSchema = Yup.object({
         id: Yup.string()
@@ -93,13 +89,13 @@ const CheckSection = () => {
                             autoComplete="on"
                             required
                         />
-                        <button
+                        <Button
                             disabled={isSubmitting}
-                            className="btn btn_green"
                             type="submit"
+                            color="green"
                         >
                             {submitText}
-                        </button>
+                        </Button>
                     </Form>
                 </Card>
             </div>

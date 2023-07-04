@@ -1,6 +1,5 @@
-export interface IFormErrorProps {
+export interface IFormError {
     error: string | undefined,
     touched: boolean | undefined
+    className?: string
 }
-
-export interface IFormError extends IFormErrorProps, React.HTMLProps<HTMLSpanElement> {}

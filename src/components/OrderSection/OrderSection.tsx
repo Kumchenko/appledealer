@@ -4,7 +4,7 @@ import styles from "./sass/Order.module.scss"
 import clsx from "clsx"
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import { IModels } from "@/interfaces"
+import { IModels, LoadingStatus } from "@/interfaces"
 import { fetchComponents, clearComponents } from "@/slices/ComponentSlice"
 import { fetchServices, clearServices } from "@/slices/ServicesSlice"
 import { useDispatch, useSelector } from "@/store"
@@ -16,10 +16,12 @@ import FormSelectExtended from "../FormSelectExtended/FormSelectExtended"
 import { useTransition, a } from "@react-spring/web"
 import { PulseLoader } from "react-spinners"
 import { postOrder } from "@/slices/OrderSlice"
-import { IOrderReqBody } from "pages/api/interfaces"
+import { orderInitialValues as initialValues } from "@/constants"
 import { useRouter } from "next/router"
 import { useTranslation, useUpdate } from "@/hooks"
 import { Modal } from "@/utils"
+import Button from "../Button/Button"
+import emptyPhone from 'public/img/iphones/empty.jpg'
 
 
 const OrderSection = ({ models }: IModels) => {
@@ -35,17 +37,6 @@ const OrderSection = ({ models }: IModels) => {
         services,
         loadingStatus: servicesLoadingStatus
     } = useSelector(({ servicesSlice }) => servicesSlice)
-
-    // Initial form values
-    const initialValues: IOrderReqBody = {
-        model: '',
-        name: '',
-        surname: '',
-        tel: '',
-        email: '',
-        component: '',
-        quality: ''
-    };
 
     // Validation Schema for form
     const validationSchema = Yup.object({
@@ -105,17 +96,21 @@ const OrderSection = ({ models }: IModels) => {
     // Prepare Component selector Placeholder value
     const componentPlaceholder = useMemo(() => {
         switch (componentsLoadingStatus) {
-            case 'idle': {
+            case LoadingStatus.Idle: {
                 return t('order:first-select-model')
             }
-            case 'error': {
+            case LoadingStatus.Error: {
                 return t('order:no-components')
             }
-            case 'fetching': {
+            case LoadingStatus.Fetching: {
                 return t('loading')
             }
-            case 'fetched': {
+            case LoadingStatus.Fetched: {
                 return t('order:select-component')
+            }
+            default: {
+                const exhaustiveCheck: never = componentsLoadingStatus;
+                return t('errors.occured')
             }
         }
     }, [componentsLoadingStatus, t]);
@@ -123,17 +118,21 @@ const OrderSection = ({ models }: IModels) => {
     // Prepare Quality selector Placeholder value
     const qualityPlaceholder = useMemo(() => {
         switch (servicesLoadingStatus) {
-            case 'idle': {
+            case LoadingStatus.Idle: {
                 return t('order:first-select-component')
             }
-            case 'error': {
+            case LoadingStatus.Error: {
                 return t('order.no-qualities')
             }
-            case 'fetching': {
+            case LoadingStatus.Fetching: {
                 return t('loading')
             }
-            case 'fetched': {
+            case LoadingStatus.Fetched: {
                 return t('order:select-quality')
+            }
+            default: {
+                const exhaustiveCheck: never = servicesLoadingStatus;
+                return t('errors.occured')
             }
         }
     }, [servicesLoadingStatus, t]);
@@ -216,8 +215,7 @@ const OrderSection = ({ models }: IModels) => {
                 <Form formik={formik} className={clsx(styles.form, "grid")}>
                     <Card title={t('order:model')} className={styles.form__card}>
                         <FormSelect
-                            style={{ marginBottom: 10 }}
-                            className={styles.form__field}
+                            className={clsx(styles.form__field, styles.form__field_model)}
                             name="model"
                             placeholder={modelPlaceholder}
                         >
@@ -228,7 +226,7 @@ const OrderSection = ({ models }: IModels) => {
                                 <a.div style={style} className={styles.form__animated}>
                                     <Image
                                         className={styles.form__img}
-                                        src={item && !(errors.model) ? `/img/iphones/${item}.png` : `/img/iphones/empty.png`}
+                                        src={item && !(errors.model) ? `/img/iphones/${item}.jpg` : emptyPhone}
                                         layout="fill"
                                         quality={90}
                                         priority={true}
@@ -296,13 +294,14 @@ const OrderSection = ({ models }: IModels) => {
                         >
                             {qualityElems}
                         </FormSelectExtended>
-                        <button
+                        <Button
                             disabled={isSubmitting || !(values.quality)}
-                            className={clsx(styles.form__btn, "btn btn_green")}
+                            className={styles.form__btn}
                             type="submit"
+                            color="green"
                         >
                             {submitText}
-                        </button>
+                        </Button>
                     </Card>
                 </Form>
             </div>
