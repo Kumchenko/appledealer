@@ -1,11 +1,11 @@
 import { _apiBase } from "@/constants";
 import { ILoadingStatus, LoadingStatus } from "@/interfaces";
-import { fetchJSON } from "@/utils";
+import { fetchJSON, idToNumber } from "@/utils";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { IOrderReqQuery, IOrderReqBody, IOrderResData } from "pages/api/interfaces";
+import { IOrderReqQuery, IOrderReqBody, IOrderData } from "pages/api/interfaces";
 
 interface IInitialState extends ILoadingStatus {
-    order: IOrderResData | null
+    order: IOrderData | null
 }
 
 const initialState: IInitialState = {
@@ -16,7 +16,7 @@ const initialState: IInitialState = {
 const getOrder = createAsyncThunk(
     'order/getOrder',
     async ({ id, tel }: IOrderReqQuery) => {
-        const order = await fetchJSON(`${_apiBase}/api/order?id=${id}&tel=${encodeURIComponent(tel)}`);
+        const order = await fetchJSON(`${_apiBase}/api/order/${idToNumber(id)}/?tel=${encodeURIComponent(tel)}`);
         if (order) {
             return order;
         } else {

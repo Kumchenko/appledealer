@@ -12,12 +12,8 @@ const initialState: IInitialState = {
 
 const fetchServices = createAsyncThunk(
     'services/fetchServices',
-    async ({ model, component }: { model: string, component: string }) => {
-        return await fetchJSON(`${_apiBase}/api/services`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ model, component })
-        });
+    async ({ modelId, componentId }: { modelId: string, componentId: string }) => {
+        return await fetchJSON(`${_apiBase}/api/service?modelId=${modelId}&componentId=${componentId}`);
     }
 );
 

@@ -1,10 +1,10 @@
 import OrderSection from "@/components/OrderSection/OrderSection"
 import { IModels } from "@/interfaces"
 
-export default function OrderPageView({models}: IModels) {
+export default function OrderPageView({modelIds}: IModels) {
     return (
         <>
-            <OrderSection models={models}/>
+            <OrderSection modelIds={modelIds}/>
         </>
     )
 }

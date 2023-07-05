@@ -8,11 +8,5 @@ export function idToString(id: number): string {
 }
 
 export function idToNumber(id: string): number {
-    const res = id.split('');
-    for (let i = 0; i < id.length; i++) {
-        if (res[0] === '0') {
-            res.shift();
-        }
-    }
-    return parseInt(res.join(''), 10);
+    return parseInt(id, 10);
 }

@@ -1,13 +1,13 @@
 import { ICallReqData, IOrderReqBody, IOrderReqQuery } from "pages/api/interfaces";
 
 export const orderInitialValues: IOrderReqBody = {
-    model: '',
+    modelId: '',
     name: '',
     surname: '',
     tel: '',
     email: '',
-    component: '',
-    quality: ''
+    componentId: '',
+    qualityId: ''
 };
 
 export const checkInitialValues: IOrderReqQuery = {

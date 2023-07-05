@@ -12,12 +12,8 @@ const initialState: IInitialState = {
 
 const fetchComponents = createAsyncThunk(
     'components/fetchComponents',
-    async (model: string) => {
-        return await fetchJSON(`${_apiBase}/api/components`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ model })
-        });
+    async (modelId: string) => {
+        return await fetchJSON(`${_apiBase}/api/component/${modelId}`);
     }
 );
 

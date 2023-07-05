@@ -12,20 +12,19 @@ export type AppPropsWithLayout = AppProps & {
 }
 
 export interface IModels {
-    models: Model[];
+    modelIds: string[];
 }
 
 export interface IComponents {
-    components: Component[];
+    components: string[];
 }
 
 export interface IService {
     id: number;
+    modelId: string;
+    componentId: string;
+    qualityId: string;
     cost: number;
-    quality: {
-        id: string;
-        name: string;
-    }
 }
 
 export interface IServices {

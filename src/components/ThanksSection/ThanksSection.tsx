@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import clsx from 'clsx';
 import styles from './sass/Thanks.module.scss'
 import Card from '../Card/Card';
@@ -40,11 +39,11 @@ const ThanksSection = () => {
                         height={260}
                         quality={90}
                         priority={true}
-                        src={order?.model ? `/img/iphones/${order.model}.jpg` : `/img/iphones/empty.jpg`}
-                        alt={order?.model}
+                        src={order?.modelId ? `/img/iphones/${order.modelId}.jpg` : `/img/iphones/empty.jpg`}
+                        alt={order?.modelId}
                     />
                     <p className={styles.card__about}>
-                        <span>{t(`repair:${order?.model}`)} — {t(`repair:${order?.component}`)}</span>
+                        <span>{t(`repair:${order?.modelId}`)} — {t(`repair:${order?.componentId}`)}</span>
                         {t('cost')}: {order?.cost}₴
                     </p>
                     <Button 

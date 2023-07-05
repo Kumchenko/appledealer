@@ -24,7 +24,7 @@ import Button from "../Button/Button"
 import emptyPhone from 'public/img/iphones/empty.jpg'
 
 
-const OrderSection = ({ models }: IModels) => {
+const OrderSection = ({ modelIds }: IModels) => {
     const { t } = useTranslation();
     const router = useRouter();
     const dispatch = useDispatch();
@@ -40,8 +40,8 @@ const OrderSection = ({ models }: IModels) => {
 
     // Validation Schema for form
     const validationSchema = Yup.object({
-        model: Yup.string()
-            .oneOf(models.map(model => model.id), t('errors.occured'))
+        modelId: Yup.string()
+            .oneOf(modelIds, t('errors.occured'))
             .required(t('errors.necessary')),
         name: Yup.string()
             .required(t('errors.necessary'))
@@ -57,11 +57,11 @@ const OrderSection = ({ models }: IModels) => {
         email: Yup.string()
             .matches(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/, t('errors.incorrect'))
             .required(t('errors.necessary')),
-        component: Yup.string()
-            .oneOf(components.map(component => component.id), t('errors.occured'))
+        componentId: Yup.string()
+            .oneOf(components, t('errors.occured'))
             .required(t('errors.necessary')),
-        quality: Yup.string()
-            .oneOf(services.map(service => service.quality.id), t('errors.occured'))
+        qualityId: Yup.string()
+            .oneOf(services.map(service => service.qualityId), t('errors.occured'))
             .required(t('errors.necessary'))
     });
 
@@ -86,12 +86,12 @@ const OrderSection = ({ models }: IModels) => {
 
     // Prepate Model selector Placeholder value
     const modelPlaceholder = useMemo(() => {
-        if (models.length > 0) {
+        if (modelIds.length > 0) {
             return t('order:select-model')
         } else {
             return t('order:no-models')
         }
-    }, [models.length, t]);
+    }, [modelIds.length, t]);
 
     // Prepare Component selector Placeholder value
     const componentPlaceholder = useMemo(() => {
@@ -122,7 +122,7 @@ const OrderSection = ({ models }: IModels) => {
                 return t('order:first-select-component')
             }
             case LoadingStatus.Error: {
-                return t('order.no-qualities')
+                return t('order:no-qualities')
             }
             case LoadingStatus.Fetching: {
                 return t('loading')
@@ -138,53 +138,53 @@ const OrderSection = ({ models }: IModels) => {
     }, [servicesLoadingStatus, t]);
 
     // Preparing options for select elements
-    const modelElems = useMemo(() => models
-        .map(({ id }) => <option key={id} value={id}>{t(`repair:${id}`)}</option>)
+    const modelElems = useMemo(() => modelIds
+        .map(modelId => <option key={modelId} value={modelId}>{t(`repair:${modelId}`)}</option>)
         .sort((a, b) => a.props.children.localeCompare(b.props.children)),
-        [models, t]);
+        [modelIds, t]);
     const componentElems = useMemo(() => components
-        .map(({ id }) => <option key={id} value={id}>{t(`repair:${id}`)}</option>)
+        .map(componentId => <option key={componentId} value={componentId}>{t(`repair:${componentId}`)}</option>)
         .sort((a, b) => a.props.children.localeCompare(b.props.children)),
         [components, t]);
     const qualityElems = useMemo(() => services
-        .map(({ quality: { id } }) => <option key={id} value={id}>{t(`repair:${id}`)}</option>)
+        .map(({ qualityId }) => <option key={qualityId} value={qualityId}>{t(`repair:${qualityId}`)}</option>)
         .sort((a, b) => a.props.children.localeCompare(b.props.children)),
         [services, t]);
 
     // Download available components for selected model
-    const getComponents = (model: string) => {
-        dispatch(fetchComponents(model))
+    const getComponents = (modelId: string) => {
+        dispatch(fetchComponents(modelId))
     }
 
     // Download available services for selected model and component
-    const getServices = (model: string, component: string) => {
-        dispatch(fetchServices({ model: model, component: component }));
+    const getServices = (modelId: string, componentId: string) => {
+        dispatch(fetchServices({ modelId, componentId }));
     }
 
     // Catching changes of model
     useUpdate(() => {
-        setModelList([values.model]);
-        formik.setFieldValue('component', initialValues.component);
-        formik.setFieldValue('quality', initialValues.quality);
+        setModelList([values.modelId]);
+        formik.setFieldValue('componentId', initialValues.componentId);
+        formik.setFieldValue('qualityId', initialValues.qualityId);
         dispatch(clearComponents());
-        if (values.model) {
-            getComponents(values.model);
+        if (values.modelId) {
+            getComponents(values.modelId);
         }
-    }, [values.model])
+    }, [values.modelId])
 
     // Catching changes of component
     useUpdate(() => {
-        const { model, component } = values;
-        formik.setFieldValue('quality', initialValues.quality);
+        const { modelId, componentId } = values;
+        formik.setFieldValue('qualityId', initialValues.qualityId);
         dispatch(clearServices());
-        if (model && component) {
-            getServices(model, component);
+        if (modelId && componentId) {
+            getServices(modelId, componentId);
         }
-    }, [values.component])
+    }, [values.componentId])
 
     // Prepare text for submit button
     const submitText = useMemo(() => {
-        const service = services.find(service => service.quality.id === values.quality);
+        const service = services.find(service => service.qualityId === values.qualityId);
         if (isSubmitting) {
             return <PulseLoader
                 color={styles.white}
@@ -197,10 +197,10 @@ const OrderSection = ({ models }: IModels) => {
         } else {
             return t('order:submit');
         }
-    }, [isSubmitting, services, t, values.quality]);
+    }, [isSubmitting, services, t, values.qualityId]);
 
     // Transition implementation
-    const [modelList, setModelList] = useState([initialValues.model]);
+    const [modelList, setModelList] = useState([initialValues.modelId]);
     const transitions = useTransition(modelList, {
         from: { opacity: 0 },
         enter: { opacity: 1 },
@@ -216,7 +216,7 @@ const OrderSection = ({ models }: IModels) => {
                     <Card title={t('order:model')} className={styles.form__card}>
                         <FormSelect
                             className={clsx(styles.form__field, styles.form__field_model)}
-                            name="model"
+                            name="modelId"
                             placeholder={modelPlaceholder}
                         >
                             {modelElems}
@@ -226,7 +226,7 @@ const OrderSection = ({ models }: IModels) => {
                                 <a.div style={style} className={styles.form__animated}>
                                     <Image
                                         className={styles.form__img}
-                                        src={item && !(errors.model) ? `/img/iphones/${item}.jpg` : emptyPhone}
+                                        src={item && !(errors.modelId) ? `/img/iphones/${item}.jpg` : emptyPhone}
                                         layout="fill"
                                         quality={90}
                                         priority={true}
@@ -279,23 +279,23 @@ const OrderSection = ({ models }: IModels) => {
                         <FormSelectExtended
                             className={styles.form__field}
                             label={t('component')}
-                            name="component"
+                            name="componentId"
                             placeholder={componentPlaceholder}
-                            disabled={!(values.model)}
+                            disabled={!(values.modelId)}
                         >
                             {componentElems}
                         </FormSelectExtended>
                         <FormSelectExtended
                             className={styles.form__field}
                             label={t('quality')}
-                            name="quality"
+                            name="qualityId"
                             placeholder={qualityPlaceholder}
-                            disabled={!(values.component)}
+                            disabled={!(values.componentId)}
                         >
                             {qualityElems}
                         </FormSelectExtended>
                         <Button
-                            disabled={isSubmitting || !(values.quality)}
+                            disabled={isSubmitting || !(values.qualityId)}
                             className={styles.form__btn}
                             type="submit"
                             color="green"
