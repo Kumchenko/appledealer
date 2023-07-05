@@ -1,4 +1,3 @@
-import { Component, Model } from "@prisma/client";
 import { NextPage } from "next";
 import { AppProps } from "next/app";
 import { ReactElement, ReactNode } from "react";
