@@ -1,8 +1,8 @@
 import { IFormError } from "./interfaces"
 
-const FormError = ({error, touched, ...args}: IFormError) => {
+const FormError = ({ error, touched, className }: IFormError) => {
     return (
-        (error && touched) ? <span {...args}>{error}</span> : null
+        (error && touched) ? <span className={className}>{error}</span> : null
     )
 }
 

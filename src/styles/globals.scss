@@ -36,6 +36,10 @@ body {
     margin: 0 auto;
 }
 
+section {
+    padding-top: 4.625rem;
+}
+
 h1,
 h2,
 h3,
@@ -93,31 +97,6 @@ input {
 
 address {
     font-style: normal;
-}
-
-// ---- Design Basic Styles ----
-
-section {
-    padding-top: 4.625rem;
-}
-
-.btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: none;
-    border-radius: 20px;
-    font-size: 1rem;
-    padding: 0.625em 1.625rem;
-    @include clickable;
-
-    &_green {
-        @include greenClickable;
-    }
-
-    &_purple {
-        @include purpleClickable('fill');
-    }
 }
 
 @import "../styles/media";

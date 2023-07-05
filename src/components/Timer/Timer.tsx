@@ -51,10 +51,10 @@ const Timer = ({ date, ended }: ITimer) => {
     </div>);
 
     const Load = <PulseLoader
-        cssOverride={{ display: 'block' }}
+        cssOverride={{ display: 'flex' }}
         color={styles.purple}
         className={clsx(styles.loader, styles.timerLocation)}
-        loading={loading}
+        loading={true}
         aria-label="Loading pulseloader" />
 
     const Complete = <p className={clsx(styles.completed, styles.timerLocation)}>{ended}</p>

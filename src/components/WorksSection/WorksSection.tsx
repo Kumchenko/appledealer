@@ -23,7 +23,9 @@ const WorksSection = () => {
                 <Slide
                     title={slidesTranslation?.[id]?.title}
                     desc={slidesTranslation?.[id]?.desc}
-                    {...slide} />
+                    src={slide.src}
+                    href={slide.href}
+                 />
             </SwiperSlide>))
     }, [w]);
 

@@ -13,7 +13,7 @@ const HowSection = () => {
         const actions: string[] | null = h('actions', { returnObjects: true, defaultValue: null });
         return actions?.map((action, id) => (
             <li key={id} className={styles.how__item}>
-                <span className={styles["how__iconWrapper"]}>
+                <span className={styles.how__iconWrapper}>
                     <FontAwesomeIcon className={styles.how__pic} icon={actionIcons[id] || faCircleExclamation} />
                 </span>
                 <p className={styles.how__text}>{action}</p>

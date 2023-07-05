@@ -50,7 +50,7 @@ export class ModalWrapper extends Component<{}, IState> {
         setTimeout(() => {
             modals.splice(index, 1);
             this.setState({ modals })
-        }, 1000);
+        }, 400);
     }
 
     render() {
@@ -62,10 +62,11 @@ export class ModalWrapper extends Component<{}, IState> {
                     onKeyDown={e => e.key === 'Escape' && this.close()} 
                     className={clsx(styles.modalWrapper, isWrapperVisible && styles.opened)}
                 >
-                    {modals.map(({ closeModal, ...modal }: IModalOpenParams, index: number) => (
+                    {modals.map(({ closeModal, title, ...modal }: IModalOpenParams, index: number) => (
                         <ModalView
                             key={modal.id + "" + index}
                             closeModal={() => this.close(index)}
+                            title={title}
                             {...modal}
                         />
                     ))}

@@ -1,6 +1,5 @@
 import clsx from "clsx";
 import Card from "../Card/Card";
-import Link from "next/link";
 import Image from "next/image";
 import styles from "./sass/Status.module.scss";
 import { idToString } from "@/utils";
@@ -9,6 +8,8 @@ import { useRouter } from "next/router";
 import { useSelector } from "@/store";
 import Head from "next/head";
 import { useTranslation } from "@/hooks";
+import Button from "../Button/Button";
+import emptyPhone from 'public/img/iphones/empty.jpg';
 
 const StatusSection = () => {
     const { t } = useTranslation();
@@ -48,8 +49,8 @@ const StatusSection = () => {
                             layout="fill"
                             priority={true}
                             quality={90}
-                            src={order?.model ? `/img/iphones/${order.model}.png` : `/img/iphones/empty.png`}
-                            alt={r(order?.model)}
+                            src={order?.modelId ? `/img/iphones/${order.modelId}.jpg` : emptyPhone}
+                            alt={r(order?.modelId)}
                         />
                     </div>
                     <ul className={styles.card__list}>
@@ -67,15 +68,23 @@ const StatusSection = () => {
                         })}
                     </ul>
                     <p className={styles.card__about}>
-                        <span>{r(order?.model)} — {r(order?.component)}</span>
+                        <span>{r(order?.modelId)} — {r(order?.componentId)}</span>
                         {t('cost')}: {order?.cost}₴
                     </p>
-                    <Link href="/check" legacyBehavior>
-                        <a className={clsx(styles.card__btn, "btn btn_purple")}>{t('back')}</a>
-                    </Link>
-                    <Link href="/" legacyBehavior>
-                        <a className={clsx(styles.card__btn, "btn btn_green")}>{t('to-main')}</a>
-                    </Link>
+                    <Button
+                        className={styles.card__btn}
+                        color='purple'
+                        href='/check'
+                    >
+                        {t('back')}
+                    </Button>
+                    <Button
+                        className={styles.card__btn}
+                        color='green'
+                        href='/'
+                    >
+                        {t('to-main')}
+                    </Button>
                 </Card>
             </div>
         </section>

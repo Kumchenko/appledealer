@@ -35,8 +35,14 @@
         margin: auto 0 0;
     }
 
-    .form__field:not(:first-of-type) {
-        margin-top: 18px;
+    .form__field {
+        &_model {
+            margin-bottom: 10px;
+        }
+        
+        &:not(:first-of-type) {
+            margin-top: 18px;
+        }
     }
 
     .form__card {

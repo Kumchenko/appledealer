@@ -1,20 +1,29 @@
-import { Component, Model } from "@prisma/client";
+import { NextPage } from "next";
+import { AppProps } from "next/app";
+import { ReactElement, ReactNode } from "react";
+
+export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+    getLayout?: (page: ReactElement) => ReactNode
+}
+
+export type AppPropsWithLayout = AppProps & {
+    Component: NextPageWithLayout
+}
 
 export interface IModels {
-    models: Model[];
+    modelIds: string[];
 }
 
 export interface IComponents {
-    components: Component[];
+    components: string[];
 }
 
 export interface IService {
     id: number;
+    modelId: string;
+    componentId: string;
+    qualityId: string;
     cost: number;
-    quality: {
-        id: string;
-        name: string;
-    }
 }
 
 export interface IServices {
@@ -22,7 +31,14 @@ export interface IServices {
 }
 
 export interface ILoadingStatus {
-    loadingStatus: 'idle' | 'fetching' | 'fetched' | 'error'
+    loadingStatus: LoadingStatus
+}
+
+export enum LoadingStatus {
+    Idle = 'idle',
+    Fetching = 'fetching',
+    Fetched = 'fetched',
+    Error = 'error'
 }
 
 export interface IUseCountdown {

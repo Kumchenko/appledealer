@@ -1,22 +1,22 @@
 import { _apiBase } from "@/constants";
-import { ILoadingStatus } from "@/interfaces";
-import { fetchJSON } from "@/utils";
+import { ILoadingStatus, LoadingStatus } from "@/interfaces";
+import { fetchJSON, idToNumber } from "@/utils";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { IOrderReqQuery, IOrderReqBody, IOrderResData } from "pages/api/interfaces";
+import { IOrderReqQuery, IOrderReqBody, IOrderData } from "pages/api/interfaces";
 
 interface IInitialState extends ILoadingStatus {
-    order: IOrderResData | null
+    order: IOrderData | null
 }
 
 const initialState: IInitialState = {
     order: null,
-    loadingStatus: 'idle'
+    loadingStatus: LoadingStatus.Idle
 }
 
 const getOrder = createAsyncThunk(
     'order/getOrder',
     async ({ id, tel }: IOrderReqQuery) => {
-        const order = await fetchJSON(`${_apiBase}/api/order?id=${id}&tel=${encodeURIComponent(tel)}`);
+        const order = await fetchJSON(`${_apiBase}/api/order/${idToNumber(id)}/?tel=${encodeURIComponent(tel)}`);
         if (order) {
             return order;
         } else {
@@ -48,18 +48,18 @@ const OrderSlice = createSlice({
     },
     extraReducers: builder =>
         builder
-            .addCase(postOrder.pending, state => { state.loadingStatus = 'fetching' })
+            .addCase(postOrder.pending, state => { state.loadingStatus = LoadingStatus.Fetching })
             .addCase(postOrder.fulfilled, (state, action) => {
                 state.order = action.payload;
-                state.loadingStatus = 'fetched';
+                state.loadingStatus = LoadingStatus.Fetched;
             })
-            .addCase(postOrder.rejected, state => { state.loadingStatus = 'error' })
-            .addCase(getOrder.pending, state => { state.loadingStatus = 'fetching' })
+            .addCase(postOrder.rejected, state => { state.loadingStatus = LoadingStatus.Error })
+            .addCase(getOrder.pending, state => { state.loadingStatus = LoadingStatus.Fetching })
             .addCase(getOrder.fulfilled, (state, action) => {
                 state.order = action.payload;
-                state.loadingStatus = 'fetched';
+                state.loadingStatus = LoadingStatus.Fetched;
             })
-            .addCase(getOrder.rejected, state => { state.loadingStatus = 'error' })
+            .addCase(getOrder.rejected, state => { state.loadingStatus = LoadingStatus.Error })
 })
 
 const { actions, reducer } = OrderSlice;

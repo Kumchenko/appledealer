@@ -4,6 +4,7 @@ import Timer from '../Timer/Timer'
 import { useMemo } from 'react'
 import { useTranslation } from '@/hooks';
 import Link from 'next/link';
+import Button from '../Button/Button';
 
 const DiscountSection = () => {
     const { t: o } = useTranslation('index', { keyPrefix: 'offer' });
@@ -26,9 +27,13 @@ const DiscountSection = () => {
                 <p className={styles.discount__desc}>
                     {o('desc')}: {r('display')}
                 </p>
-                <Link href="/order" passHref>
-                    <a className={clsx(styles.discount__order, "btn btn_green")}>{o('submit')}</a>
-                </Link>
+                <Button
+                    className={styles.discount__order}
+                    color='green'
+                    href='/order'
+                >
+                    {o('submit')}
+                </Button>
                 <Timer date={time} ended={o('ended')} />
             </div>
         </section>

@@ -1,5 +1,5 @@
 import { _apiBase } from "@/constants";
-import { ILoadingStatus, IServices } from "@/interfaces";
+import { ILoadingStatus, IServices, LoadingStatus } from "@/interfaces";
 import { fetchJSON } from "@/utils";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
@@ -7,17 +7,13 @@ interface IInitialState extends ILoadingStatus, IServices { }
 
 const initialState: IInitialState = {
     services: [],
-    loadingStatus: 'idle'
+    loadingStatus: LoadingStatus.Idle
 }
 
 const fetchServices = createAsyncThunk(
     'services/fetchServices',
-    async ({ model, component }: { model: string, component: string }) => {
-        return await fetchJSON(`${_apiBase}/api/services`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ model, component })
-        });
+    async ({ modelId, componentId }: { modelId: string, componentId: string }) => {
+        return await fetchJSON(`${_apiBase}/api/service?modelId=${modelId}&componentId=${componentId}`);
     }
 );
 
@@ -29,12 +25,12 @@ const ServicesSlice = createSlice({
     },
     extraReducers: builder => {
         builder
-            .addCase(fetchServices.pending, state => { state.loadingStatus = 'fetching' })
+            .addCase(fetchServices.pending, state => { state.loadingStatus = LoadingStatus.Fetching })
             .addCase(fetchServices.fulfilled, (state, action) => {
                 state.services = action.payload;
-                state.loadingStatus = 'fetched';
+                state.loadingStatus = LoadingStatus.Fetched;
             })
-            .addCase(fetchServices.rejected, state => { state.loadingStatus = 'error' })
+            .addCase(fetchServices.rejected, state => { state.loadingStatus = LoadingStatus.Error })
     }
 })
 

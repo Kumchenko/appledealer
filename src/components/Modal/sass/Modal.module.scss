@@ -3,6 +3,8 @@
 
 .modal {
     box-shadow: 0 0 15px 5px #00000039;
+    transition: all $transitionTime $transitionFunc;
+    opacity: 0;
 
     .title_only {
         margin-bottom: 0;
@@ -16,5 +18,9 @@
         background-color: transparent;
         border: none;   
         @include purpleClickable('transparent');
+    }
+
+    &.visible {
+        opacity: 1;
     }
 }
