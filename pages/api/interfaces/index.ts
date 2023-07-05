@@ -1,5 +1,3 @@
-import { Operation } from "@prisma/client";
-
 export interface IOrderReqQuery {
     [key: string]: string | string[]
     id: string;
@@ -21,7 +19,13 @@ export interface IOrderData extends IOrderReqBody {
     serviceId: number;
     created: Date;
     cost: number;
-    operations: Operation[] | null
+    operations?: {
+        id: number
+        dateTime: Date
+        status: string
+        orderId: number
+        employeeId: number
+    }[]
 }
 
 export interface IServiceReqData {
