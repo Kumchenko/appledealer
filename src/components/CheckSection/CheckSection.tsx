@@ -11,7 +11,6 @@ import { useRouter } from "next/router";
 import { useMemo } from "react";
 import { PulseLoader } from "react-spinners";
 import { useTranslation } from "@/hooks";
-import { Modal } from "@/utils";
 import Button from "../Button/Button";
 import { checkInitialValues as initialValues } from "@/constants";
 
@@ -42,9 +41,6 @@ const CheckSection = () => {
                 })
                 .catch(() => {
                     formik.resetForm();
-                    Modal.open({
-                        title: t('errors.occured')
-                    })
                 })
         }
     });
@@ -80,13 +76,14 @@ const CheckSection = () => {
                             required
                         />
                         <FormInputExtended
+                            mask="+380999999999"
                             label={c('tel-num')}
                             className={styles.form__field}
                             name="tel"
                             type="tel"
                             pattern="[+]{1}38[0]{1}[0-9]{9}"
-                            placeholder="+38(___)-___-__-__"
-                            autoComplete="on"
+                            placeholder="+380"
+                            autoComplete="tel"
                             required
                         />
                         <Button

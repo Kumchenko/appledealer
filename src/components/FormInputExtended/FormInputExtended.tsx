@@ -5,15 +5,19 @@ import FormInput from "../FormInput/FormInput"
 import { IFormInputExtended } from "./interfaces"
 import { useFormikContext } from "formik"
 
-const FormInputExtended = ({ 
-    className, 
-    label, 
-    name, 
-    placeholder, 
-    type, 
-    autoComplete, 
+const FormInputExtended = ({
+    mask = "",
+    className,
+    label,
+    name,
+    onChange,
+    onBlur,
+    placeholder,
+    type,
+    autoComplete,
     required,
-    disabled
+    disabled,
+    pattern
 }: IFormInputExtended) => {
     const { getFieldMeta } = useFormikContext();
     const { error, touched } = getFieldMeta(name);
@@ -26,13 +30,17 @@ const FormInputExtended = ({
                 touched={touched}
             />
             <FormInput
-                className={styles.form__input}
                 name={name}
+                className={styles.form__input}
+                mask={mask}
+                onChange={onChange}
+                onBlur={onBlur}
                 placeholder={placeholder}
                 type={type}
                 autoComplete={autoComplete}
                 required={required}
                 disabled={disabled}
+                pattern={pattern}
             />
         </label>
     )

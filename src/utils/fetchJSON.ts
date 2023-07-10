@@ -3,5 +3,5 @@ export async function fetchJSON(...args: Parameters<typeof fetch>) {
     if (response.ok) {
         return await response.json();
     }
-    return Promise.reject(response);
+    throw await response.json();
 }

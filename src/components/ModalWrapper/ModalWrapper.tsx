@@ -1,5 +1,5 @@
 import { Component } from "react";
-import ModalView, { IModalProps } from "../Modal/Modal";
+import ModalView, { IModalProps } from "../ModalView/ModalView";
 import styles from "./sass/ModalWrapper.module.scss";
 import clsx from "clsx";
 
@@ -64,7 +64,7 @@ export class ModalWrapper extends Component<{}, IState> {
                 >
                     {modals.map(({ closeModal, title, ...modal }: IModalOpenParams, index: number) => (
                         <ModalView
-                            key={modal.id + "" + index}
+                            key={modal.id}
                             closeModal={() => this.close(index)}
                             title={title}
                             {...modal}

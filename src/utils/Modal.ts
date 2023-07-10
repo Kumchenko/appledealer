@@ -1,5 +1,5 @@
 import { IModalOpenParams, ModalWrapper } from "@/components/ModalWrapper/ModalWrapper";
-import { Ref } from "react";
+import { ModalType } from "@/constants";
 
 export class Modal {
     static _currentGlobalLoader: ModalWrapper | null = null; //reference variable
@@ -12,6 +12,13 @@ export class Modal {
     static open({ ...args }: IModalOpenParams) {
         if (this._currentGlobalLoader instanceof ModalWrapper) {
             this._currentGlobalLoader.open({ ...args });
+        }
+    }
+
+    // Display i18n Error type Modal: t('errors.i18n_key') 
+    static error(i18n_key: string) {
+        if (this._currentGlobalLoader instanceof ModalWrapper) {
+            this._currentGlobalLoader.open({ type: ModalType.Error, title: i18n_key || 'occured' });
         }
     }
 

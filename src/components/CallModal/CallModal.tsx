@@ -13,6 +13,7 @@ import { postCall } from "@/slices/CallSlice";
 import { Modal } from "@/utils";
 import Button from "../Button/Button";
 import { callInitialValues as initialValues } from "@/constants";
+import { IApiError } from "@/interfaces";
 
 const CallModal = ({ closeModal }: { closeModal: Function }) => {
     const { t } = useTranslation();
@@ -51,9 +52,7 @@ const CallModal = ({ closeModal }: { closeModal: Function }) => {
                     autoClose: 3000,
                     title: t('call-me-success')
                 }))
-                .catch(() => Modal.open({
-                    title: t('errors.occured')
-                }))
+                .catch(() => {})
         }
     });
     const { isSubmitting } = formik;

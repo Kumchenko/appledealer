@@ -11,6 +11,7 @@ const FormSelectExtended = ({
     name,
     placeholder,
     disabled,
+    required,
     children
 }: IFormSelectExtended) => {
     const { getFieldMeta } = useFormikContext();
@@ -24,6 +25,7 @@ const FormSelectExtended = ({
                 name={name}
                 placeholder={placeholder}
                 disabled={disabled}
+                required={required}
             >
                 {children}
             </FormSelect>

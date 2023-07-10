@@ -1,6 +1,6 @@
-import { ICallReqData, IOrderReqBody, IOrderReqQuery } from "pages/api/interfaces";
+import { ICallPostReq, IOrderGetReq, IOrderPostReq } from "@/interfaces";
 
-export const orderInitialValues: IOrderReqBody = {
+export const orderInitialValues: IOrderPostReq = {
     modelId: '',
     name: '',
     surname: '',
@@ -10,12 +10,12 @@ export const orderInitialValues: IOrderReqBody = {
     qualityId: ''
 };
 
-export const checkInitialValues: IOrderReqQuery = {
+export const checkInitialValues: IOrderGetReq = {
     id: '',
     tel: ''
 }
 
-export const callInitialValues: ICallReqData = {
+export const callInitialValues: ICallPostReq = {
     name: '',
     tel: ''
 }
