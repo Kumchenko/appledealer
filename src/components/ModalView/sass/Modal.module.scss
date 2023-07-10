@@ -9,6 +9,10 @@
     .title_only {
         margin-bottom: 0;
     }
+
+    .title_error {
+        color: $red
+    }
     
     &__close {
         font-size: 2rem;

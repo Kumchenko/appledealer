@@ -1,19 +1,28 @@
-import { _apiBase } from "@/constants";
-import { IComponents, ILoadingStatus, LoadingStatus } from "@/interfaces";
-import { fetchJSON } from "@/utils";
+import { _apiBase, LoadingStatus } from "@/constants";
+import { IApiError, ILoadingStatus } from "@/interfaces";
+import { ensureError, fetchJSON } from "@/utils";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-interface IInitialState extends IComponents, ILoadingStatus { }
+interface IInitialState extends ILoadingStatus { 
+    componentIds: string[]
+}
 
 const initialState: IInitialState = {
-    components: [],
+    componentIds: [],
     loadingStatus: LoadingStatus.Idle
 }
 
-const fetchComponents = createAsyncThunk(
+const fetchComponents = createAsyncThunk<string[], string, {
+    rejectValue: IApiError
+}>(
     'components/fetchComponents',
-    async (modelId: string) => {
-        return await fetchJSON(`${_apiBase}/api/component/${modelId}`);
+    async (modelId: string, thunkAPI) => {
+        try {
+            return await fetchJSON(`${_apiBase}/api/component/${modelId}`);
+        }
+        catch (e) {
+            return thunkAPI.rejectWithValue(ensureError(e))
+        }
     }
 );
 
@@ -27,7 +36,7 @@ const ComponentsSlice = createSlice({
         builder
             .addCase(fetchComponents.pending, state => { state.loadingStatus = LoadingStatus.Fetching })
             .addCase(fetchComponents.fulfilled, (state, action) => {
-                state.components = action.payload;
+                state.componentIds = action.payload;
                 state.loadingStatus = LoadingStatus.Fetched;
             })
             .addCase(fetchComponents.rejected, state => { state.loadingStatus = LoadingStatus.Error })

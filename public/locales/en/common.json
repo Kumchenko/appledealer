@@ -35,7 +35,16 @@
         "necessary": "Necessary",
         "incorrect": "Incorrect format",
         "occured": "Error was occured",
-        "not-found": "Not found"
+        "not-found": "Not found",
+        "empty-data": "Some fields of form are empty. Unsuccessful request",
+        "order-not-found": "Order not found",
+        "service-not-found": "Сервіс not found",
+        "models-not-found": "Models not found",
+        "components-not-found": "Components not found",
+        "id-is-undefined": "Provided ID is empty. Unsuccessful request",
+        "tel-is-undefined": "Provided Phone number is empty. Unsuccessful request",
+        "model-id-is-undefined": "Provided ModelID is empty. Unsuccessful request",
+        "tel-is-wrong": "Phone number is wrong"
     },
     "footer": {
         "credentials": "Created by Kumchenko"

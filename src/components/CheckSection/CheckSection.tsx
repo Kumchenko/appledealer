@@ -14,6 +14,7 @@ import { useTranslation } from "@/hooks";
 import { Modal } from "@/utils";
 import Button from "../Button/Button";
 import { checkInitialValues as initialValues } from "@/constants";
+import { IApiError } from "@/interfaces";
 
 
 const CheckSection = () => {
@@ -42,9 +43,6 @@ const CheckSection = () => {
                 })
                 .catch(() => {
                     formik.resetForm();
-                    Modal.open({
-                        title: t('errors.occured')
-                    })
                 })
         }
     });

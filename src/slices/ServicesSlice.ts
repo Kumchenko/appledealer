@@ -1,5 +1,5 @@
-import { _apiBase } from "@/constants";
-import { ILoadingStatus, IServices, LoadingStatus } from "@/interfaces";
+import { _apiBase, LoadingStatus } from "@/constants";
+import { ILoadingStatus, IServices, IServicesFetchReq } from "@/interfaces";
 import { fetchJSON } from "@/utils";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
@@ -12,7 +12,7 @@ const initialState: IInitialState = {
 
 const fetchServices = createAsyncThunk(
     'services/fetchServices',
-    async ({ modelId, componentId }: { modelId: string, componentId: string }) => {
+    async ({ modelId, componentId }: IServicesFetchReq) => {
         return await fetchJSON(`${_apiBase}/api/service?modelId=${modelId}&componentId=${componentId}`);
     }
 );

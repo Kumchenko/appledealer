@@ -1,23 +1,26 @@
-import { _apiBase } from "@/constants";
-import { LoadingStatus } from "@/interfaces";
-import { fetchJSON } from "@/utils";
+import { LoadingStatus, _apiBase } from "@/constants";
+import { ensureError, fetchJSON } from "@/utils";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { ICallReqData } from "pages/api/interfaces";
+import { IApiError, ICallPostReq } from "@/interfaces";
 
 const initialState = {
     loadingStatus: LoadingStatus.Idle
 }
 
-const postCall = createAsyncThunk(
+const postCall = createAsyncThunk<{}, ICallPostReq, {
+    rejectValue: IApiError
+}>(
     'call/postCall',
-    async (callData: ICallReqData) => {
-        const call = await fetchJSON(`${_apiBase}/api/callme`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ ...callData })
-        })
-        if (!call) {
-            throw Error('Received empty callme');
+    async (callData, thunkAPI) => {
+        try {
+            return await fetchJSON(`${_apiBase}/api/callme`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ ...callData })
+            })
+        }
+        catch (e) {
+            return thunkAPI.rejectWithValue(ensureError(e))
         }
     }
 )
@@ -36,7 +39,4 @@ const CallSlice = createSlice({
 const { actions, reducer } = CallSlice;
 
 export default reducer
-export const {
-
-} = actions
 export { postCall }

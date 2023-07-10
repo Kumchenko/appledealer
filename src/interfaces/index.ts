@@ -1,6 +1,7 @@
 import { NextPage } from "next";
 import { AppProps } from "next/app";
 import { ReactElement, ReactNode } from "react";
+import { LoadingStatus } from "@/constants/Enums";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
     getLayout?: (page: ReactElement) => ReactNode
@@ -12,10 +13,6 @@ export type AppPropsWithLayout = AppProps & {
 
 export interface IModels {
     modelIds: string[];
-}
-
-export interface IComponents {
-    components: string[];
 }
 
 export interface IService {
@@ -32,13 +29,6 @@ export interface IServices {
 
 export interface ILoadingStatus {
     loadingStatus: LoadingStatus
-}
-
-export enum LoadingStatus {
-    Idle = 'idle',
-    Fetching = 'fetching',
-    Fetched = 'fetched',
-    Error = 'error'
 }
 
 export interface IUseCountdown {
@@ -63,4 +53,48 @@ export interface INavPoint {
 export interface ISocialPoint {
     href: string,
     child: JSX.Element
+}
+
+export interface IOrderGetReq {
+    id: string;
+    tel: string;
+}
+
+export interface IOrderPostReq {
+    modelId: string;
+    name: string;
+    surname: string;
+    tel: string;
+    email: string;
+    componentId: string;
+    qualityId: string;
+}
+
+export interface IOrder extends IOrderPostReq {
+    id: number;
+    serviceId: number;
+    created: Date;
+    cost: number;
+    operations?: {
+        id: number
+        dateTime: Date
+        status: string
+        orderId: number
+        employeeId: number
+    }[]
+}
+
+export interface ICallPostReq {
+    name: string;
+    tel: string;
+}
+
+export interface IServicesFetchReq {
+    modelId: string;
+    componentId: string;
+}
+
+export interface IApiError extends Error {
+    i18n: string;
+    message: string;
 }

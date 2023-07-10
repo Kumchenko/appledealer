@@ -5,24 +5,30 @@ import clsx from "clsx"
 import { useEffect } from "react"
 import { ICardProps } from "../Card/interfaces"
 import Card from "../Card/Card"
+import { ModalType } from "@/constants"
+import { useTranslation } from "@/hooks"
 
 export type IModalProps = {
-    content?: React.FC<any>;
+    content?: React.ComponentType<any>;
     closeIcon?: boolean,
     closeModal?: Function,
     autoClose?: number,
     isVisible?: boolean
+    type?: ModalType
 } & ICardProps;
 
-const ModalView = ({ 
+const ModalView = ({
     title,
-    closeIcon, 
-    closeModal, 
-    autoClose, 
-    content: Content, 
+    closeIcon,
+    closeModal,
+    autoClose,
+    content: Content,
     className,
-    isVisible 
+    titleClass,
+    type = ModalType.Normal,
+    isVisible
 }: IModalProps) => {
+    const { t } = useTranslation();
     // Set autoclosing
     useEffect(() => {
         if (autoClose && closeModal && autoClose > 1000) {
@@ -36,8 +42,8 @@ const ModalView = ({
         <Card
             className={clsx(styles.modal, className, isVisible && styles.visible)}
             single={true}
-            titleClass={clsx(!Content && styles.title_only)}
-            title={title}
+            titleClass={clsx(titleClass, type === ModalType.Error && styles.title_error, !Content && styles.title_only)}
+            title={type === ModalType.Error ? t(`errors.${title}`) : title}
         >
             {closeIcon ? <button onClick={() => closeModal ? closeModal() : null} className={styles.modal__close}>
                 <FontAwesomeIcon icon={faXmark} />

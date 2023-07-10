@@ -4,7 +4,7 @@ import styles from "./sass/Order.module.scss"
 import clsx from "clsx"
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import { IModels, LoadingStatus } from "@/interfaces"
+import { IModels } from "@/interfaces"
 import { fetchComponents, clearComponents } from "@/slices/ComponentSlice"
 import { fetchServices, clearServices } from "@/slices/ServicesSlice"
 import { useDispatch, useSelector } from "@/store"
@@ -16,10 +16,9 @@ import FormSelectExtended from "../FormSelectExtended/FormSelectExtended"
 import { useTransition, a } from "@react-spring/web"
 import { PulseLoader } from "react-spinners"
 import { postOrder } from "@/slices/OrderSlice"
-import { orderInitialValues as initialValues } from "@/constants"
+import { LoadingStatus, orderInitialValues as initialValues } from "@/constants"
 import { useRouter } from "next/router"
 import { useTranslation, useUpdate } from "@/hooks"
-import { Modal } from "@/utils"
 import Button from "../Button/Button"
 import emptyPhone from 'public/img/iphones/empty.jpg'
 
@@ -30,7 +29,7 @@ const OrderSection = ({ modelIds }: IModels) => {
     const dispatch = useDispatch();
 
     const {
-        components,
+        componentIds,
         loadingStatus: componentsLoadingStatus
     } = useSelector(({ componentsSlice }) => componentsSlice);
     const {
@@ -58,7 +57,7 @@ const OrderSection = ({ modelIds }: IModels) => {
             .matches(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/, t('errors.incorrect'))
             .required(t('errors.necessary')),
         componentId: Yup.string()
-            .oneOf(components, t('errors.occured'))
+            .oneOf(componentIds, t('errors.occured'))
             .required(t('errors.necessary')),
         qualityId: Yup.string()
             .oneOf(services.map(service => service.qualityId), t('errors.occured'))
@@ -76,9 +75,6 @@ const OrderSection = ({ modelIds }: IModels) => {
                 })
                 .catch(() => {
                     formik.resetForm();
-                    Modal.open({
-                        title: t('errors.occured')
-                    })
                 })
         }
     })
@@ -142,10 +138,10 @@ const OrderSection = ({ modelIds }: IModels) => {
         .map(modelId => <option key={modelId} value={modelId}>{t(`repair:${modelId}`)}</option>)
         .sort((a, b) => a.props.children.localeCompare(b.props.children)),
         [modelIds, t]);
-    const componentElems = useMemo(() => components
+    const componentElems = useMemo(() => componentIds
         .map(componentId => <option key={componentId} value={componentId}>{t(`repair:${componentId}`)}</option>)
         .sort((a, b) => a.props.children.localeCompare(b.props.children)),
-        [components, t]);
+        [componentIds, t]);
     const qualityElems = useMemo(() => services
         .map(({ qualityId }) => <option key={qualityId} value={qualityId}>{t(`repair:${qualityId}`)}</option>)
         .sort((a, b) => a.props.children.localeCompare(b.props.children)),

@@ -3,7 +3,6 @@ import { ICardProps } from "./interfaces"
 import styles from './sass/Card.module.scss'
 import { ForwardedRef, forwardRef } from "react";
 
-
 const Card = forwardRef(({ title, titleClass, children, className, single = false }: ICardProps, ref: ForwardedRef<HTMLDivElement>) => {
     return (
         <div

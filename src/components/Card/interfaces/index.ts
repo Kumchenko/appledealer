@@ -1,8 +1,8 @@
-import React from "react"
+import { PropsWithChildren } from "react"
 
-export interface ICardProps extends React.PropsWithChildren {
+export type ICardProps = PropsWithChildren<{
     title?: string,
     className?: string,
     titleClass?: string,
-    single?: Boolean
-}
+    single?: boolean
+}>
