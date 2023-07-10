@@ -28,8 +28,10 @@
     "next": "12.3.4",
     "next-i18next": "^13.3.0",
     "react": "18.2.0",
+    "react-device-detect": "^2.2.3",
     "react-dom": "18.2.0",
     "react-i18next": "^12.3.1",
+    "react-input-mask": "^2.0.4",
     "react-redux": "^8.0.5",
     "react-spinners": "^0.13.8",
     "sharp": "^0.32.1",
@@ -38,6 +40,7 @@
     "yup": "^1.1.1"
   },
   "devDependencies": {
+    "@types/react-input-mask": "^3.0.2",
     "sass": "^1.62.1"
   }
 }

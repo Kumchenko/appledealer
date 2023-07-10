@@ -252,13 +252,14 @@ const OrderSection = ({ modelIds }: IModels) => {
                             required
                         />
                         <FormInputExtended
+                            mask="+380999999999"
                             className={styles.form__field}
                             label={t('tel')}
                             name="tel"
                             type="tel"
                             pattern="[+]{1}38[0]{1}[0-9]{9}"
-                            placeholder="+38(___)-___-__-__"
-                            autoComplete="on"
+                            placeholder="+380"
+                            autoComplete="tel"
                             required
                         />
                         <FormInputExtended

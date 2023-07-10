@@ -1,11 +1,5 @@
-import { IFormInputProps } from "@/components/FormInput/interfaces";
+import { IFormInput } from "@/components/FormInput/interfaces";
 
-export interface IFormInputExtendedProps {
-    label: string;
-}
-
-export type IFormInputExtended = {} &
-    IFormInputExtendedProps &
-    IFormInputProps &
-    React.PropsWithChildren &
-    React.ComponentProps<'input'>;
+export type IFormInputExtended = {
+    label: string
+} & IFormInput

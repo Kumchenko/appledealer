@@ -10,7 +10,8 @@ const FormSelect = ({
     children,
     onChange,
     onBlur,
-    disabled
+    disabled,
+    required
 }: IFormSelect) => {
     const { handleBlur, handleChange, getFieldProps } = useFormikContext();
     const { value } = getFieldProps(name);
@@ -36,6 +37,7 @@ const FormSelect = ({
                 }
             }}
             disabled={disabled}
+            required={required}
         >
             <option value="" disabled>{placeholder}</option>
             {children}

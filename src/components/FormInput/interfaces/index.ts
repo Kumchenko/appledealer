@@ -1,5 +1,15 @@
-export type IFormInputProps = {
-    name: string
-} & React.PropsWithChildren
+import { ChangeEventHandler, FocusEventHandler, HTMLInputTypeAttribute } from "react"
 
-export type IFormInput = {} & IFormInputProps  & React.ComponentProps<'input'>;
+export type IFormInput = React.PropsWithChildren<{
+    mask?: string | (RegExp | string)[];
+    name: string;
+    className?: string;
+    onChange?: ChangeEventHandler<HTMLInputElement>;
+    onBlur?: FocusEventHandler<HTMLInputElement>;
+    type?: HTMLInputTypeAttribute;
+    placeholder?: string;
+    required?: boolean;
+    disabled?: boolean;
+    autoComplete?: string;
+    pattern?: string;
+}>

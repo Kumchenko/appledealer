@@ -1,11 +1,5 @@
-import { IFormSelectProps } from "@/components/FormSelect/interfaces";
+import { IFormSelect } from "@/components/FormSelect/interfaces";
 
-export interface IFormSelectExtendedProps {
+export type IFormSelectExtended = {
     label: string;
-}
-
-export type IFormSelectExtended = {} & 
-    IFormSelectExtendedProps & 
-    IFormSelectProps & 
-    React.PropsWithChildren & 
-    React.ComponentProps<'select'>;
+} & IFormSelect
