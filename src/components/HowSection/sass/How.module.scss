@@ -29,7 +29,20 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        width: 33%;
+        width: 28%;
+        transition: transform $transitionTime $transitionFunc;
+
+        @media (hover: hover) {
+            &:hover {
+                transform: scale(1.1);
+            }
+        }
+
+        @media (hover: none) {
+            &:active {
+                transform: scale(1.1);
+            }
+        }
     }
 
     &__iconWrapper {
@@ -76,14 +89,6 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-        }
-    }
-}
-
-@include sm {
-    .how {
-        &__item {
-            width: 30%;
         }
     }
 }

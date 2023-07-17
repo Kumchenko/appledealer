@@ -186,7 +186,7 @@
                 height: 100%;
                 top: 0;
                 left: 0;
-                background-color: $brightPurple;
+                @include bgGradient;
                 z-index: 5;
                 padding: 1.5rem;
                 font-size: 1.4rem;

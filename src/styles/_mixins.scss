@@ -116,3 +116,7 @@
         }
     }
 }
+
+@mixin bgGradient {
+    background: linear-gradient(95deg, rgba(196,181,253,1) 0%, rgba(245,208,254,1) 100%);
+}

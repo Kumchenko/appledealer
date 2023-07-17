@@ -18,13 +18,13 @@ const Header = ({ navPoints, socialPoints }: IHeaderProps) => {
 
     // Open navigation func
     const openNav = useCallback(() => {
-        document.body.style.overflow = 'hidden'
+        document.documentElement.classList.add('opened')
         setNavOpened(true);
     }, []);
 
     // Close navigation func
     const closeNav = useCallback(() => {
-        document.body.style.overflow = 'initial'
+        document.documentElement.classList.remove('opened')
         setNavOpened(false);
     }, []);
 

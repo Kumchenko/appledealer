@@ -39,11 +39,11 @@ const ThanksSection = () => {
                         height={260}
                         quality={90}
                         priority={true}
-                        src={order?.modelId ? `/img/iphones/${order.modelId}.jpg` : `/img/iphones/empty.jpg`}
+                        src={order?.service.modelId ? `/img/iphones/${order.service.modelId}.jpg` : `/img/iphones/empty.jpg`}
                         alt={order?.modelId}
                     />
                     <p className={styles.card__about}>
-                        <span>{t(`repair:${order?.modelId}`)} — {t(`repair:${order?.componentId}`)}</span>
+                        <span>{t(`repair:${order?.service.modelId}`)} — {t(`repair:${order?.service.componentId}`)}</span>
                         {t('cost')}: {order?.cost}₴
                     </p>
                     <Button 

@@ -42,6 +42,7 @@
         "empty-data": "Некоторые поля формы пусты. Запрос неуспешен",
         "order-not-found": "Заказ не найден",
         "service-not-found": "Сервис не найден",
+        "services-not-found": "Сервисы не найдены",
         "models-not-found": "Модели не найдены",
         "components-not-found": "Компоненты не найдены",
         "id-is-undefined": "Получен пустой ID. Запрос неуспешен",

@@ -20,15 +20,15 @@ html {
     font-size: 16px;
     letter-spacing: 0.02em;
     scroll-behavior: smooth;
-}
-
-body {
-    color: $purple;
-    background-color: $brightPurple;
 
     &.opened {
         overflow: hidden;
     }
+}
+
+body {
+    color: $purple;
+    @include bgGradient;
 }
 
 .container {

@@ -28,11 +28,7 @@ const TransitionLayout = ({ children }: ITransitionLayout) => {
         setPagesArr([children])
     }, [children]);
 
-    return (
-        <div style={{ overflowX: 'clip' }}>
-            {transitions((style, item) => <a.div style={style}>{item}</a.div>)}
-        </div>
-    )
+    return transitions((style, item) => <a.div style={style}>{item}</a.div>)
 }
 
 export default TransitionLayout

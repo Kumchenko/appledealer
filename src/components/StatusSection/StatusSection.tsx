@@ -49,7 +49,7 @@ const StatusSection = () => {
                             layout="fill"
                             priority={true}
                             quality={90}
-                            src={order?.modelId ? `/img/iphones/${order.modelId}.jpg` : emptyPhone}
+                            src={order?.service.modelId ? `/img/iphones/${order.service.modelId}.jpg` : emptyPhone}
                             alt={r(order?.modelId)}
                         />
                     </div>
@@ -68,7 +68,7 @@ const StatusSection = () => {
                         })}
                     </ul>
                     <p className={styles.card__about}>
-                        <span>{r(order?.modelId)} — {r(order?.componentId)}</span>
+                        <span>{r(order?.service.modelId)} — {r(order?.service.componentId)}</span>
                         {t('cost')}: {order?.cost}₴
                     </p>
                     <Button

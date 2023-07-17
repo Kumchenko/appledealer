@@ -75,7 +75,14 @@ export interface IOrder extends IOrderPostReq {
     serviceId: number;
     created: Date;
     cost: number;
-    operations?: {
+    service: {
+        id: number;
+        cost: number;
+        modelId: string;
+        componentId: string;
+        qualityId: string;
+    }
+    operations: {
         id: number
         dateTime: Date
         status: string
