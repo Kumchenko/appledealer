@@ -13,22 +13,22 @@ import { AppPropsWithLayout } from '@/interfaces'
 config.autoAddCss = false
 
 // Our modal ref
-let modalWrapperRef: ModalWrapper | null;
+let modalWrapperRef: ModalWrapper | null
 
 function MyApp({ Component, pageProps, router }: AppPropsWithLayout) {
-  // Register modalWrapper
-  useEffect(() => {
-    Modal.registerModal(modalWrapperRef);
-  }, []);
+    // Register modalWrapper
+    useEffect(() => {
+        Modal.registerModal(modalWrapperRef)
+    }, [])
 
-  const getLayout = Component.getLayout ?? ((page) => page)
+    const getLayout = Component.getLayout ?? (page => page)
 
-  return (
-    <Provider store={store}>
-      {getLayout(<Component key={router.pathname} {...pageProps} />)}
-      <ModalWrapper ref={ref => modalWrapperRef = ref} />
-    </Provider>
-  )
+    return (
+        <Provider store={store}>
+            {getLayout(<Component key={router.pathname} {...pageProps} />)}
+            <ModalWrapper ref={ref => (modalWrapperRef = ref)} />
+        </Provider>
+    )
 }
 
-export default appWithTranslation(MyApp);
+export default appWithTranslation(MyApp)

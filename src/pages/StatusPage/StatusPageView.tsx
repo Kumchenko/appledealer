@@ -1,4 +1,4 @@
-import StatusSection from "@/components/StatusSection/StatusSection"
+import StatusSection from '@/components/StatusSection/StatusSection'
 
 export default function StatusPageView() {
     return (

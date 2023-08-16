@@ -1,12 +1,13 @@
-import clsx from "clsx"
-import styles from "./sass/FormInputExtended.module.scss"
-import FormError from "../FormError/FormError"
-import FormInput from "../FormInput/FormInput"
-import { IFormInputExtended } from "./interfaces"
-import { useFormikContext } from "formik"
+import clsx from 'clsx'
+import styles from './sass/FormInputExtended.module.scss'
+import FormError from '../FormError/FormError'
+import FormInput from '../FormInput/FormInput'
+import { IFormInputExtended } from './interfaces'
+import { useFormikContext } from 'formik'
+import { useId } from 'react'
 
 const FormInputExtended = ({
-    mask = "",
+    mask = '',
     className,
     label,
     name,
@@ -17,20 +18,18 @@ const FormInputExtended = ({
     autoComplete,
     required,
     disabled,
-    pattern
+    pattern,
 }: IFormInputExtended) => {
-    const { getFieldMeta } = useFormikContext();
-    const { error, touched } = getFieldMeta(name);
+    const { getFieldMeta } = useFormikContext()
+    const { error, touched } = getFieldMeta(name)
+    const id = useId()
     return (
-        <label className={clsx(styles.form__field, className)}>
-            {label}
-            <FormError
-                className={styles.form__error}
-                error={error}
-                touched={touched}
-            />
+        <div className={clsx(styles.form__field, className)}>
+            <label htmlFor={id}>{label}</label>
+            <FormError className={styles.form__error} error={error} touched={touched} />
             <FormInput
                 name={name}
+                id={id}
                 className={styles.form__input}
                 mask={mask}
                 onChange={onChange}
@@ -42,8 +41,8 @@ const FormInputExtended = ({
                 disabled={disabled}
                 pattern={pattern}
             />
-        </label>
+        </div>
     )
 }
 
-export default FormInputExtended;
+export default FormInputExtended

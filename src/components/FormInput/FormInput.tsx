@@ -1,12 +1,13 @@
-import clsx from "clsx";
-import styles from "./sass/FormInput.module.scss"
-import { IFormInput } from "./interfaces";
-import { useFormikContext } from "formik";
-import InputMask from 'react-input-mask';
-import { isSafari } from "react-device-detect";
+import clsx from 'clsx'
+import styles from './sass/FormInput.module.scss'
+import { IFormInput } from './interfaces'
+import { useFormikContext } from 'formik'
+import InputMask from 'react-input-mask'
+import { isSafari } from 'react-device-detect'
 
 const FormInput = ({
-    mask = "",
+    mask = '',
+    id,
     name,
     className,
     onChange,
@@ -16,32 +17,33 @@ const FormInput = ({
     autoComplete,
     required,
     disabled,
-    pattern
+    pattern,
 }: IFormInput) => {
-    const { handleBlur, handleChange, getFieldProps } = useFormikContext();
-    const { value } = getFieldProps(name);
+    const { handleBlur, handleChange, getFieldProps } = useFormikContext()
+    const { value } = getFieldProps(name)
     return (
         <InputMask
+            id={id}
             mask={mask}
             maskChar={isSafari ? '_' : null}
             alwaysShowMask={false}
             name={name}
             value={value}
             className={clsx(styles.form__input, className)}
-            onChange={(e) => {
+            onChange={e => {
                 if (handleChange) {
-                    handleChange(e);
+                    handleChange(e)
                 }
                 if (onChange) {
-                    onChange(e);
+                    onChange(e)
                 }
             }}
-            onBlur={(e) => {
+            onBlur={e => {
                 if (handleBlur) {
-                    handleBlur(e);
+                    handleBlur(e)
                 }
                 if (onBlur) {
-                    onBlur(e);
+                    onBlur(e)
                 }
             }}
             placeholder={placeholder}
@@ -54,4 +56,4 @@ const FormInput = ({
     )
 }
 
-export default FormInput;
+export default FormInput

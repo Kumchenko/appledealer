@@ -1,4 +1,4 @@
-import ThanksSection from "@/components/ThanksSection/ThanksSection"
+import ThanksSection from '@/components/ThanksSection/ThanksSection'
 
 export default function ThanksPageView() {
     return (

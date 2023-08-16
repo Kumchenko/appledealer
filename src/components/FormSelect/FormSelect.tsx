@@ -1,48 +1,52 @@
-import clsx from "clsx";
-import styles from "./sass/FormSelect.module.scss"
-import { IFormSelect } from "./interfaces";
-import { useFormikContext } from "formik";
+import clsx from 'clsx'
+import styles from './sass/FormSelect.module.scss'
+import { IFormSelect } from './interfaces'
+import { useFormikContext } from 'formik'
 
 const FormSelect = ({
     name,
+    id,
     className,
     placeholder,
     children,
     onChange,
     onBlur,
     disabled,
-    required
+    required,
 }: IFormSelect) => {
-    const { handleBlur, handleChange, getFieldProps } = useFormikContext();
-    const { value } = getFieldProps(name);
+    const { handleBlur, handleChange, getFieldProps } = useFormikContext()
+    const { value } = getFieldProps(name)
     return (
         <select
             name={name}
+            id={id}
             className={clsx(styles.form__select, className)}
             value={value}
-            onChange={(e) => {
+            onChange={e => {
                 if (handleChange) {
-                    handleChange(e);
+                    handleChange(e)
                 }
                 if (onChange) {
-                    onChange(e);
+                    onChange(e)
                 }
             }}
-            onBlur={(e) => {
+            onBlur={e => {
                 if (handleBlur) {
-                    handleBlur(e);
+                    handleBlur(e)
                 }
                 if (onBlur) {
-                    onBlur(e);
+                    onBlur(e)
                 }
             }}
             disabled={disabled}
             required={required}
         >
-            <option value="" disabled>{placeholder}</option>
+            <option value="" disabled>
+                {placeholder}
+            </option>
             {children}
         </select>
     )
 }
 
-export default FormSelect;
+export default FormSelect

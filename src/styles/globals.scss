@@ -20,14 +20,16 @@ html {
     font-size: 16px;
     letter-spacing: 0.02em;
     scroll-behavior: smooth;
+    background: #d5bcf9;
 
-    &.opened {
+    &.lock {
         overflow: hidden;
     }
 }
 
 body {
     color: $purple;
+    min-height: 100vh;
     @include bgGradient;
 }
 

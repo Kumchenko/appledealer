@@ -1,47 +1,48 @@
-import Image from "next/image"
-import Card from "@/components/Card/Card"
-import styles from "./sass/Order.module.scss"
-import clsx from "clsx"
+import Image from 'next/image'
+import Card from '@/components/Card/Card'
+import styles from './sass/Order.module.scss'
+import clsx from 'clsx'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import { IModels } from "@/interfaces"
-import { fetchComponents, clearComponents } from "@/slices/ComponentSlice"
-import { fetchServices, clearServices } from "@/slices/ServicesSlice"
-import { useDispatch, useSelector } from "@/store"
-import { useMemo, useState } from "react"
-import Form from "../Form/Form"
-import FormSelect from "../FormSelect/FormSelect"
-import FormInputExtended from "../FormInputExtended/FormInputExtended"
-import FormSelectExtended from "../FormSelectExtended/FormSelectExtended"
-import { useTransition, a } from "@react-spring/web"
-import { PulseLoader } from "react-spinners"
-import { postOrder } from "@/slices/OrderSlice"
-import { LoadingStatus, orderInitialValues as initialValues } from "@/constants"
-import { useRouter } from "next/router"
-import { useTranslation, useUpdate } from "@/hooks"
-import Button from "../Button/Button"
+import { IModels } from '@/interfaces'
+import { fetchComponents, clearComponents } from '@/slices/ComponentSlice'
+import { fetchServices, clearServices } from '@/slices/ServicesSlice'
+import { useDispatch, useSelector } from '@/store'
+import { useEffect, useMemo, useState } from 'react'
+import Form from '../Form/Form'
+import FormSelect from '../FormSelect/FormSelect'
+import FormInputExtended from '../FormInputExtended/FormInputExtended'
+import FormSelectExtended from '../FormSelectExtended/FormSelectExtended'
+import { useTransition, a } from '@react-spring/web'
+import { PulseLoader } from 'react-spinners'
+import { postOrder } from '@/slices/OrderSlice'
+import { LoadingStatus, orderInitialValues as initialValues } from '@/constants'
+import { useRouter } from 'next/router'
+import { useTranslation, useUpdate } from '@/hooks'
+import Button from '../Button/Button'
 import emptyPhone from 'public/img/iphones/empty.jpg'
 
-
 const OrderSection = ({ modelIds }: IModels) => {
-    const { t } = useTranslation();
-    const router = useRouter();
-    const dispatch = useDispatch();
+    const { t } = useTranslation()
+    const router = useRouter()
+    const dispatch = useDispatch()
 
-    const {
-        componentIds,
-        loadingStatus: componentsLoadingStatus
-    } = useSelector(({ componentsSlice }) => componentsSlice);
-    const {
-        services,
-        loadingStatus: servicesLoadingStatus
-    } = useSelector(({ servicesSlice }) => servicesSlice)
+    // Clear preloaded components and models when changing page
+    useEffect(() => {
+        router.events.on('routeChangeStart', () => {
+            dispatch(clearComponents())
+            dispatch(clearServices())
+        })
+    }, [dispatch, router])
+
+    const { componentIds, loadingStatus: componentsLoadingStatus } = useSelector(
+        ({ componentsSlice }) => componentsSlice,
+    )
+    const { services, loadingStatus: servicesLoadingStatus } = useSelector(({ servicesSlice }) => servicesSlice)
 
     // Validation Schema for form
     const validationSchema = Yup.object({
-        modelId: Yup.string()
-            .oneOf(modelIds, t('errors.occured'))
-            .required(t('errors.necessary')),
+        modelId: Yup.string().oneOf(modelIds, t('errors.occured')).required(t('errors.necessary')),
         name: Yup.string()
             .required(t('errors.necessary'))
             .min(3, args => t('errors.min', { count: args.min }))
@@ -56,29 +57,31 @@ const OrderSection = ({ modelIds }: IModels) => {
         email: Yup.string()
             .matches(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/, t('errors.incorrect'))
             .required(t('errors.necessary')),
-        componentId: Yup.string()
-            .oneOf(componentIds, t('errors.occured'))
-            .required(t('errors.necessary')),
+        componentId: Yup.string().oneOf(componentIds, t('errors.occured')).required(t('errors.necessary')),
         qualityId: Yup.string()
-            .oneOf(services.map(service => service.qualityId), t('errors.occured'))
-            .required(t('errors.necessary'))
-    });
+            .oneOf(
+                services.map(service => service.qualityId),
+                t('errors.occured'),
+            )
+            .required(t('errors.necessary')),
+    })
 
     // Initialize formik
     const formik = useFormik({
         initialValues,
         validationSchema,
-        onSubmit: (values) => {
-            dispatch(postOrder(values)).unwrap()
+        onSubmit: values => {
+            dispatch(postOrder(values))
+                .unwrap()
                 .then(() => {
                     router.push('/thanks')
                 })
                 .catch(() => {
-                    formik.resetForm();
+                    formik.resetForm()
                 })
-        }
+        },
     })
-    const { values, errors, isSubmitting } = formik;
+    const { values, errors, isSubmitting } = formik
 
     // Prepate Model selector Placeholder value
     const modelPlaceholder = useMemo(() => {
@@ -87,7 +90,7 @@ const OrderSection = ({ modelIds }: IModels) => {
         } else {
             return t('order:no-models')
         }
-    }, [modelIds.length, t]);
+    }, [modelIds.length, t])
 
     // Prepare Component selector Placeholder value
     const componentPlaceholder = useMemo(() => {
@@ -105,11 +108,11 @@ const OrderSection = ({ modelIds }: IModels) => {
                 return t('order:select-component')
             }
             default: {
-                const exhaustiveCheck: never = componentsLoadingStatus;
+                const exhaustiveCheck: never = componentsLoadingStatus
                 return t('errors.occured')
             }
         }
-    }, [componentsLoadingStatus, t]);
+    }, [componentsLoadingStatus, t])
 
     // Prepare Quality selector Placeholder value
     const qualityPlaceholder = useMemo(() => {
@@ -127,25 +130,46 @@ const OrderSection = ({ modelIds }: IModels) => {
                 return t('order:select-quality')
             }
             default: {
-                const exhaustiveCheck: never = servicesLoadingStatus;
+                const exhaustiveCheck: never = servicesLoadingStatus
                 return t('errors.occured')
             }
         }
-    }, [servicesLoadingStatus, t]);
+    }, [servicesLoadingStatus, t])
 
     // Preparing options for select elements
-    const modelElems = useMemo(() => modelIds
-        .map(modelId => <option key={modelId} value={modelId}>{t(`repair:${modelId}`)}</option>)
-        .sort((a, b) => a.props.children.localeCompare(b.props.children)),
-        [modelIds, t]);
-    const componentElems = useMemo(() => componentIds
-        .map(componentId => <option key={componentId} value={componentId}>{t(`repair:${componentId}`)}</option>)
-        .sort((a, b) => a.props.children.localeCompare(b.props.children)),
-        [componentIds, t]);
-    const qualityElems = useMemo(() => services
-        .map(({ qualityId }) => <option key={qualityId} value={qualityId}>{t(`repair:${qualityId}`)}</option>)
-        .sort((a, b) => a.props.children.localeCompare(b.props.children)),
-        [services, t]);
+    const modelElems = useMemo(
+        () =>
+            modelIds
+                .map(modelId => (
+                    <option key={modelId} value={modelId}>
+                        {t(`repair:${modelId}`)}
+                    </option>
+                ))
+                .sort((a, b) => a.props.children.localeCompare(b.props.children)),
+        [modelIds, t],
+    )
+    const componentElems = useMemo(
+        () =>
+            componentIds
+                .map(componentId => (
+                    <option key={componentId} value={componentId}>
+                        {t(`repair:${componentId}`)}
+                    </option>
+                ))
+                .sort((a, b) => a.props.children.localeCompare(b.props.children)),
+        [componentIds, t],
+    )
+    const qualityElems = useMemo(
+        () =>
+            services
+                .map(({ qualityId }) => (
+                    <option key={qualityId} value={qualityId}>
+                        {t(`repair:${qualityId}`)}
+                    </option>
+                ))
+                .sort((a, b) => a.props.children.localeCompare(b.props.children)),
+        [services, t],
+    )
 
     // Download available components for selected model
     const getComponents = (modelId: string) => {
@@ -154,63 +178,67 @@ const OrderSection = ({ modelIds }: IModels) => {
 
     // Download available services for selected model and component
     const getServices = (modelId: string, componentId: string) => {
-        dispatch(fetchServices({ modelId, componentId }));
+        dispatch(fetchServices({ modelId, componentId }))
     }
 
     // Catching changes of model
     useUpdate(() => {
-        setModelList([values.modelId]);
-        formik.setFieldValue('componentId', initialValues.componentId);
-        formik.setFieldValue('qualityId', initialValues.qualityId);
-        dispatch(clearComponents());
+        setModelList([values.modelId])
+        formik.setFieldValue('componentId', initialValues.componentId)
+        formik.setFieldValue('qualityId', initialValues.qualityId)
+        dispatch(clearComponents())
         if (values.modelId) {
-            getComponents(values.modelId);
+            getComponents(values.modelId)
         }
     }, [values.modelId])
 
     // Catching changes of component
     useUpdate(() => {
-        const { modelId, componentId } = values;
-        formik.setFieldValue('qualityId', initialValues.qualityId);
-        dispatch(clearServices());
+        const { modelId, componentId } = values
+        formik.setFieldValue('qualityId', initialValues.qualityId)
+        dispatch(clearServices())
         if (modelId && componentId) {
-            getServices(modelId, componentId);
+            getServices(modelId, componentId)
         }
     }, [values.componentId])
 
     // Prepare text for submit button
     const submitText = useMemo(() => {
-        const service = services.find(service => service.qualityId === values.qualityId);
+        const service = services.find(service => service.qualityId === values.qualityId)
         if (isSubmitting) {
-            return <PulseLoader
-                color={styles.white}
-                className={styles.form__loader}
-                loading={isSubmitting}
-                aria-label="Loading pulseloader" />;
+            return (
+                <PulseLoader
+                    color={styles.white}
+                    className={styles.form__loader}
+                    loading={isSubmitting}
+                    aria-label="Loading pulseloader"
+                />
+            )
         }
         if (service) {
-            return `${t('order:submit')}: ${service.cost}₴`;
+            return `${t('order:submit')}: ${service.cost}₴`
         } else {
-            return t('order:submit');
+            return t('order:submit')
         }
-    }, [isSubmitting, services, t, values.qualityId]);
+    }, [isSubmitting, services, t, values.qualityId])
 
     // Transition implementation
-    const [modelList, setModelList] = useState([initialValues.modelId]);
+    const [modelList, setModelList] = useState([initialValues.modelId])
     const transitions = useTransition(modelList, {
         from: { opacity: 0 },
         enter: { opacity: 1 },
         leave: { opacity: 0, position: 'absolute' },
-        delay: 200
+        delay: 200,
     })
 
     return (
         <section className={styles.order}>
-            <div className={clsx(styles.container, "container")}>
+            <div className={clsx(styles.container, 'container')}>
                 <h1 className={styles.order__title}>{t('order:h1')}</h1>
-                <Form formik={formik} className={clsx(styles.form, "grid")}>
+                <Form formik={formik} className={clsx(styles.form, 'grid')}>
                     <Card title={t('order:model')} className={styles.form__card}>
                         <FormSelect
+                            id="modelId"
                             className={clsx(styles.form__field, styles.form__field_model)}
                             name="modelId"
                             placeholder={modelPlaceholder}
@@ -222,7 +250,7 @@ const OrderSection = ({ modelIds }: IModels) => {
                                 <a.div style={style} className={styles.form__animated}>
                                     <Image
                                         className={styles.form__img}
-                                        src={item && !(errors.modelId) ? `/img/iphones/${item}.jpg` : emptyPhone}
+                                        src={item && !errors.modelId ? `/img/iphones/${item}.jpg` : emptyPhone}
                                         layout="fill"
                                         quality={90}
                                         priority={true}
@@ -278,7 +306,7 @@ const OrderSection = ({ modelIds }: IModels) => {
                             label={t('component')}
                             name="componentId"
                             placeholder={componentPlaceholder}
-                            disabled={!(values.modelId)}
+                            disabled={!values.modelId}
                         >
                             {componentElems}
                         </FormSelectExtended>
@@ -287,12 +315,12 @@ const OrderSection = ({ modelIds }: IModels) => {
                             label={t('quality')}
                             name="qualityId"
                             placeholder={qualityPlaceholder}
-                            disabled={!(values.componentId)}
+                            disabled={!values.componentId}
                         >
                             {qualityElems}
                         </FormSelectExtended>
                         <Button
-                            disabled={isSubmitting || !(values.qualityId)}
+                            disabled={isSubmitting || !values.qualityId}
                             className={styles.form__btn}
                             type="submit"
                             color="green"

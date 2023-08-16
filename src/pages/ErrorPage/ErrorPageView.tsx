@@ -1,7 +1,5 @@
-import ErrorSection from "@/components/ErrorSection/ErrorSection";
+import ErrorSection from '@/components/ErrorSection/ErrorSection'
 
 export default function ErrorPageView() {
-    return (
-        <ErrorSection />
-    )
+    return <ErrorSection />
 }

@@ -1,4 +1,4 @@
-import { INavPoint } from "@/interfaces";
+import { INavPoint } from '@/interfaces'
 
 const NavPoints: INavPoint[] = [
     {
@@ -7,30 +7,30 @@ const NavPoints: INavPoint[] = [
         subPoints: [
             {
                 href: '/#about',
-                title: 'contacts'
+                title: 'contacts',
             },
             {
                 href: '/#discount',
-                title: 'discount'
+                title: 'discount',
             },
             {
                 href: '/#works',
-                title: 'works'
+                title: 'works',
             },
             {
                 href: '/#how',
-                title: 'how'
-            }
-        ]
+                title: 'how',
+            },
+        ],
     },
     {
         href: '/order',
-        title: 'order-repair'
+        title: 'order-repair',
     },
     {
         href: '/check',
-        title: 'order-status'
-    }
+        title: 'order-status',
+    },
 ]
 
 export default NavPoints

@@ -1,5 +1,5 @@
-import { IFormInput } from "@/components/FormInput/interfaces";
+import { IFormInput } from '@/components/FormInput/interfaces'
 
 export type IFormInputExtended = {
     label: string
-} & IFormInput
+} & Omit<IFormInput, 'id'>

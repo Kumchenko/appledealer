@@ -1,8 +1,8 @@
-import { NextRouter } from "next/router";
+import { NextRouter } from 'next/router'
 
 export function scrollToId(router: NextRouter) {
-    const selector = router.asPath.replace(router.pathname, '');
+    const selector = router.asPath.replace(router.pathname, '')
     if (selector) {
-        document.querySelector(selector)?.scrollIntoView();
+        document.querySelector(selector)?.scrollIntoView()
     }
 }

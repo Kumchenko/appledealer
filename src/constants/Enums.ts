@@ -2,10 +2,10 @@ export enum LoadingStatus {
     Idle = 'idle',
     Fetching = 'fetching',
     Fetched = 'fetched',
-    Error = 'error'
+    Error = 'error',
 }
 
 export enum ModalType {
-    Normal = "normal",
-    Error = "error"
+    Normal = 'normal',
+    Error = 'error',
 }

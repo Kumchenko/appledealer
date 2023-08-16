@@ -1,9 +1,9 @@
 export interface ITimerBlock {
-    value: number,
+    value: number
     name: string
 }
 
 export interface ITimer {
-    date: number,
+    date: number
     ended: string
 }

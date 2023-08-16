@@ -1,4 +1,4 @@
-import { ICallPostReq, IOrderGetReq, IOrderPostReq } from "@/interfaces";
+import { ICallPostReq, IOrderGetReq, IOrderPostReq } from '@/interfaces'
 
 export const orderInitialValues: IOrderPostReq = {
     modelId: '',
@@ -7,15 +7,15 @@ export const orderInitialValues: IOrderPostReq = {
     tel: '',
     email: '',
     componentId: '',
-    qualityId: ''
-};
+    qualityId: '',
+}
 
 export const checkInitialValues: IOrderGetReq = {
     id: '',
-    tel: ''
+    tel: '',
 }
 
 export const callInitialValues: ICallPostReq = {
     name: '',
-    tel: ''
+    tel: '',
 }

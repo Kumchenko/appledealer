@@ -1,4 +1,4 @@
-import CheckSection from "@/components/CheckSection/CheckSection"
+import CheckSection from '@/components/CheckSection/CheckSection'
 
 export default function CheckPageView() {
     return (

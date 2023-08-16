@@ -5,8 +5,8 @@ import { useTranslation } from '@/hooks'
 import Button from '../Button/Button'
 
 const ErrorSection = () => {
-    const { t } = useTranslation();
-    const { t: e } = useTranslation('error');
+    const { t } = useTranslation()
+    const { t: e } = useTranslation('error')
     return (
         <section>
             <div className="container">
@@ -20,18 +20,12 @@ const ErrorSection = () => {
                             className={styles.error__img}
                             src="/img/error.gif"
                             alt={e('alt')}
-                            layout='fill'
+                            layout="fill"
                             priority={true}
                         />
                     </div>
-                    <p className={styles.error__desc}>
-                        {e('detail')}
-                    </p>
-                    <Button
-                        className={styles.card__btn}
-                        color='green'
-                        href="/"
-                    >
+                    <p className={styles.error__desc}>{e('detail')}</p>
+                    <Button className={styles.card__btn} color="green" href="/">
                         {t('to-main')}
                     </Button>
                 </Card>

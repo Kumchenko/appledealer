@@ -1,15 +1,15 @@
-import { useEffect, useRef } from "react"
+import { useEffect, useRef } from 'react'
 
 const useUpdate = (fn: () => void, deps: Array<any>) => {
-    const mounted = useRef(false);
+    const mounted = useRef(false)
     useEffect(() => {
         if (!mounted.current) {
-            mounted.current = true;
+            mounted.current = true
         } else {
-            fn();
+            fn()
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, deps)
 }
 
-export default useUpdate;
+export default useUpdate

@@ -1,6 +1,6 @@
-import { INavPoint, ISocialPoint } from "@/interfaces";
+import { INavPoint, ISocialPoint } from '@/interfaces'
 
 export interface IHeaderProps {
-    navPoints: INavPoint[],
+    navPoints: INavPoint[]
     socialPoints: ISocialPoint[]
 }

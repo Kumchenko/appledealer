@@ -1,9 +1,10 @@
-import clsx from "clsx"
-import styles from "./sass/FormSelectExtended.module.scss"
-import FormError from "../FormError/FormError"
-import FormSelect from "../FormSelect/FormSelect"
-import { IFormSelectExtended } from "./interfaces"
-import { useFormikContext } from "formik"
+import clsx from 'clsx'
+import styles from './sass/FormSelectExtended.module.scss'
+import FormError from '../FormError/FormError'
+import FormSelect from '../FormSelect/FormSelect'
+import { IFormSelectExtended } from './interfaces'
+import { useFormikContext } from 'formik'
+import { useId } from 'react'
 
 const FormSelectExtended = ({
     className,
@@ -12,15 +13,17 @@ const FormSelectExtended = ({
     placeholder,
     disabled,
     required,
-    children
+    children,
 }: IFormSelectExtended) => {
-    const { getFieldMeta } = useFormikContext();
-    const { error, touched } = getFieldMeta(name);
+    const { getFieldMeta } = useFormikContext()
+    const { error, touched } = getFieldMeta(name)
+    const id = useId()
     return (
-        <label className={clsx(styles.form__field, className)}>
-            {label}
+        <div className={clsx(styles.form__field, className)}>
+            <label htmlFor={id}>{label}</label>
             <FormError className={styles.form__error} error={error} touched={touched} />
             <FormSelect
+                id={id}
                 className={styles.form__select}
                 name={name}
                 placeholder={placeholder}
@@ -29,8 +32,8 @@ const FormSelectExtended = ({
             >
                 {children}
             </FormSelect>
-        </label>
+        </div>
     )
 }
 
-export default FormSelectExtended;
+export default FormSelectExtended

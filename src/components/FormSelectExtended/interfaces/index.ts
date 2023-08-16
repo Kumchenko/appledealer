@@ -1,5 +1,5 @@
-import { IFormSelect } from "@/components/FormSelect/interfaces";
+import { IFormSelect } from '@/components/FormSelect/interfaces'
 
 export type IFormSelectExtended = {
-    label: string;
-} & IFormSelect
+    label: string
+} & Omit<IFormSelect, 'id'>

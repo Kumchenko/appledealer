@@ -1,6 +1,6 @@
-import { FormikContextType } from "formik";
+import { FormikContextType } from 'formik'
 
 export type IForm = {
-    className?: string,
+    className?: string
     formik: FormikContextType<any>
 } & React.PropsWithChildren

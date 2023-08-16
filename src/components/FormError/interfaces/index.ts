@@ -1,5 +1,5 @@
 export interface IFormError {
-    error: string | undefined,
+    error: string | undefined
     touched: boolean | undefined
     className?: string
 }

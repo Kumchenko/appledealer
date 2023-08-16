@@ -5,5 +5,5 @@ module.exports = {
         locales: ['uk', 'ru', 'en'],
         defaultLocale: 'uk',
     },
-    localePath: require('path').resolve('./public/locales')
+    localePath: require('path').resolve('./public/locales'),
 }
