@@ -105,14 +105,17 @@ const OrderSection = ({ modelIds }: IModels) => {
                 return t('loading')
             }
             case LoadingStatus.Fetched: {
-                return t('order:select-component')
+                if (componentIds.length > 0) {
+                    return t('order:select-component')
+                }
+                return t('order:no-components')
             }
             default: {
                 const exhaustiveCheck: never = componentsLoadingStatus
                 return t('errors.occured')
             }
         }
-    }, [componentsLoadingStatus, t])
+    }, [componentIds, componentsLoadingStatus, t])
 
     // Prepare Quality selector Placeholder value
     const qualityPlaceholder = useMemo(() => {
@@ -127,14 +130,17 @@ const OrderSection = ({ modelIds }: IModels) => {
                 return t('loading')
             }
             case LoadingStatus.Fetched: {
-                return t('order:select-quality')
+                if (services.length > 0) {
+                    return t('order:select-quality')
+                }
+                return t('order:no-qualities')
             }
             default: {
                 const exhaustiveCheck: never = servicesLoadingStatus
                 return t('errors.occured')
             }
         }
-    }, [servicesLoadingStatus, t])
+    }, [services, servicesLoadingStatus, t])
 
     // Preparing options for select elements
     const modelElems = useMemo(
