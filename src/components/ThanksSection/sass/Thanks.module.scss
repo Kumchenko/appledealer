@@ -1,7 +1,7 @@
 @use 'sass:math';
-@import "../../../styles/mixins";
+@import '../../../styles/mixins';
 
-.thanks { 
+.thanks {
     text-align: center;
     &__title {
         text-align: center;
@@ -14,7 +14,8 @@
         display: flex;
         flex-direction: column;
         font-size: 1.25rem;
-        &__title, &__subtitle {
+        &__title,
+        &__subtitle {
             margin-bottom: 9px;
         }
         &__img {
@@ -23,9 +24,11 @@
         }
         &__about {
             margin: 20px 0;
+            & > *:not(:first-child) {
+                margin-top: 0.2em;
+            }
         }
-        span {
-            display: block;
+        .bolder {
             font-weight: 600;
         }
     }
@@ -38,4 +41,3 @@
         }
     }
 }
-

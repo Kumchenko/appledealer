@@ -8,9 +8,12 @@ import { useRouter } from 'next/router'
 import { idToString } from '@/utils'
 import { useTranslation } from '@/hooks'
 import Button from '../Button/Button'
+import Head from 'next/head'
 
 const ThanksSection = () => {
-    const { t } = useTranslation()
+    const { t } = useTranslation('thanks')
+    const { t: r } = useTranslation('repair')
+    const { t: c } = useTranslation()
 
     const router = useRouter()
     const { order, loadingStatus } = useSelector(({ orderSlice }) => orderSlice)
@@ -26,13 +29,13 @@ const ThanksSection = () => {
     return (
         <section className={styles.thanks}>
             <div className={clsx(styles.container, 'container')}>
-                <h1 className={styles.thanks__title}>{t('thanks:h1')}</h1>
+                <h1 className={styles.thanks__title}>{t('h1')}</h1>
                 <Card
                     title={`${t('repair:order')} ${order?.id ? idToString(order.id) : 0}`}
                     className={styles.card}
                     single={true}
                 >
-                    <p className={styles.card__subtitle}>{t('thanks:will-contact')}</p>
+                    <p className={styles.card__subtitle}>{t('will-contact')}</p>
                     <Image
                         className={styles.card__img}
                         width={320}
@@ -44,16 +47,21 @@ const ThanksSection = () => {
                                 ? `/img/iphones/${order.service.modelId}.jpg`
                                 : `/img/iphones/empty.jpg`
                         }
-                        alt={order?.modelId}
+                        alt={order?.service.modelId}
                     />
-                    <p className={styles.card__about}>
-                        <span>
-                            {t(`repair:${order?.service.modelId}`)} — {t(`repair:${order?.service.componentId}`)}
-                        </span>
-                        {t('cost')}: {order?.cost}₴
-                    </p>
+                    <div className={styles.card__about}>
+                        <p className={styles.bolder}>
+                            {r(order?.service.modelId)} — {r(order?.service.componentId)}
+                        </p>
+                        <p>
+                            {c('quality')}: {r(order?.service.qualityId)}
+                        </p>
+                        <p>
+                            {c('cost')}: {order?.cost}₴
+                        </p>
+                    </div>
                     <Button href="/" className={styles.card__btn} color="green">
-                        {t('to-main')}
+                        {c('to-main')}
                     </Button>
                 </Card>
             </div>

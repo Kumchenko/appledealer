@@ -1,5 +1,4 @@
 import { NextPageWithLayout } from '@/interfaces'
-import MetaLayout from '@/layouts/MetaLayout'
 import NavLayout from '@/layouts/NavLayout'
 import TransitionLayout from '@/layouts/TransitionLayout'
 import StatusPageView from '@/pages/StatusPage/StatusPageView'
@@ -13,11 +12,9 @@ const Status: NextPageWithLayout = () => {
 
 Status.getLayout = function getLayout(page: ReactElement) {
     return (
-        <MetaLayout>
-            <NavLayout>
-                <TransitionLayout>{page}</TransitionLayout>
-            </NavLayout>
-        </MetaLayout>
+        <NavLayout>
+            <TransitionLayout>{page}</TransitionLayout>
+        </NavLayout>
     )
 }
 

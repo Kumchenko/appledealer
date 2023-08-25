@@ -70,11 +70,15 @@ export interface IOrderPostReq {
     qualityId: string
 }
 
-export interface IOrder extends IOrderPostReq {
+export interface IOrder {
     id: number
     serviceId: number
     created: Date
     cost: number
+    name: string
+    surname: string
+    tel: string
+    email: string
     service: {
         id: number
         cost: number

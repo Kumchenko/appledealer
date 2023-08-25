@@ -48,7 +48,7 @@ const StatusSection = () => {
                             priority={true}
                             quality={90}
                             src={order?.service.modelId ? `/img/iphones/${order.service.modelId}.jpg` : emptyPhone}
-                            alt={r(order?.modelId)}
+                            alt={r(order?.service.modelId)}
                         />
                     </div>
                     <ul className={styles.card__list}>
@@ -65,12 +65,17 @@ const StatusSection = () => {
                             )
                         })}
                     </ul>
-                    <p className={styles.card__about}>
-                        <span>
+                    <div className={styles.card__about}>
+                        <p className={styles.bolder}>
                             {r(order?.service.modelId)} — {r(order?.service.componentId)}
-                        </span>
-                        {t('cost')}: {order?.cost}₴
-                    </p>
+                        </p>
+                        <p>
+                            {t('quality')}: {r(order?.service.qualityId)}
+                        </p>
+                        <p>
+                            {t('cost')}: {order?.cost}₴
+                        </p>
+                    </div>
                     <Button className={styles.card__btn} color="purple" href="/check">
                         {t('back')}
                     </Button>
