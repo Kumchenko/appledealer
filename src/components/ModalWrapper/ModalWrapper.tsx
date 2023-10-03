@@ -47,24 +47,41 @@ export class ModalWrapper extends Component<{}, IState> {
 
     close = (index?: number) => {
         let modals = this.state.modals.slice()
-        index = index ? index : modals[0].id
 
         // Firstly setting visible false for retain close effect
-        this.setState(state => ({
-            modals: state.modals.map(modal => {
+        this.setState(state => {
+            const remainingModals = state.modals.map(modal => {
                 if (modal.id === index) {
                     modal.isVisible = false
                 }
                 return modal
-            }),
-            isWrapperVisible: modals.length > 1,
-        }))
+            })
+            const isWrapperVisible = remainingModals.filter(modal => modal.isVisible).length > 0
+            return {
+                modals: remainingModals,
+                isWrapperVisible,
+            }
+        })
 
         // Secondly deleting modal from state
         setTimeout(() => {
             this.setState(state => ({
                 modals: state.modals.filter(modal => modal.id !== index),
             }))
+        }, 400)
+    }
+
+    closeAll = () => {
+        // Firstly setting visible false for retain close effect
+        this.setState({
+            isWrapperVisible: false,
+        })
+
+        // Secondly deleting modal from state
+        setTimeout(() => {
+            this.setState({
+                modals: [],
+            })
         }, 400)
     }
 
@@ -83,7 +100,7 @@ export class ModalWrapper extends Component<{}, IState> {
         return (
             <div
                 onClick={e => {
-                    e.target === e.currentTarget && this.close()
+                    e.target === e.currentTarget && this.closeAll()
                 }}
                 onKeyDown={e => e.key === 'Escape' && this.close()}
                 className={clsx(styles.modalWrapper, isWrapperVisible && styles.opened)}
