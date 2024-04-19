@@ -8,3 +8,11 @@ export default function useTranslation(ns?: string, options?: UseTranslationOpti
     const T = useMemo(() => t, [i18n])
     return { t: T, i18n }
 }
+
+export const useOrderPageTranslation = () => useTranslation('order')
+export const useRepairTranslation = () => useTranslation('repair')
+export const useStatusPageTranslation = () => useTranslation('status')
+export const useTimeTranslation = () => useTranslation('timer')
+export const useCheckPageTranslation = () => useTranslation('check')
+export const useIndexPageTranslation = () => useTranslation('index')
+export const useErrorPageTranslation = () => useTranslation('error')

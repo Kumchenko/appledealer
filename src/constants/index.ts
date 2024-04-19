@@ -2,8 +2,7 @@ import { IApiError } from '@/interfaces'
 import NavPoints from './NavPoints'
 import SocialPoints from './SocialPoints'
 import WorkSlides from './WorkSlides'
-
-const _apiBase = process.env.NEXT_PUBLIC_API_URL
+import { env } from './env'
 
 export const apiError: IApiError = {
     name: 'ApiError',
@@ -11,7 +10,7 @@ export const apiError: IApiError = {
     message: '',
 }
 
-export { NavPoints, SocialPoints, WorkSlides, _apiBase }
+export { NavPoints, SocialPoints, WorkSlides }
 
 export { callInitialValues, checkInitialValues, orderInitialValues } from './InitialValues'
 

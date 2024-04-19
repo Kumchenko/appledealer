@@ -1,3 +1,6 @@
 {
-    "h1": "Status of order"
+    "h1": "Status of order",
+    "order": "Order",
+    "thanks-h1": "Thank you for your order!",
+    "will-contact": "Our manager will contact you to clarify the conditions"
 }

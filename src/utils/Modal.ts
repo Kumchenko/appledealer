@@ -15,16 +15,6 @@ export class Modal {
         }
     }
 
-    // Display i18n Error type Modal: t('errors.i18n_key')
-    static error(i18n_key: string) {
-        if (this._currentGlobalLoader instanceof ModalWrapper) {
-            this._currentGlobalLoader.open({
-                type: ModalType.Error,
-                title: i18n_key || 'occured',
-            })
-        }
-    }
-
     static close(index?: number) {
         if (this._currentGlobalLoader instanceof ModalWrapper) {
             this._currentGlobalLoader.close(index)

@@ -1,23 +1,20 @@
 import { useTranslation } from '@/hooks'
-import { useDispatch } from '@/store'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import Form from '../Form/Form'
-import FormInputExtended from '../FormInputExtended/FormInputExtended'
+import FormInputExtended from '../Form/components/FormInputExtended/FormInputExtended'
 import styles from './sass/CallModal.module.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPhone } from '@fortawesome/free-solid-svg-icons'
 import { useEffect, useMemo, useRef } from 'react'
 import { PulseLoader } from 'react-spinners'
-import { postCall } from '@/slices/CallSlice'
 import { Modal } from '@/utils'
 import Button from '../Button/Button'
 import { callInitialValues as initialValues } from '@/constants'
-import { IApiError } from '@/interfaces'
+import call from '@/api/call'
 
 const CallModal = ({ closeModal }: { closeModal: Function }) => {
     const { t } = useTranslation()
-    const dispatch = useDispatch()
 
     // Ref of submit button
     const submitRef = useRef<HTMLButtonElement>(null)
@@ -43,12 +40,7 @@ const CallModal = ({ closeModal }: { closeModal: Function }) => {
         initialValues,
         validationSchema,
         onSubmit: values => {
-            dispatch(postCall(values))
-                .unwrap()
-                .finally(() => {
-                    formik.resetForm()
-                    closeModal()
-                })
+            call.post('/callmes', values)
                 .then(() =>
                     Modal.open({
                         autoClose: 3000,
@@ -56,6 +48,7 @@ const CallModal = ({ closeModal }: { closeModal: Function }) => {
                     }),
                 )
                 .catch(() => {})
+                .finally(() => closeModal())
         },
     })
     const { isSubmitting } = formik
