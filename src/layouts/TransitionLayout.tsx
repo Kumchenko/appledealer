@@ -20,7 +20,10 @@ const TransitionLayout = ({ children }: ITransitionLayout) => {
         enter: { opacity: 1, x: '0px' },
         leave: { opacity: 0, x: '-50%', position: 'absolute' },
         onRest: () => {
-            scrollToId(router)
+            const id = router.asPath.split('#').at(1)
+            if (id) {
+                scrollToId(id)
+            }
         },
     })
 

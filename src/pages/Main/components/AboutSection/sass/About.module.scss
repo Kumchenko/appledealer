@@ -1,0 +1,127 @@
+@use 'sass:math';
+@import '../../../../../styles/variables';
+@import '../../../../../styles/mixins';
+
+.about {
+    .grid {
+        align-items: stretch;
+        justify-items: stretch;
+    }
+
+    &__title {
+        margin-bottom: math.div(8, 48) * 1em;
+    }
+
+    &__subtitle {
+        font-size: 1.25rem;
+        margin-bottom: math.div(26, 20) * 1em;
+    }
+
+    &__title,
+    &__subtitle {
+        grid-column: 1 / 13;
+        text-align: center;
+    }
+
+    .info {
+        background-color: $white;
+        border-radius: 25px;
+        grid-column: 1 / 7;
+        padding: 24px;
+        font-size: 1.125rem;
+
+        &__title {
+            margin-bottom: math.div(8, 36) * 1em;
+
+            &:nth-of-type(even) {
+                margin-top: math.div(30, 36) * 1em;
+            }
+        }
+
+        &__address {
+            display: block;
+            margin-bottom: math.div(12, 18) * 1em;
+            @include purpleClickable('transparent');
+        }
+
+        &__contacts {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+
+    .timetable {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 0.3em 0.1em;
+        align-items: center;
+    }
+
+    .timetable > *:nth-child(even) {
+        text-align: right;
+    }
+
+    &__mapWrapper {
+        grid-column: 7 / 13;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__loader {
+        position: absolute;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__map {
+        border: none;
+        border-radius: 25px;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+@include md {
+    .about {
+        .info {
+            grid-column: 2 / 12;
+        }
+
+        &__mapWrapper {
+            margin-top: 1.875rem;
+            grid-column: 2 / 12;
+            height: 280px;
+        }
+    }
+}
+
+@include xs {
+    .about {
+        .info {
+            text-align: center;
+            grid-column: 1 / 13;
+            padding: 20px;
+
+            &__contacts {
+                row-gap: 8px;
+                flex-direction: column;
+            }
+        }
+
+        .timetable {
+            grid-template-columns: 1fr;
+            justify-items: center;
+
+            span:nth-of-type(2n + 1):not(:nth-child(1)) {
+                margin-top: 15px;
+            }
+        }
+
+        &__mapWrapper {
+            grid-column: 1 / 13;
+        }
+    }
+}

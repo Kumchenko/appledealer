@@ -10,3 +10,8 @@ const Form = ({ children, className, formik }: IForm) => {
 }
 
 export default Form
+export { default as FormInput } from './components/FormInput/FormInput'
+export { default as FormInputExtended } from './components/FormInputExtended/FormInputExtended'
+export { default as FormSelect } from './components/FormSelect/FormSelect'
+export { default as FormSelectExtended } from './components/FormSelectExtended/FormSelectExtended'
+export { default as FormError } from './components/FormError/FormError'

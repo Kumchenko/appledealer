@@ -1,9 +1,8 @@
-@use "sass:math";
+@use 'sass:math';
 @import './variables';
 @import './mixins';
 @import './grid';
 @import './swiper';
-
 
 // ---- Default styles ----
 * {
@@ -39,7 +38,7 @@ body {
 }
 
 section {
-    padding-top: 4.625rem;
+    padding-top: 4.5rem;
 }
 
 h1,
@@ -101,4 +100,4 @@ address {
     font-style: normal;
 }
 
-@import "../styles/media";
+@import '../styles/media';

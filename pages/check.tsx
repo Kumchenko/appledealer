@@ -1,5 +1,5 @@
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import CheckPageView from '@/pages/CheckPage/CheckPageView'
+import CheckPageView from '@/pages/Check/CheckPageView'
 import { GetStaticProps } from 'next'
 import { ReactElement } from 'react'
 import NavLayout from '@/layouts/NavLayout'

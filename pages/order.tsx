@@ -1,10 +1,9 @@
-import { _apiBase } from '@/constants'
+import call from '@/api/call'
 import { IModels, NextPageWithLayout } from '@/interfaces'
 import MetaLayout from '@/layouts/MetaLayout'
 import NavLayout from '@/layouts/NavLayout'
 import TransitionLayout from '@/layouts/TransitionLayout'
-import OrderPageView from '@/pages/OrderPage/OrderPageView'
-import { fetchJSON } from '@/utils'
+import OrderPageView from '@/pages/Order/OrderPageView'
 import { GetStaticProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { ReactElement } from 'react'
@@ -24,10 +23,9 @@ Order.getLayout = function getLayout(page: ReactElement) {
 }
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-    const modelIds = await fetchJSON(`${_apiBase}/api/model/`)
     return {
         props: {
-            modelIds,
+            modelIds: (await call.get('/model/')).data,
             ...(await serverSideTranslations(locale ?? 'uk', ['common', 'order', 'repair'])),
         },
         revalidate: 300,

@@ -1,0 +1,31 @@
+@use 'sass:math';
+@import '../../../../../styles/variables';
+
+.form__select {
+    border-radius: 20px;
+    border: 1px solid $purple;
+    font-size: 16px;
+    font-weight: 500;
+    color: $purple;
+    padding: 6px 16px;
+    padding-right: 2.375rem;
+    appearance: none;
+    background-image: url('/img/polygon.svg'), linear-gradient(to right, $purple, $purple);
+    background-repeat: no-repeat;
+    background-position:
+        right math.div(14, 18) * 1em top 50%,
+        right 2.375rem top 0;
+    background-size:
+        math.div(1em, 1.5) math.div(1em, 1.5),
+        1px 100%;
+
+    &:active,
+    &:focus {
+        color: $darkPurple;
+        border-color: $darkPurple;
+        background-image: url('/img/polygon-bold.svg'), linear-gradient(to right, $purple, $purple);
+        background-size:
+            math.div(1em, 1.5) math.div(1em, 1.5),
+            2px 100%;
+    }
+}

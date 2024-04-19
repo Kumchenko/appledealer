@@ -43,7 +43,7 @@ const ModalView = ({
             className={clsx(styles.modal, className, isVisible && styles.visible)}
             single={true}
             titleClass={clsx(titleClass, type === ModalType.Error && styles.title_error, !Content && styles.title_only)}
-            title={type === ModalType.Error ? t(`errors.${title}`) : title}
+            title={title}
         >
             {closeIcon ? (
                 <button onClick={() => (closeModal ? closeModal() : null)} className={styles.modal__close}>

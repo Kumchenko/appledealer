@@ -7,13 +7,13 @@ const MetaLayout = ({ children }: React.PropsWithChildren) => {
     const router = useRouter()
     const { t } = useTranslation()
 
-    const metaTitle =
-        t(NavPoints.filter(navPoint => navPoint.href.startsWith(router.pathname)).map(navTitle => navTitle.title)[0]) +
-        ' – AppleDealer'
+    const pageTranslationKey = NavPoints.find(navPoint => navPoint.href.startsWith(router.pathname))?.title
 
     return (
         <>
-            <Head>{metaTitle ? <title>{metaTitle}</title> : null}</Head>
+            <Head>
+                <title>{pageTranslationKey ? t(pageTranslationKey) + ' – AppleDealer' : 'AppleDealer'}</title>
+            </Head>
             {children}
         </>
     )

@@ -1,7 +1,7 @@
 import { NextPageWithLayout } from '@/interfaces'
 import NavLayout from '@/layouts/NavLayout'
 import TransitionLayout from '@/layouts/TransitionLayout'
-import ErrorPageView from '@/pages/ErrorPage/ErrorPageView'
+import ErrorPageView from '@/pages/Error/ErrorPageView'
 import { GetStaticProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import Head from 'next/head'
