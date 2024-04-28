@@ -86,7 +86,7 @@ export interface IOrder {
         componentId: string
         qualityId: string
     }
-    operations: {
+    operations?: {
         id: number
         dateTime: Date
         status: string

@@ -17,7 +17,7 @@ const initialState: IInitialState = {
 const getOrder = createAsyncThunk('order/getOrder', async ({ id, tel }: IOrderGetReq, thunkAPI) => {
     try {
         return (
-            await call.get<IOrder>(`/orders/order/${id}/`, {
+            await call.get<IOrder>(`/orders/${id}/`, {
                 params: {
                     tel,
                 },

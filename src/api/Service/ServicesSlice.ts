@@ -13,7 +13,7 @@ const initialState: IInitialState = {
 
 const fetchServices = createAsyncThunk('services/fetchServices', async (serviceData: IServicesFetchReq, thunkAPI) => {
     try {
-        return (await call.get('/service', { params: serviceData })).data
+        return (await call.get('/services', { params: serviceData })).data
     } catch (err) {
         return thunkAPI.rejectWithValue((err as AxiosError<IApiError>).response?.data)
     }

@@ -25,7 +25,7 @@ Order.getLayout = function getLayout(page: ReactElement) {
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
     return {
         props: {
-            modelIds: (await call.get('/model/')).data,
+            modelIds: (await call.get('/models')).data,
             ...(await serverSideTranslations(locale ?? 'uk', ['common', 'order', 'repair'])),
         },
         revalidate: 300,
