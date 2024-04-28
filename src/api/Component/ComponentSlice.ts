@@ -15,7 +15,7 @@ const initialState: IInitialState = {
 
 const fetchComponents = createAsyncThunk('components/fetchComponents', async (modelId: string, thunkAPI) => {
     try {
-        return (await call.get<string[]>(`/component/${modelId}`)).data
+        return (await call.get<string[]>('/components', { params: { modelId } })).data
     } catch (err) {
         return thunkAPI.rejectWithValue((err as AxiosError<IApiError>).response?.data)
     }

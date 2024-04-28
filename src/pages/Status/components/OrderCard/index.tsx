@@ -38,7 +38,7 @@ export const OrderCard = ({ order, isNew }: { order: IOrder; isNew: boolean }) =
                     <span>{r('CREATED')}</span>
                     {new Date(order?.created || 0).toLocaleString(router.locale)}
                 </li>
-                {order.operations.map(operation => {
+                {order.operations?.map(operation => {
                     return (
                         <li key={operation.status} className={styles.card__item}>
                             <span>{r(operation.status)}</span>
