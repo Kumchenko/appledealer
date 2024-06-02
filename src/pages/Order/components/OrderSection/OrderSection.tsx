@@ -9,7 +9,7 @@ import { fetchComponents, clearComponents } from '@/api/Component/ComponentSlice
 import { fetchServices, clearServices } from '@/api/Service/ServicesSlice'
 import { useDispatch, useSelector } from '@/api/store'
 import { useEffect, useMemo, useState } from 'react'
-import Form from '../../../../components/Form/Form'
+import Form, { FormCaptcha } from '../../../../components/Form/Form'
 import FormSelect from '../../../../components/Form/components/FormSelect/FormSelect'
 import FormInputExtended from '../../../../components/Form/components/FormInputExtended/FormInputExtended'
 import FormSelectExtended from '../../../../components/Form/components/FormSelectExtended/FormSelectExtended'
@@ -21,6 +21,9 @@ import { useRouter } from 'next/router'
 import { useTranslation, useUpdate } from '@/hooks'
 import Button from '../../../../components/Button/Button'
 import emptyPhone from 'public/img/iphones/empty.jpg'
+import { Modal } from '@/utils'
+import { env } from '@/constants/env'
+import ReCaptcha from 'react-google-recaptcha'
 
 const OrderSection = ({ modelIds }: IModels) => {
     const { t } = useTranslation()
@@ -65,20 +68,23 @@ const OrderSection = ({ modelIds }: IModels) => {
                 t('errors.occured'),
             )
             .required(t('errors.necessary')),
+        captchaToken: Yup.string()
+            .nonNullable()
+            .min(1, t('errors.captcha_required'))
+            .required(t('errors.captcha_required')),
     })
 
     // Initialize formik
     const formik = useFormik({
         initialValues,
         validationSchema,
-        onSubmit: values => {
+        onSubmit: values =>
             dispatch(postOrder(values))
                 .unwrap()
                 .then(({ id, tel }) => {
                     router.push(`/status?id=${id}&tel=${encodeURIComponent(tel)}&thanks=true`)
                 })
-                .catch(() => {})
-        },
+                .catch(() => {}),
     })
     const { values, errors, isSubmitting } = formik
 
@@ -265,7 +271,10 @@ const OrderSection = ({ modelIds }: IModels) => {
                             ))}
                         </div>
                     </Card>
-                    <Card title={t('order:contact-data')} className={styles.form__card}>
+                    <Card
+                        title={t('order:contact-data')}
+                        className={`${styles.form__card} ${styles.form__card_contacts}`}
+                    >
                         <FormInputExtended
                             className={styles.form__field}
                             label={t('name')}
@@ -324,6 +333,11 @@ const OrderSection = ({ modelIds }: IModels) => {
                         >
                             {qualityElems}
                         </FormSelectExtended>
+                        <FormCaptcha
+                            className={`${styles.form__field} ${styles.form__captcha}`}
+                            name="captchaToken"
+                            size="compact"
+                        />
                         <Button
                             disabled={isSubmitting || !values.qualityId}
                             className={styles.form__btn}

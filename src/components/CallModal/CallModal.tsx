@@ -1,7 +1,7 @@
 import { useTranslation } from '@/hooks'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import Form from '../Form/Form'
+import Form, { FormCaptcha } from '../Form/Form'
 import FormInputExtended from '../Form/components/FormInputExtended/FormInputExtended'
 import styles from './sass/CallModal.module.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -33,6 +33,10 @@ const CallModal = ({ closeModal }: { closeModal: Function }) => {
         tel: Yup.string()
             .matches(/[+]{1}38[0]{1}[0-9]{9}/, t('errors.incorrect'))
             .required(t('errors.necessary')),
+        captchaToken: Yup.string()
+            .nonNullable()
+            .min(1, t('errors.captcha_required'))
+            .required(t('errors.captcha_required')),
     })
 
     // Initializing formik
@@ -95,6 +99,7 @@ const CallModal = ({ closeModal }: { closeModal: Function }) => {
                     autoComplete="tel"
                     required
                 />
+                <FormCaptcha className={`${styles.form__field} ${styles.form__captcha}`} name="captchaToken" />
                 <Button type="submit" disabled={isSubmitting} ref={submitRef} color="green">
                     {submitText}
                 </Button>

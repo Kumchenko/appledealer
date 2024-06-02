@@ -58,6 +58,7 @@ export interface ISocialPoint {
 export interface IOrderGetReq {
     id: string
     tel: string
+    captchaToken: string | null
 }
 
 export interface IOrderPostReq {
@@ -68,6 +69,7 @@ export interface IOrderPostReq {
     email: string
     componentId: string
     qualityId: string
+    captchaToken: string | null
 }
 
 export interface IOrder {
@@ -98,6 +100,7 @@ export interface IOrder {
 export interface ICallPostReq {
     name: string
     tel: string
+    captchaToken: string | null
 }
 
 export interface IServicesFetchReq {

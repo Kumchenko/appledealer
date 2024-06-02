@@ -45,7 +45,8 @@
         "id-is-undefined": "Provided ID is empty. Unsuccessful request",
         "tel-is-undefined": "Provided Phone number is empty. Unsuccessful request",
         "model-id-is-undefined": "Provided ModelID is empty. Unsuccessful request",
-        "tel-is-wrong": "Phone number is wrong"
+        "tel-is-wrong": "Phone number is wrong",
+        "captcha_required": "Captcha is required"
     },
     "footer": {
         "credentials": "Created by Kumchenko"

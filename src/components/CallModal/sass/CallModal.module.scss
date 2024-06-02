@@ -1,5 +1,5 @@
-@import "../../../styles/variables";
-@import "../../../styles/mixins";
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
 
 .call {
     display: flex;
@@ -19,7 +19,7 @@
 
     &__icon {
         font-size: 3rem;
-        padding: .8rem;
+        padding: 0.8rem;
     }
 
     .form {
@@ -34,6 +34,10 @@
 
         &__field:not(:first-of-type) {
             margin-top: 18px;
+        }
+
+        &__captcha {
+            margin-inline: auto;
         }
 
         button {

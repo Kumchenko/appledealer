@@ -46,9 +46,19 @@
         }
     }
 
+    .form__captcha {
+        align-self: center;
+        margin-bottom: 10px;
+        min-height: 172px;
+    }
+
     .form__card {
         display: flex;
         flex-direction: column;
+
+        &_contacts {
+            justify-content: space-between;
+        }
 
         &:nth-of-type(1) {
             grid-column: 1 / 5;
