@@ -8,14 +8,17 @@ export const orderInitialValues: IOrderPostReq = {
     email: '',
     componentId: '',
     qualityId: '',
+    captchaToken: null,
 }
 
 export const checkInitialValues: IOrderGetReq = {
     id: '',
     tel: '',
+    captchaToken: null,
 }
 
 export const callInitialValues: ICallPostReq = {
     name: '',
     tel: '',
+    captchaToken: null,
 }

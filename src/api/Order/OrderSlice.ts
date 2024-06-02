@@ -14,19 +14,22 @@ const initialState: IInitialState = {
     loadingStatus: LoadingStatus.Idle,
 }
 
-const getOrder = createAsyncThunk('order/getOrder', async ({ id, tel }: IOrderGetReq, thunkAPI) => {
-    try {
-        return (
-            await call.get<IOrder>(`/orders/${id}/`, {
-                params: {
-                    tel,
-                },
-            })
-        ).data
-    } catch (err) {
-        return thunkAPI.rejectWithValue((err as AxiosError<IApiError>).response?.data)
-    }
-})
+const getOrder = createAsyncThunk(
+    'order/getOrder',
+    async ({ id, tel }: Omit<IOrderGetReq, 'captchaToken'>, thunkAPI) => {
+        try {
+            return (
+                await call.get<IOrder>(`/orders/${id}/`, {
+                    params: {
+                        tel,
+                    },
+                })
+            ).data
+        } catch (err) {
+            return thunkAPI.rejectWithValue((err as AxiosError<IApiError>).response?.data)
+        }
+    },
+)
 
 const postOrder = createAsyncThunk('order/postOrder', async (orderData: IOrderPostReq, thunkAPI) => {
     try {

@@ -1,5 +1,5 @@
 import Card from '@/components/Card/Card'
-import Form from '../../../../components/Form/Form'
+import Form, { FormCaptcha } from '../../../../components/Form/Form'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import clsx from 'clsx'
@@ -28,6 +28,10 @@ const CheckSection = () => {
         tel: Yup.string()
             .matches(/[+]{1}38[0]{1}[0-9]{9}/, t('errors.incorrect'))
             .required(t('errors.necessary')),
+        captchaToken: Yup.string()
+            .nonNullable()
+            .min(1, t('errors.captcha_required'))
+            .required(t('errors.captcha_required')),
     })
 
     const formik = useFormik({
@@ -87,6 +91,7 @@ const CheckSection = () => {
                             autoComplete="tel"
                             required
                         />
+                        <FormCaptcha className={`${styles.form__field} ${styles.form__captcha}`} name="captchaToken" />
                         <Button disabled={isSubmitting} type="submit" color="green">
                             {submitText}
                         </Button>

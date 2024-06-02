@@ -15,7 +15,7 @@ export type IModalProps = {
     autoClose?: number
     isVisible?: boolean
     type?: ModalType
-} & ICardProps
+} & Omit<ICardProps, 'children'>
 
 const ModalView = ({
     title,
