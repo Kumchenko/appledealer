@@ -21,7 +21,7 @@ call.interceptors.request.use(async request => {
 call.interceptors.response.use(
     res => res,
     (error: AxiosError<IApiError>) => {
-        const title = error.response?.data.message
+        const title = error.response?.data.message ?? error?.message
         if (typeof window !== 'undefined' && title) {
             console.error(title)
             Modal.open({
